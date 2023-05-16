@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public class User {
-    private static ArrayList<User> users;
+    private static final ArrayList<User> users;
     private String username;
     private String password;
     private int score;
