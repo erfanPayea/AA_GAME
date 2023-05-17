@@ -18,7 +18,7 @@
                 <Button onMouseClicked="#register" styleClass="Button-register" text="register" />
             </HBox>
          <CheckBox fx:id="statLoggedIn" mnemonicParsing="false" text="Stay logged in" />
-            <Label id="miniLabel" fx:id="message" />
+            <Label id="miniLabel" fx:id="result"/>
         </VBox>
     </center>
 

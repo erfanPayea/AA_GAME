@@ -14,6 +14,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import model.User;
+import view.enums.Message;
 
 import java.net.URL;
 import java.util.Objects;
@@ -30,7 +31,7 @@ public class ProfileMenu extends Application {
     @FXML
     private TextField newUsername;
     @FXML
-    private Label message;
+    private Label result;
     {
         controller = new ProfileMenuController();
     }
@@ -50,22 +51,25 @@ public class ProfileMenu extends Application {
     }
     @FXML
     public void initialize() {
-        message.setText("This is a label for show Messages to you!");
-        username.setText(User.currentUser.getUsername());
-        password.setText(User.currentUser.getPassword());
+        this.result.setText("This is a label for show Messages to you!");
+        this.username.setText(User.currentUser.getUsername());
+        this.password.setText(User.currentUser.getPassword());
         // todo : avatar
     }
 
     public void saveChanges() {
-        this.message.setText(controller.saveChanges(newUsername.getText(), newPassword.getText()).toString());
-        username.setText(User.currentUser.getUsername());
-        password.setText(User.currentUser.getPassword());
+        Message message = this.controller.saveChanges(this.newUsername.getText(), this.newPassword.getText());
+        message.sendMessage(this.result);
+
+        this.username.setText(User.currentUser.getUsername());
+        this.password.setText(User.currentUser.getPassword());
     }
 
     public void backMainMenu() throws Exception {
         new MainMenu().start(stage);
     }
 
+    // todo : add alert for these :
     public void logout() throws Exception {
         User.currentUser = null;
         new LoginMenu().start(stage);

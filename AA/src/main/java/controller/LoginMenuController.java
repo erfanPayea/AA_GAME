@@ -5,6 +5,9 @@ import view.enums.Message;
 
 public class LoginMenuController {
     public Message login(String username, String password, boolean stayLoggedIn) {
+        if (username.isEmpty() || password.isEmpty())
+            return Message.EMPTY_FIELD;
+
         User user = User.getUserByUsername(username);
         if (user == null)
             return Message.NOT_MATCH;
@@ -20,11 +23,14 @@ public class LoginMenuController {
     }
 
     public Message register(String username, String password) {
-        if (username == null || username.length() < 4)
+        if (username.isEmpty() || password.isEmpty())
+            return Message.EMPTY_FIELD;
+
+        if (username.length() < 4)
             return Message.LOW_USERNAME;
         else if (User.getUserByUsername(username) != null)
             return Message.USERNAME_EXISTS;
-        else if (password == null || password.length() < 4)
+        else if (password.length() < 4)
             return Message.LOW_PASSWORD;
         else {
             new User(username, password);

@@ -25,7 +25,7 @@ public class LoginMenu extends Application {
     @FXML
     private TextField username;
     @FXML
-    private Label message;
+    private Label result;
 
     {
         controller = new LoginMenuController();
@@ -53,20 +53,21 @@ public class LoginMenu extends Application {
     }
     @FXML
     public void initialize() {
-        message.setText("This is a label for show Messages to you!");
+        result.setText("This is a label for show Messages to you!");
     }
 
     public void register() {
-        message.setText(controller.register(username.getText(), password.getText()).toString());
+        Message message = controller.register(username.getText(), password.getText());
+        message.sendMessage(this.result);
     }
 
     public void login() throws Exception {
-        Message result = controller.login(username.getText(), password.getText(), statLoggedIn.isSelected());
+        Message message = controller.login(username.getText(), password.getText(), statLoggedIn.isSelected());
         if (result == null) {
             new MainMenu().start(stage);
             return;
         }
 
-        this.message.setText(result.toString());
+        message.sendMessage(this.result);
     }
 }

@@ -3,8 +3,6 @@ package controller;
 import model.User;
 import view.enums.Message;
 
-import java.util.Objects;
-
 public class ProfileMenuController {
     private User currentUser;
 
@@ -14,7 +12,7 @@ public class ProfileMenuController {
 
     public Message saveChanges(String username, String password) { // todo : avatar
         if (password.isEmpty() && username.isEmpty())
-            return Message.EMPTY_FIELD;
+            return Message.ALL_EMPTY;
 
         if (!username.isEmpty()) {
             if (username.length() < 4)
