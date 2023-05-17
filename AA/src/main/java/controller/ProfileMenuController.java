@@ -30,6 +30,7 @@ public class ProfileMenuController {
             currentUser.setPassword(password);
         }
 
+        User.saveUsersToFile();
         return Message.CHANGE_SUCCESS;
     }
 }

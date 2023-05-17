@@ -5,6 +5,7 @@ module com.example.demo {
 
 
     exports model;
+    opens model to com.google.gson;
     exports controller;
     opens controller to javafx.fxml;
     exports view.enums;

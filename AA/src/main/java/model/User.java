@@ -30,7 +30,7 @@ public class User {
         this.password = password;
         this.score = 0;
         users.add(this);
-//        User.saveUsersToFile();
+        User.saveUsersToFile();
     }
 
     public static User getUserByUsername(String username) {

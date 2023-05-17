@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import model.User;
 import view.enums.Message;
 
 import java.net.URL;
@@ -30,18 +31,18 @@ public class LoginMenu extends Application {
         controller = new LoginMenuController();
     }
     public static void main(String[] args) {
-//        User.loadUsersFromFile();
+        User.loadUsersFromFile();
         launch(args);
     }
 
     @Override
     public void start(Stage stage) throws Exception {
-//        User loggedInUser;
-//        if ((loggedInUser = User.loadStayLoggedIn()) != null) {
-//            MainMenuController.setCurrentUser(loggedInUser);
-//            new MainMenu(loggedInUser).start(stage);
-//            return;
-//        }
+        User loggedInUser;
+        if ((loggedInUser = User.loadStayLoggedIn()) != null) {
+            User.currentUser = loggedInUser;
+            new MainMenu().start(stage);
+            return;
+        }
 
         LoginMenu.stage = stage;
         URL url = LoginMenu.class.getResource("/FXML/loginMenu.fxml");

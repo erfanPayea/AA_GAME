@@ -11,8 +11,8 @@ public class LoginMenuController {
         else if (user.isPasswordIncorrect(password))
             return Message.NOT_MATCH;
         else {
-//            if (statLoggedIn.isSelected())
-//                User.setStayLoggedIn(user);
+            if (stayLoggedIn)
+                User.setStayLoggedIn(user);
 
             User.currentUser = user;
             return null;
