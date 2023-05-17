@@ -1,15 +1,11 @@
-package view;
+package view.menus;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-public class RegisterMenu extends Application {
+public class SettingsMenu extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-    }
-
-    public static void main(String[] args) {
-        launch();
     }
 }

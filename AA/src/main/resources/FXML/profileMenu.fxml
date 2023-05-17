@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.ProfileMenu">
+   <children>
+      <VBox layoutX="74.0" layoutY="77.0" prefHeight="264.0" prefWidth="452.0" spacing="10.0">
+         <children>
+            <HBox prefHeight="27.0" prefWidth="430.0">
+               <children>
+                  <HBox prefHeight="27.0" prefWidth="236.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="34.0" prefWidth="92.0" text="Current name: " />
+                        <Label fx:id="username" prefHeight="57.0" prefWidth="134.0" textFill="#0094ff">
+                           <font>
+                              <Font size="13.0" />
+                           </font></Label>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="27.0" prefWidth="238.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="27.0" prefWidth="124.0" text="New name:" />
+                        <TextField fx:id="newUsername" prefHeight="27.0" prefWidth="173.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="27.0" prefWidth="452.0">
+               <children>
+                  <HBox prefHeight="27.0" prefWidth="234.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="27.0" prefWidth="110.0" text="Current password: " />
+                        <Label fx:id="password" prefHeight="57.0" prefWidth="134.0" textFill="RED">
+                           <font>
+                              <Font size="13.0" />
+                           </font></Label>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="27.0" prefWidth="241.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="27.0" prefWidth="147.0" text="New password:" />
+                        <TextField fx:id="newPassword" prefHeight="27.0" prefWidth="195.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="33.0" prefWidth="452.0">
+               <children>
+                  <HBox prefHeight="27.0" prefWidth="234.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="40.0" prefWidth="110.0" text="Current avatar: " />
+                        <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="24.0" prefWidth="218.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="34.0" prefWidth="86.0" text="New avatar:" />
+                        <ChoiceBox prefHeight="19.0" prefWidth="145.0">
+                           <!-- todo : add avatar images-->
+                        </ChoiceBox>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="30.0" prefWidth="452.0">
+
+            </HBox>
+            <HBox prefHeight="73.0" prefWidth="452.0" spacing="20.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#saveChanges" prefHeight="36.0" prefWidth="99.0" text="Save changes" textFill="#1c9926" />
+                  <Button layoutX="111.0" layoutY="25.0" mnemonicParsing="false" onAction="#backMainMenu" prefHeight="36.0" prefWidth="99.0" text="MainMenu" textFill="#2d00ff" />
+                  <Button layoutX="233.0" layoutY="25.0" mnemonicParsing="false" onAction="#logout" prefHeight="36.0" prefWidth="99.0" text="Logout" textFill="#ff8000" />
+                  <Button layoutX="352.0" layoutY="25.0" mnemonicParsing="false" onAction="#deleteAccount" prefHeight="36.0" prefWidth="99.0" text="Delete account" textFill="#ec0303" />
+               </children>
+            </HBox>
+            <Label fx:id="message" alignment="CENTER" prefHeight="34.0" prefWidth="452.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
