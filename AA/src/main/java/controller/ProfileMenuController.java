@@ -13,15 +13,18 @@ public class ProfileMenuController {
     }
 
     public Message saveChanges(String username, String password) { // todo : avatar
-        if (password == null && username == null)
+        if (password.isEmpty() && username.isEmpty())
             return Message.EMPTY_FIELD;
 
-        if (username != null) {
+        if (!username.isEmpty()) {
             if (username.length() < 4)
                 return Message.LOW_USERNAME;
+            if (!password.isEmpty() && password.length() < 4)
+                return Message.LOW_PASSWORD;
+
             currentUser.setUsername(username);
         }
-        if (password != null) {
+        if (!password.isEmpty()) {
             if (password.length() < 4)
                 return Message.LOW_PASSWORD;
             currentUser.setPassword(password);

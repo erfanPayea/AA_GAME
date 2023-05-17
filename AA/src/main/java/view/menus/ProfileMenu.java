@@ -58,7 +58,8 @@ public class ProfileMenu extends Application {
 
     public void saveChanges() {
         this.message.setText(controller.saveChanges(newUsername.getText(), newPassword.getText()).toString());
-        initialize();
+        username.setText(User.currentUser.getUsername());
+        password.setText(User.currentUser.getPassword());
     }
 
     public void backMainMenu() throws Exception {
