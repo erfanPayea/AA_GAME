@@ -32,6 +32,7 @@ public class ProfileMenu extends Application {
     {
         editor = new Editor();
     }
+
     @Override
     public void start(Stage stage) throws Exception {
         ProfileMenu.stage = stage;
@@ -41,6 +42,7 @@ public class ProfileMenu extends Application {
         stage.setScene(scene);
         stage.show();
     }
+
     @FXML
     public void initialize() {
         this.username.setText(User.currentUser.getUsername());

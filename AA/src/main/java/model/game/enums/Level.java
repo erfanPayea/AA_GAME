@@ -5,6 +5,7 @@ public enum Level {
     LEVEL_2(2, 10, 1.5, 5),
     LEVEL_3(3, 15, 1.8, 3),
     ;
+
     public static Level getLevelByNumber(int number) {
         for (Level level : values()) {
             if (level.number == number)

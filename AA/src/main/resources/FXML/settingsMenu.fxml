@@ -5,60 +5,69 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.SettingsMenu">
-   <children>
-      <VBox layoutX="89.0" layoutY="59.0" prefHeight="147.0" prefWidth="422.0" spacing="15.0">
-         <children>
-            <HBox prefHeight="35.0" prefWidth="422.0">
-               <children>
-                  <Label prefHeight="38.0" prefWidth="81.0" textFill="#004eff">
-                     <font>
-                        <Font size="13.0" />
-                     </font></Label>
-                  <Label alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="125.0" text="The game map :    " />
-                  <ChoiceBox fx:id="mapChoiceBox" prefHeight="19.0" prefWidth="138.0">
-                     <HBox.margin>
-                        <Insets top="5.0" />
-                     </HBox.margin>
-                  </ChoiceBox>
-               </children>
-            </HBox>
-            <HBox prefHeight="35.0" prefWidth="422.0">
-               <children>
-                  <Label prefHeight="38.0" prefWidth="81.0" textFill="RED">
-                     <font>
-                        <Font size="13.0" />
-                     </font></Label>
-                  <Label alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="126.0" text="The game level :     " />
-                  <ChoiceBox fx:id="levelNumberChoiceBox" prefHeight="19.0" prefWidth="138.0">
-                     <HBox.margin>
-                        <Insets top="5.0" />
-                     </HBox.margin>
-                  </ChoiceBox>
-               </children>
-            </HBox>
-            <HBox prefHeight="35.0" prefWidth="422.0">
-               <children>
-                  <Label prefHeight="35.0" prefWidth="77.0" textFill="#0cff00">
-                     <font>
-                        <Font size="13.0" />
-                     </font></Label>
-                  <Label prefHeight="35.0" prefWidth="130.0" text="Starting ball number :" />
-                  <ChoiceBox fx:id="ballsNumberChoiceBox" prefHeight="26.0" prefWidth="137.0">
-                     <HBox.margin>
-                        <Insets top="5.0" />
-                     </HBox.margin>
-                  </ChoiceBox>
-               </children></HBox>
-         </children>
-      </VBox>
-      <Button layoutX="168.0" layoutY="251.0" mnemonicParsing="false" onAction="#saveChanges" prefHeight="35.0" prefWidth="102.0" text="Save changes" textFill="#1c9926" />
-      <Button layoutX="331.0" layoutY="251.0" mnemonicParsing="false" onAction="#backMainMenu" prefHeight="35.0" prefWidth="102.0" text="Main menu" textFill="#2d00ff" />
-      <Label fx:id="result" alignment="CENTER" layoutX="93.0" layoutY="299.0" prefHeight="35.0" prefWidth="422.0">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <CheckBox fx:id="isMute" layoutX="257.0" layoutY="206.0" mnemonicParsing="false" text="Mute sound" textFill="#ea1212" />
-   </children>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.SettingsMenu">
+    <children>
+        <VBox layoutX="89.0" layoutY="59.0" prefHeight="147.0" prefWidth="422.0" spacing="15.0">
+            <children>
+                <HBox prefHeight="35.0" prefWidth="422.0">
+                    <children>
+                        <Label prefHeight="38.0" prefWidth="81.0" textFill="#004eff">
+                            <font>
+                                <Font size="13.0"/>
+                            </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="125.0" text="The game map :    "/>
+                        <ChoiceBox fx:id="mapChoiceBox" prefHeight="19.0" prefWidth="138.0">
+                            <HBox.margin>
+                                <Insets top="5.0"/>
+                            </HBox.margin>
+                        </ChoiceBox>
+                    </children>
+                </HBox>
+                <HBox prefHeight="35.0" prefWidth="422.0">
+                    <children>
+                        <Label prefHeight="38.0" prefWidth="81.0" textFill="RED">
+                            <font>
+                                <Font size="13.0"/>
+                            </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="126.0"
+                               text="The game level :     "/>
+                        <ChoiceBox fx:id="levelNumberChoiceBox" prefHeight="19.0" prefWidth="138.0">
+                            <HBox.margin>
+                                <Insets top="5.0"/>
+                            </HBox.margin>
+                        </ChoiceBox>
+                    </children>
+                </HBox>
+                <HBox prefHeight="35.0" prefWidth="422.0">
+                    <children>
+                        <Label prefHeight="35.0" prefWidth="77.0" textFill="#0cff00">
+                            <font>
+                                <Font size="13.0"/>
+                            </font>
+                        </Label>
+                        <Label prefHeight="35.0" prefWidth="130.0" text="Starting ball number :"/>
+                        <ChoiceBox fx:id="ballsNumberChoiceBox" prefHeight="26.0" prefWidth="137.0">
+                            <HBox.margin>
+                                <Insets top="5.0"/>
+                            </HBox.margin>
+                        </ChoiceBox>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+        <Button layoutX="168.0" layoutY="251.0" mnemonicParsing="false" onAction="#saveChanges" prefHeight="35.0"
+                prefWidth="102.0" text="Save changes" textFill="#1c9926"/>
+        <Button layoutX="331.0" layoutY="251.0" mnemonicParsing="false" onAction="#backMainMenu" prefHeight="35.0"
+                prefWidth="102.0" text="Main menu" textFill="#2d00ff"/>
+        <Label fx:id="result" alignment="CENTER" layoutX="93.0" layoutY="299.0" prefHeight="35.0" prefWidth="422.0">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <CheckBox fx:id="isMute" layoutX="257.0" layoutY="206.0" mnemonicParsing="false" text="Mute sound"
+                  textFill="#ea1212"/>
+    </children>
 </AnchorPane>

@@ -30,6 +30,7 @@ public class LoginMenu extends Application {
     {
         controller = new LoginMenuController();
     }
+
     public static void main(String[] args) {
         User.loadUsersFromFile();
         launch(args);
@@ -51,6 +52,7 @@ public class LoginMenu extends Application {
         stage.setScene(scene);
         stage.show();
     }
+
     @FXML
     public void initialize() {
         Message.DEFAULT.sendMessage(this.result);

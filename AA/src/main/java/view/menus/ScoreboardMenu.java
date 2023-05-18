@@ -2,7 +2,6 @@ package view.menus;
 
 import controller.ScoreboardController;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -12,7 +11,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import model.User;
 import model.game.enums.Level;
@@ -36,6 +34,7 @@ public class ScoreboardMenu extends Application {
     {
         controller = new ScoreboardController();
     }
+
     @Override
     public void start(Stage stage) throws Exception {
         ScoreboardMenu.stage = stage;
@@ -62,8 +61,7 @@ public class ScoreboardMenu extends Application {
         int level;
         try {
             level = Integer.parseInt(this.levelChoiceBox.getValue());
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             level = 0;
         }
 
@@ -76,17 +74,17 @@ public class ScoreboardMenu extends Application {
             highScores.getChildren().remove(1, size - 1);
         }
 
-        for (int index = 0; index < rankUsers.size(); index ++) {
+        for (int index = 0; index < rankUsers.size(); index++) {
             Label rankLabel = new Label(String.valueOf(index + 1));
             setLabel(rankLabel, rankNumbers, index + 1);
             rankNumbers.getChildren().add(rankLabel);
 
             Label userLabel = new Label(rankUsers.get(index).getUsername());
-            setLabel(userLabel, users,index + 1);
+            setLabel(userLabel, users, index + 1);
             users.getChildren().add(userLabel);
 
             Label scoreLabel = new Label(String.valueOf(rankUsers.get(index).getHighScores()[level]));
-            setLabel(scoreLabel, highScores,index + 1);
+            setLabel(scoreLabel, highScores, index + 1);
             highScores.getChildren().add(scoreLabel);
         }
     }

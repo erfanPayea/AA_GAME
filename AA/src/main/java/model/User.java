@@ -7,7 +7,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -38,7 +37,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.score = 0;
-        this.settings = new Settings(2, 25, Map.getMapByName("empty"),false); // todo : mapDefault
+        this.settings = new Settings(2, 25, Map.getMapByName("empty"), false); // todo : mapDefault
         users.add(this);
         User.saveUsersToFile();
     }
@@ -64,12 +63,15 @@ public class User {
     public String getUsername() {
         return this.username;
     }
+
     public String getPassword() {
         return password;
     }
+
     public Settings getSettings() {
         return this.settings;
     }
+
     public int[] getHighScores() {
         return this.highScores;
     }
@@ -90,11 +92,11 @@ public class User {
         this.password = password;
     }
 
-    public void setScore(int score, int level) {
+    public void setScore(int score) {
         this.score = score;
 
-        if (score > this.highScores[level])
-            this.highScores[level] = score;
+        if (score > this.highScores[settings.getLevel().getNumber()])
+            this.highScores[settings.getLevel().getNumber()] = score;
 
         if (score > highScores[0])
             this.highScores[0] = score;

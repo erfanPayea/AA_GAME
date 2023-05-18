@@ -15,6 +15,7 @@ public enum Map {
     }
 
     private final String name;
+
     Map(String name) {
         this.name = name;
     }

@@ -70,6 +70,7 @@ public class SettingsMenu extends Application {
 
         Message.DEFAULT.sendMessage(this.result);
     }
+
     @FXML
     public void saveChanges() {
         Message message = editor.saveSettingsChanges(this.mapChoiceBox.getValue(), this.levelNumberChoiceBox.getValue(),
@@ -80,7 +81,7 @@ public class SettingsMenu extends Application {
     }
 
     @FXML
-    public void backMainMenu() throws Exception{
+    public void backMainMenu() throws Exception {
         new MainMenu().start(stage);
     }
 }

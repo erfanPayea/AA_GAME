@@ -16,6 +16,7 @@ import java.util.Objects;
 
 public class MainMenu extends Application {
     private static Stage stage;
+
     @Override
     public void start(Stage stage) throws Exception {
         MainMenu.stage = stage;
@@ -51,7 +52,7 @@ public class MainMenu extends Application {
         new ProfileMenu().start(MainMenu.stage);
     }
 
-    public void goScoreBoard() throws Exception{
+    public void goScoreBoard() throws Exception {
         new ScoreboardMenu().start(stage);
     }
 }
