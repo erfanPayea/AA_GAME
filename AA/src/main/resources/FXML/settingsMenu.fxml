@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.SettingsMenu">
+   <children>
+      <VBox layoutX="89.0" layoutY="59.0" prefHeight="282.0" prefWidth="422.0" spacing="15.0">
+         <children>
+            <HBox prefHeight="35.0" prefWidth="422.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="38.0" prefWidth="103.0" text="Selected map: " />
+                  <Label fx:id="map" prefHeight="38.0" prefWidth="81.0" textFill="#004eff">
+                     <font>
+                        <Font size="13.0" />
+                     </font></Label>
+                  <Label alignment="CENTER" prefHeight="39.0" prefWidth="102.0" text="New map: " />
+                  <ChoiceBox fx:id="mapChoiceBox" prefHeight="19.0" prefWidth="138.0">
+                     <HBox.margin>
+                        <Insets top="5.0" />
+                     </HBox.margin>
+                  </ChoiceBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="35.0" prefWidth="422.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="38.0" prefWidth="103.0" text="Selected level: " />
+                  <Label fx:id="levelNumber" prefHeight="38.0" prefWidth="81.0" textFill="RED">
+                     <font>
+                        <Font size="13.0" />
+                     </font></Label>
+                  <Label alignment="CENTER" prefHeight="39.0" prefWidth="102.0" text="New level: " />
+                  <ChoiceBox fx:id="levelNumberChoiceBox" prefHeight="19.0" prefWidth="138.0">
+                     <HBox.margin>
+                        <Insets top="5.0" />
+                     </HBox.margin>
+                  </ChoiceBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="35.0" prefWidth="422.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="35.0" prefWidth="96.0" text="balls number:" />
+                  <Label fx:id="ballsNumber" prefHeight="35.0" prefWidth="87.0" textFill="#0cff00">
+                     <font>
+                        <Font size="13.0" />
+                     </font></Label>
+                  <Label prefHeight="37.0" prefWidth="101.0" text="new balls number: " />
+                  <ChoiceBox fx:id="ballsNumberChoiceBox" prefHeight="26.0" prefWidth="137.0">
+                     <HBox.margin>
+                        <Insets top="5.0" />
+                     </HBox.margin>
+                  </ChoiceBox>
+               </children></HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

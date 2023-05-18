@@ -20,7 +20,7 @@ public class MainMenu extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         MainMenu.stage = stage;
-        URL url = new URL(Objects.requireNonNull(this.getClass().getResource("/FXML/MainMenu.fxml")).toExternalForm());
+        URL url = new URL(Objects.requireNonNull(this.getClass().getResource("/FXML/mainMenu.fxml")).toExternalForm());
         AnchorPane pane = FXMLLoader.load(url);
         Text name = new Text(0, 20, User.currentUser.getUsername() + "'s room");
         name.setFill(Color.RED);

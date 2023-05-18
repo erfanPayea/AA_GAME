@@ -10,6 +10,8 @@ import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import model.game.Settings;
+import model.game.enums.Map;
 
 public class User {
     private static ArrayList<User> users;
@@ -17,6 +19,7 @@ public class User {
     private static final Gson gson = new Gson();
     private String username;
     private String password;
+    private Settings settings;
     private int score;
     private int highScore;
     private int rank;
@@ -29,6 +32,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.score = 0;
+        this.settings = new Settings(2, 25, Map.getMapByName("empty"),false); // todo : mapDefault
         users.add(this);
         User.saveUsersToFile();
     }
@@ -52,6 +56,9 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+    public Settings getSettings() {
+        return this.settings;
     }
 
     public int getScore() {

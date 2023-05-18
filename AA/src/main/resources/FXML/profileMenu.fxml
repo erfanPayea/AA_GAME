@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
@@ -59,8 +60,9 @@
                      <children>
                         <Label alignment="CENTER" prefHeight="34.0" prefWidth="86.0" text="New avatar:" />
                         <ChoiceBox prefHeight="19.0" prefWidth="145.0">
-                           <!-- todo : add avatar images-->
-                        </ChoiceBox>
+                           <HBox.margin>
+                              <Insets top="5.0" />
+                           </HBox.margin></ChoiceBox>
                      </children>
                   </HBox>
                </children>

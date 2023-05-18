@@ -12,4 +12,10 @@ module com.example.demo {
     opens view.enums to javafx.fxml;
     exports view.menus;
     opens view.menus to javafx.fxml;
+    exports model.game;
+    opens model.game to com.google.gson;
+    exports model.thing;
+    opens model.thing to com.google.gson;
+    exports model.game.enums;
+    opens model.game.enums to com.google.gson;
 }

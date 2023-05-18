@@ -72,11 +72,13 @@ public class ProfileMenu extends Application {
     // todo : add alert for these :
     public void logout() throws Exception {
         User.currentUser = null;
+        User.setStayLoggedIn(null);
         new LoginMenu().start(stage);
     }
 
     public void deleteAccount() throws Exception {
         User.removeUser(User.currentUser);
+        User.setStayLoggedIn(null);
         User.currentUser = null;
         new LoginMenu().start(stage);
     }
