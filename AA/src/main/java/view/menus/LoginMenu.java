@@ -53,7 +53,7 @@ public class LoginMenu extends Application {
     }
     @FXML
     public void initialize() {
-        result.setText("This is a label for show Messages to you!");
+        Message.DEFAULT.sendMessage(this.result);
     }
 
     public void register() {

@@ -31,4 +31,20 @@ public class Settings {
     public boolean isMute() {
         return isMute;
     }
+
+    public void setMap(String mapName) {
+        if (mapName != null)
+            this.map = Map.getMapByName(mapName);
+    }
+    public void setLevel(String level) {
+        if (level != null)
+            this.level = Level.getLevelByNumber(Integer.parseInt(level));
+    }
+    public void setBallNumbers(String ballNumbers) {
+        if (ballNumbers != null)
+            this.ballNumbers = Integer.parseInt(ballNumbers);
+    }
+    public void setMute(boolean isMute) {
+        this.isMute = isMute;
+    }
 }

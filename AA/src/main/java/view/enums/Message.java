@@ -4,6 +4,7 @@ import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 
 public enum Message {
+    DEFAULT("This is a label for show Messages to you!", Color.DARKCYAN),
     // Login menu
     EMPTY_FIELD("Please fill all fields", Color.YELLOW),
     NOT_MATCH("username and password didn't match!", Color.ORANGERED),

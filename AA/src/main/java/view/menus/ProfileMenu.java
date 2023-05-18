@@ -1,6 +1,6 @@
 package view.menus;
 
-import controller.ProfileMenuController;
+import controller.Editor;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,10 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import model.User;
 import view.enums.Message;
@@ -21,7 +17,7 @@ import java.util.Objects;
 
 public class ProfileMenu extends Application {
     private static Stage stage;
-    private ProfileMenuController controller;
+    private final Editor editor;
     @FXML
     private Label password;
     @FXML
@@ -32,33 +28,29 @@ public class ProfileMenu extends Application {
     private TextField newUsername;
     @FXML
     private Label result;
+
     {
-        controller = new ProfileMenuController();
+        editor = new Editor();
     }
     @Override
     public void start(Stage stage) throws Exception {
         ProfileMenu.stage = stage;
         URL url = new URL(Objects.requireNonNull(this.getClass().getResource("/FXML/profileMenu.fxml")).toExternalForm());
         AnchorPane pane = FXMLLoader.load(url);
-        Text name = new Text(0, 20, User.currentUser.getUsername() + "'s profile");
-        name.setFill(Color.RED);
-        name.setTextAlignment(TextAlignment.CENTER);
-        name.setFont(Font.font(20));
-        pane.getChildren().add(name);
         Scene scene = new Scene(pane);
         stage.setScene(scene);
         stage.show();
     }
     @FXML
     public void initialize() {
-        this.result.setText("This is a label for show Messages to you!");
         this.username.setText(User.currentUser.getUsername());
         this.password.setText(User.currentUser.getPassword());
+        Message.DEFAULT.sendMessage(this.result);
         // todo : avatar
     }
 
-    public void saveChanges() {
-        Message message = this.controller.saveChanges(this.newUsername.getText(), this.newPassword.getText());
+    public void saveChanges() throws Exception {
+        Message message = this.editor.saveProfileChanges(this.newUsername.getText(), this.newPassword.getText());
         message.sendMessage(this.result);
 
         this.username.setText(User.currentUser.getUsername());
