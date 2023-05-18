@@ -32,7 +32,7 @@ public class Editor {
             currentUser.setPassword(password);
         }
 
-        saveToDatabase();
+        User.saveToDatabase();
         return Message.CHANGE_SUCCESS;
     }
 
@@ -46,14 +46,8 @@ public class Editor {
         currentSettings.setBallNumbers(ballsNumber);
         currentSettings.setMute(isMute);
 
-        saveToDatabase();
+        User.saveToDatabase();
         return Message.CHANGE_SUCCESS;
     }
 
-    public void saveToDatabase() {
-        if (User.loadStayLoggedIn() != null)
-            User.setStayLoggedIn(currentUser);
-
-        User.saveUsersToFile();
-    }
 }

@@ -51,7 +51,7 @@ public class MainMenu extends Application {
         new ProfileMenu().start(MainMenu.stage);
     }
 
-    public void goScoreBoard() {
-
+    public void goScoreBoard() throws Exception{
+        new ScoreboardMenu().start(stage);
     }
 }

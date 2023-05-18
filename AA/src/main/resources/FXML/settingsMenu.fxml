@@ -15,7 +15,7 @@
                      <font>
                         <Font size="13.0" />
                      </font></Label>
-                  <Label alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="125.0" text="New map :    " />
+                  <Label alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="125.0" text="The game map :    " />
                   <ChoiceBox fx:id="mapChoiceBox" prefHeight="19.0" prefWidth="138.0">
                      <HBox.margin>
                         <Insets top="5.0" />
@@ -39,11 +39,11 @@
             </HBox>
             <HBox prefHeight="35.0" prefWidth="422.0">
                <children>
-                  <Label prefHeight="35.0" prefWidth="66.0" textFill="#0cff00">
+                  <Label prefHeight="35.0" prefWidth="77.0" textFill="#0cff00">
                      <font>
                         <Font size="13.0" />
                      </font></Label>
-                  <Label prefHeight="35.0" prefWidth="141.0" text="The gameballs number :" />
+                  <Label prefHeight="35.0" prefWidth="130.0" text="Starting ball number :" />
                   <ChoiceBox fx:id="ballsNumberChoiceBox" prefHeight="26.0" prefWidth="137.0">
                      <HBox.margin>
                         <Insets top="5.0" />

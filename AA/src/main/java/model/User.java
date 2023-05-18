@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -19,13 +21,17 @@ public class User {
     private static final Gson gson = new Gson();
     private String username;
     private String password;
-    private Settings settings;
+    private final Settings settings;
     private int score;
-    private int highScore;
-    private int rank;
+    private final int[] highScores;
 
     static {
         users = new ArrayList<>();
+    }
+
+    {
+        highScores = new int[4];
+        Arrays.fill(highScores, 0);
     }
 
     public User(String username, String password) {
@@ -37,6 +43,10 @@ public class User {
         User.saveUsersToFile();
     }
 
+    public static ArrayList<User> getUsers() {
+        return users;
+    }
+
     public static User getUserByUsername(String username) {
         for (User user : users) {
             if (user.username.equals(username))
@@ -45,28 +55,27 @@ public class User {
         return null;
     }
 
-    public static void removeUser(User user) {
-        users.remove(user);
+    public static void remove() {
+        users.remove(currentUser);
+        currentUser = null;
+        saveToDatabase();
     }
-
 
     public String getUsername() {
         return this.username;
     }
-
     public String getPassword() {
         return password;
     }
     public Settings getSettings() {
         return this.settings;
     }
+    public int[] getHighScores() {
+        return this.highScores;
+    }
 
     public int getScore() {
         return score;
-    }
-
-    public void setHighScore(int highScore) {
-        this.highScore = highScore;
     }
 
     public boolean isPasswordIncorrect(String password) {
@@ -81,14 +90,14 @@ public class User {
         this.password = password;
     }
 
-    public void setScore(int score) {
+    public void setScore(int score, int level) {
         this.score = score;
-        if (this.score > this.highScore)
-            this.highScore = score;
-    }
 
-    public void remove() {
-        users.remove(this);
+        if (score > this.highScores[level])
+            this.highScores[level] = score;
+
+        if (score > highScores[0])
+            this.highScores[0] = score;
     }
 
     // database :
@@ -111,6 +120,14 @@ public class User {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    // dataBase :
+    public static void saveToDatabase() {
+        if (User.loadStayLoggedIn() != null)
+            User.setStayLoggedIn(currentUser);
+
+        User.saveUsersToFile();
     }
 
     public static User loadStayLoggedIn() {

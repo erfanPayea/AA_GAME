@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.ScoreboardMenu">
+   <children>
+      <VBox fx:id="users" layoutX="117.0" layoutY="106.0" prefHeight="279.0" prefWidth="293.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="30.0" prefWidth="293.0" text="User" />
+         </children></VBox>
+      <Label alignment="CENTER" layoutX="117.0" layoutY="46.0" prefHeight="35.0" prefWidth="100.0" text="Sort by level :" />
+      <ChoiceBox fx:id="levelChoiceBox" layoutX="225.0" layoutY="51.0" prefWidth="150.0" />
+      <VBox fx:id="highScores" layoutX="411.0" layoutY="106.0" prefHeight="279.0" prefWidth="100.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="30.0" prefWidth="100.0" text="Best Score" />
+         </children>
+      </VBox>
+      <VBox fx:id="rankNumbers" layoutX="84.0" layoutY="106.0" prefHeight="279.0" prefWidth="32.0">
+         <children>
+            <Label prefHeight="30.0" prefWidth="38.0" text="Rank" />
+         </children>
+      </VBox>
+      <Button layoutX="402.0" layoutY="50.0" mnemonicParsing="false" onAction="#sort" prefHeight="26.0" prefWidth="58.0" text="sort" textFill="#419428" />
+   </children>
+</AnchorPane>

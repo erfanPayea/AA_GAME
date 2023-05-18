@@ -69,9 +69,7 @@ public class ProfileMenu extends Application {
     }
 
     public void deleteAccount() throws Exception {
-        User.removeUser(User.currentUser);
-        User.setStayLoggedIn(null);
-        User.currentUser = null;
+        User.remove();
         new LoginMenu().start(stage);
     }
 }
