@@ -14,8 +14,9 @@
             <TextField fx:id="username" maxWidth="300" promptText="username"/>
             <PasswordField fx:id="password" maxWidth="300" promptText="password"/>
             <HBox alignment="CENTER" spacing="20">
-                <Button onMouseClicked="#login" styleClass="Button-login" text="login"/>
-                <Button onMouseClicked="#register" styleClass="Button-register" text="register"/>
+                <Button onAction="#playAsGuest" styleClass="Button-guest" text="play as guest"/>
+                <Button onAction="#login" styleClass="Button-login" text="login"/>
+                <Button onAction="#register" styleClass="Button-register" text="register"/>
             </HBox>
             <CheckBox fx:id="statLoggedIn" mnemonicParsing="false" text="Stay logged in"/>
             <Label id="miniLabel" fx:id="result"/>

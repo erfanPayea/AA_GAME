@@ -69,9 +69,9 @@ public class ScoreboardMenu extends Application {
 
         int size = rankNumbers.getChildren().size();
         if (size > 1) {
-            rankNumbers.getChildren().remove(1, size - 1);
-            users.getChildren().remove(1, size - 1);
-            highScores.getChildren().remove(1, size - 1);
+            rankNumbers.getChildren().remove(1, size);
+            users.getChildren().remove(1, size);
+            highScores.getChildren().remove(1, size);
         }
 
         for (int index = 0; index < rankUsers.size(); index++) {

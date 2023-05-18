@@ -15,12 +15,17 @@ public class Editor {
 
 
     public Message saveProfileChanges(String username, String password) { // todo : avatar
+        if (currentUser.getPassword() == null)
+            return Message.GUEST_PROFILE;
+
         if (password.isEmpty() && username.isEmpty())
             return Message.ALL_EMPTY;
 
         if (!username.isEmpty()) {
             if (username.length() < 4)
                 return Message.LOW_USERNAME;
+            if (User.getUserByUsername(username) != null)
+                return Message.USERNAME_EXISTS;
             if (!password.isEmpty() && password.length() < 4)
                 return Message.LOW_PASSWORD;
 

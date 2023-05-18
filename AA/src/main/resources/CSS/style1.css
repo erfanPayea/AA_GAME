@@ -60,6 +60,18 @@ PasswordField {
     -fx-font-size: 10px;
 }
 
+.Button-guest {
+    -fx-min-width: 100;
+    -fx-max-width: 100;
+    -fx-background-color: #3c7fb1,
+    linear-gradient(#fafdfe, #e8f5fc),
+    linear-gradient(#dc5959 0%, #dc5959 49%, #dc5959 50%, #a7d9f5 100%);
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 3, 2, 1;
+    -fx-text-fill: black;
+    -fx-font-size: 10px;
+}
+
 #label {
     -fx-font-size: 32px;
     -fx-font-family: "Arial Black";

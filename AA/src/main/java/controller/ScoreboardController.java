@@ -12,7 +12,7 @@ public class ScoreboardController {
         for (User user : User.getUsers()) {
             index = 0;
             for (int i = 0; i < ranks.size(); i++) {
-                if (ranks.get(i).getHighScores()[level] < user.getHighScores()[level]) {
+                if (ranks.get(i).getHighScores()[level] <= user.getHighScores()[level]) {
                     index = i;
                     break;
                 }

@@ -37,4 +37,12 @@ public class LoginMenuController {
             return Message.REGISTER_SUCCESS;
         }
     }
+
+    public Message playAsGuest(boolean stayLoggedIn) {
+        if (stayLoggedIn)
+            return Message.GUEST_ERROR;
+
+        new User();
+        return null;
+    }
 }

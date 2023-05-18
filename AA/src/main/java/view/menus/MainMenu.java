@@ -10,6 +10,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import model.User;
+import view.enums.Message;
 
 import java.net.URL;
 import java.util.Objects;

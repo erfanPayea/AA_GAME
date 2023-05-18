@@ -42,6 +42,13 @@ public class User {
         User.saveUsersToFile();
     }
 
+    public User() {
+        this.username = "guest";
+        this.score = 0;
+        this.settings = new Settings(2, 25, Map.getMapByName("empty"), false); // todo : mapDefault
+        User.currentUser = this;
+    }
+
     public static ArrayList<User> getUsers() {
         return users;
     }

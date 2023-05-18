@@ -1,4 +1,10 @@
 package model.thing;
 
-public class CenterCircle {
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
+
+public class CenterCircle extends Circle {
+    public CenterCircle(double v, Paint paint) {
+        super(v, paint);
+    }
 }
