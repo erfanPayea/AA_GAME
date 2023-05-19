@@ -9,7 +9,7 @@ import java.util.Objects;
 public enum Map {
     MAP_1("Night", new ImageView(new Image(Objects.requireNonNull(Map.class.getResource(
             "/images/backgrounds/white-bg.webp")).toString(), 800 ,600, false, false)),
-            Color.BLACK),
+            Color.DARKBLUE),
     MAP_2("Fruit", null, Color.ORANGE), // todo : not null
     MAP_3("Nature", null, Color.GREEN),
     ;

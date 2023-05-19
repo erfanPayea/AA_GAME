@@ -14,9 +14,8 @@ public enum Message {
     GUEST_ERROR("You can't stay logged in with a guest", Color.ORANGERED),
     GUEST_PROFILE("Changing fields is not available for guests!", Color.DARKCYAN),
     REGISTER_SUCCESS("Successfully registered; You can log in now!", Color.LIGHTGREEN),
-
     // Profile menu
-    ALL_EMPTY("All fields are empty!", Color.YELLOW),
+    ALL_EMPTY("All fields are empty!", Color.GOLD),
     CHANGE_SUCCESS("Changes applied successfully", Color.LIGHTGREEN),
     ;
     private final String message;

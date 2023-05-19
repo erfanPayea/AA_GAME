@@ -1,23 +1,25 @@
 package view.menus;
 
+import controller.GameMenuController;
 import javafx.application.Application;
-import javafx.geometry.Pos;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.text.Font;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.game.Settings;
-import model.thing.InvisibleCircle;
+import model.thing.Ball;
+
+import java.util.ArrayList;
 
 public class GameMenu extends Application {
     private static Stage stage;
-    private final Settings settings;
+    private final GameMenuController controller;
+    private VBox ballsGroup;
 
     public GameMenu(Settings settings) {
-        this.settings = settings;
+        this.controller = new GameMenuController(this, settings);
     }
 
     @Override
@@ -25,25 +27,34 @@ public class GameMenu extends Application {
         GameMenu.stage = stage;
         Pane pane = new Pane();
         pane.setPrefWidth(700); pane.setPrefHeight(550);
-        createCenterCircle(pane);
+        controller.createAndAddCenterCircle(pane);
+
+        this.ballsGroup = createBallsGroup(pane);
+        pane.getChildren().add(ballsGroup);
 
         Scene scene = new Scene(pane);
         stage.setScene(scene);
+
+        this.ballsGroup.requestFocus();
         stage.show();
     }
 
-    public void createCenterCircle(Pane pane) {
-        Label name = new Label(settings.getMap().getName());
-        name.setTextFill(Color.WHITE);
-        name.setFont(new Font(40)); name.setAlignment(Pos.CENTER);
-        name.setPrefHeight(54); name.setPrefWidth(153);
-        name.setLayoutX(274); name.setLayoutY(173);
+    private VBox createBallsGroup(Pane pane) {
+        VBox ballsGroup = controller.createBallsGroup(pane);
 
-        Circle circle = new Circle(350, 200,80, settings.getMap().getColor());
-        InvisibleCircle invisibleCircle = new InvisibleCircle(350, 200, 120); invisibleCircle.setVisible(false);
+        ballsGroup.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                String keyName = keyEvent.getCode().getName();
 
-        pane.getChildren().add(circle);
-        pane.getChildren().add(invisibleCircle);
-        pane.getChildren().add(name);
+                if (keyName.equals("Space"))
+                    controller.shoot(pane);
+            }
+        });
+        return ballsGroup;
+    }
+
+    public void shootFirst() {
+        this.ballsGroup.getChildren().remove(0);
     }
 }

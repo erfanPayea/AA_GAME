@@ -4,7 +4,6 @@ import model.User;
 import model.game.Settings;
 import view.enums.Message;
 
-import java.security.SecureRandom;
 
 public class Editor {
     private final User currentUser;
