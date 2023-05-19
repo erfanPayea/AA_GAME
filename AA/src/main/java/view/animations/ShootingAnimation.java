@@ -37,6 +37,11 @@ public class ShootingAnimation extends Transition {
             if (pane.getChildren().get(0) instanceof InvisibleCircle invisibleCircle)
                 invisibleCircle.receiveBall(ball);
 
+            InvisibleCircleAnimation invisibleCircleAnimation = new InvisibleCircleAnimation((InvisibleCircle) pane.getChildren().get(0),
+                    5, 1.2,
+                    7);
+            invisibleCircleAnimation.play();
+
             this.stop();
         }
 

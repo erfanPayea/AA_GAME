@@ -15,7 +15,7 @@
         </Label>
       <VBox layoutX="340.0" layoutY="460.0" prefHeight="20.0" prefWidth="20.0" />
       <Circle layoutX="350.0" layoutY="355.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
-      <Line layoutX="350.0" layoutY="355.0" startY="-155" />
+      <Line fill="#061afc" layoutX="350.0" layoutY="355.0" startY="-155" stroke="BLUE" />
     </children>
 
 </AnchorPane>

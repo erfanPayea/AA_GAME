@@ -37,11 +37,6 @@ public class GameMenuController {
         InvisibleCircle invisibleCircle = new InvisibleCircle(350, 200, 170, pane);
         invisibleCircle.setVisible(false);
 
-        InvisibleCircleAnimation invisibleCircleAnimation = new InvisibleCircleAnimation(invisibleCircle,
-                settings.getLevel().getRotationSpeed(), settings.getLevel().getWindSpeed(),
-                settings.getLevel().getFreezeTime());
-        invisibleCircleAnimation.play();
-
         pane.getChildren().add(invisibleCircle);
         pane.getChildren().add(circle);
         pane.getChildren().add(name);

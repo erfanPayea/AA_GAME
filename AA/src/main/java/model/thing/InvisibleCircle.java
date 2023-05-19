@@ -22,4 +22,8 @@ public class InvisibleCircle extends Circle {
         lines.add(line);
         pane.getChildren().add(line);
     }
+
+    public ArrayList<Ball> getBalls() {
+        return balls;
+    }
 }
