@@ -37,7 +37,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.score = 0;
-        this.settings = new Settings(2, 25, Map.getMapByName("Dark"), false); // todo : mapDefault
+        this.settings = new Settings(2, 25, Map.getMapByName("Night"), false); // todo : mapDefault
         users.add(this);
         User.saveUsersToFile();
     }
@@ -45,7 +45,7 @@ public class User {
     public User() {
         this.username = "guest";
         this.score = 0;
-        this.settings = new Settings(2, 25, Map.getMapByName("Dark"), false); // todo : mapDefault
+        this.settings = new Settings(2, 25, Map.getMapByName("Night"), false); // todo : mapDefault
         User.currentUser = this;
     }
 

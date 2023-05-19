@@ -2,14 +2,14 @@ package model.thing;
 
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
-import view.animations.BallAnimation;
+import view.animations.ShootingAnimation;
 
 public class Ball extends Circle {
     private int number;
-    private BallAnimation ballAnimation;
+    private ShootingAnimation shootingAnimation;
     public Ball(double v, Paint paint, int number) {
         super(v, paint);
         this.number = number;
-        this.ballAnimation = new BallAnimation();
+        this.shootingAnimation = new ShootingAnimation();
     }
 }
