@@ -1,9 +1,18 @@
 package model.game.enums;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+import model.thing.CenterCircle;
+
+import java.util.Objects;
+
 public enum Map {
-    EMPTY_MAP("empty"),  // todo : delete
-    AGING("aging"),
-    VYING("vying"),
+    MAP_1("Dark", new ImageView(new Image(Objects.requireNonNull(Map.class.getResource(
+            "/images/backgrounds/white-bg.webp")).toString(), 800 ,600, false, false)),
+            Color.BLACK),
+    MAP_2("Orange", null, Color.ORANGE), // todo : not null
+    MAP_3("Blue", null, Color.BLUE),
     ;
 
     public static Map getMapByName(String name) {
@@ -15,12 +24,23 @@ public enum Map {
     }
 
     private final String name;
+    private final ImageView background;
+    private final Color color;
 
-    Map(String name) {
+    Map(String name, ImageView background, Color color) {
         this.name = name;
+        this.background = background;
+        this.color = color;
     }
 
     public String getName() {
         return name;
+    }
+    public ImageView getBackground() {
+        return background;
+    }
+
+    public Color getColor() {
+        return this.color;
     }
 }
