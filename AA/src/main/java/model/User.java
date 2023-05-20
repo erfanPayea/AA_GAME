@@ -21,8 +21,10 @@ public class User {
     private String username;
     private String password;
     private final Settings settings;
-    private int score;
+    private int lastGameScore;
     private final int[] highScores;
+    public int lastTimePlayed;
+    public boolean hasWinLastGame;
 
     static {
         users = new ArrayList<>();
@@ -36,7 +38,7 @@ public class User {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
-        this.score = 0;
+        this.lastGameScore = 0;
         this.settings = new Settings(2, 25, Map.getMapByName("Space"), false);
         users.add(this);
         User.saveUsersToFile();
@@ -44,7 +46,7 @@ public class User {
 
     public User() {
         this.username = "guest";
-        this.score = 0;
+        this.lastGameScore = 0;
         this.settings = new Settings(2, 25, Map.getMapByName("Space"), false);
         User.currentUser = this;
     }
@@ -83,8 +85,8 @@ public class User {
         return this.highScores;
     }
 
-    public int getScore() {
-        return score;
+    public int getLastGameScore() {
+        return lastGameScore;
     }
 
     public boolean isPasswordIncorrect(String password) {
@@ -99,14 +101,14 @@ public class User {
         this.password = password;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void setLastGameScore(int lastGameScore) {
+        this.lastGameScore = lastGameScore;
 
-        if (score > this.highScores[settings.getLevel().getNumber()])
-            this.highScores[settings.getLevel().getNumber()] = score;
+        if (lastGameScore > this.highScores[settings.getLevel().getNumber()])
+            this.highScores[settings.getLevel().getNumber()] = lastGameScore;
 
-        if (score > highScores[0])
-            this.highScores[0] = score;
+        if (lastGameScore > highScores[0])
+            this.highScores[0] = lastGameScore;
     }
 
     // database :

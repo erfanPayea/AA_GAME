@@ -18,32 +18,36 @@ import model.game.Settings;
 
 public class GameMenu extends Application {
     private static Stage stage;
-    private final GameMenuController controller;
     private Scene scene;
+    private final GameMenuController controller;
+    private final Settings settings;
+    private Pane pane;
     private HBox remainingBallsHBox;
     private VBox ballsGroupVBox;
 
     public GameMenu(Settings settings) {
+        this.settings = settings;
         this.controller = new GameMenuController(this, settings);
     }
 
     @Override
     public void start(Stage stage) throws Exception {
         GameMenu.stage = stage;
-        Pane pane = new Pane();
-        pane.setPrefWidth(700); pane.setPrefHeight(550);
-        controller.createAndAddCenterCircle(pane);
+        this.pane = new Pane();
 
-        this.ballsGroupVBox = createBallsGroup(pane);
-        pane.getChildren().add(ballsGroupVBox);
+        this.pane.setPrefWidth(700); this.pane.setPrefHeight(550);
+        controller.createAndAddCenterCircle(this.pane);
+
+        this.ballsGroupVBox = createBallsGroup(this.pane);
+        this.pane.getChildren().add(ballsGroupVBox);
 
         this.remainingBallsHBox = createRemainingBalls();
-        pane.getChildren().add(this.remainingBallsHBox);
+        this.pane.getChildren().add(this.remainingBallsHBox);
 
-        pane.setBackground(new Background(User.currentUser.getSettings().getMap().getBackgroundImage()));
-        createPauseButton(pane);
+        this.pane.setBackground(new Background(settings.getMap().getBackgroundImage()));
+        createPauseButton(this.pane);
 
-        this.scene = new Scene(pane);
+        this.scene = new Scene(this.pane);
         stage.setScene(scene);
 
         this.ballsGroupVBox.requestFocus();
@@ -108,7 +112,7 @@ public class GameMenu extends Application {
             ballsNumberText.setText(String.valueOf(newBallsNumber));
             if (newBallsNumber < 6)
                 ballsNumberText.setFill(Color.GREEN);
-            else if (newBallsNumber <= User.currentUser.getSettings().getBallNumbers() / 2 + 1)
+            else if (newBallsNumber <= settings.getBallNumbers() / 2 + 1)
                 ballsNumberText.setFill(Color.GOLD);
         }
     }
@@ -129,8 +133,16 @@ public class GameMenu extends Application {
         start(stage);
     }
 
+    public void looseGame() throws Exception {
+        this.pane.setBackground(new Background(new BackgroundFill(Color.ORANGERED, null, null)));
+        this.pane.getChildren().get(1).requestFocus();
+
+        new FinishMenu().start(new Stage());
+    }
+
     public void end() throws Exception {
         this.stop();
         new MainMenu().start(stage);
     }
+
 }

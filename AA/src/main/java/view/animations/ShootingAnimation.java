@@ -29,7 +29,11 @@ public class ShootingAnimation extends Transition {
 
         if (isHitAnotherBall())
         {
-            gameMenuController.looseGame();
+            try {
+                gameMenuController.looseGame();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
             this.stop();
         }
 

@@ -7,10 +7,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import model.User;
 import model.game.Settings;
 import model.thing.Ball;
 import model.thing.InvisibleCircle;
 import view.animations.ShootingAnimation;
+import view.menus.FinishMenu;
 import view.menus.GameMenu;
 import view.menus.MainMenu;
 
@@ -119,8 +121,12 @@ public class GameMenuController {
         gameMenu.restart();
     }
 
-    public void looseGame() {
+    public void looseGame() throws Exception {
+        User.currentUser.hasWinLastGame = false;
         int score = settings.getLevel().getScorePerBall() * (settings.getBallNumbers() - balls.size()); // todo : time
+        User.currentUser.lastTimePlayed = 10;
+        User.currentUser.setLastGameScore(score);
+        gameMenu.looseGame();
     }
 
     public void finishGame() throws Exception {
