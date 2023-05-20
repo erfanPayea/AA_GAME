@@ -1,17 +1,15 @@
 package model.game.enums;
 
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
 import java.util.Objects;
 
 public enum Map {
-    MAP_1("Night", new ImageView(new Image(Objects.requireNonNull(Map.class.getResource(
-            "/images/backgrounds/white-bg.webp")).toString(), 800 ,600, false, false)),
-            Color.DARKBLUE),
-    MAP_2("Fruit", null, Color.ORANGE), // todo : not null
-    MAP_3("Nature", null, Color.GREEN),
+    MAP_1("Space", "space-bg.png", Color.BLACK),
+    MAP_2("Fruit", "fruit-bg.png", Color.ALICEBLUE), // todo : not null
+    MAP_3("Nature", "nature-bg.png", Color.DARKBLUE),
     ;
 
     public static Map getMapByName(String name) {
@@ -23,20 +21,24 @@ public enum Map {
     }
 
     private final String name;
-    private final ImageView background;
+    private final BackgroundImage backgroundImage;
     private final Color color;
 
-    Map(String name, ImageView background, Color color) {
+    Map(String name, String backgroundName, Color color) {
         this.name = name;
-        this.background = background;
+        this.backgroundImage = new BackgroundImage(new Image(Objects.requireNonNull(Map.class.getResource(
+                "/images/background/" + backgroundName)).toExternalForm(),700, 560, false, false),
+                BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         this.color = color;
     }
 
     public String getName() {
         return name;
     }
-    public ImageView getBackground() {
-        return background;
+
+    public BackgroundImage getBackgroundImage() {
+        return backgroundImage;
     }
 
     public Color getColor() {

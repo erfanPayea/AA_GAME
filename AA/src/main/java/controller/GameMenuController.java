@@ -2,19 +2,19 @@ package controller;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import model.game.Settings;
 import model.thing.Ball;
 import model.thing.InvisibleCircle;
-import view.animations.InvisibleCircleAnimation;
 import view.animations.ShootingAnimation;
 import view.menus.GameMenu;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class GameMenuController {
     private final GameMenu gameMenu;
@@ -28,7 +28,7 @@ public class GameMenuController {
 
     public void createAndAddCenterCircle(Pane pane) {
         Label name = new Label(settings.getMap().getName());
-        name.setTextFill(Color.WHITE);
+        if (settings.getMap().getColor() != Color.ALICEBLUE) name.setTextFill(Color.WHITE);
         name.setFont(new Font(40)); name.setAlignment(Pos.CENTER);
         name.setPrefHeight(54); name.setPrefWidth(153);
         name.setLayoutX(274); name.setLayoutY(173);

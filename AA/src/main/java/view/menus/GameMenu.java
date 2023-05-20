@@ -4,14 +4,16 @@ import controller.GameMenuController;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import model.User;
 import model.game.Settings;
-import model.thing.Ball;
 
-import java.util.ArrayList;
+import java.util.Objects;
+
 
 public class GameMenu extends Application {
     private static Stage stage;
@@ -31,6 +33,8 @@ public class GameMenu extends Application {
 
         this.ballsGroup = createBallsGroup(pane);
         pane.getChildren().add(ballsGroup);
+
+        pane.setBackground(new Background(User.currentUser.getSettings().getMap().getBackgroundImage()));
 
         Scene scene = new Scene(pane);
         stage.setScene(scene);
