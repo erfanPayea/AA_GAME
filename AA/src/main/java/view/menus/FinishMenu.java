@@ -2,7 +2,6 @@ package view.menus;
 
 import controller.GameMenuController;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

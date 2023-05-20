@@ -23,6 +23,7 @@ public class GameMenu extends Application {
     private final Settings settings;
     private Pane pane;
     private HBox remainingBallsHBox;
+    private HBox scoreSheet;
     private VBox ballsGroupVBox;
 
     {
@@ -43,6 +44,9 @@ public class GameMenu extends Application {
 
         this.remainingBallsHBox = createRemainingBalls();
         this.pane.getChildren().add(this.remainingBallsHBox);
+
+        this.scoreSheet = controller.createScoreSheet();
+        this.pane.getChildren().add(scoreSheet);
 
         this.pane.setBackground(new Background(settings.getMap().getBackgroundImage()));
         createPauseButton(this.pane);
@@ -122,6 +126,11 @@ public class GameMenu extends Application {
         }
     }
 
+    public void changeScore(int score) {
+        if (this.scoreSheet.getChildren().get(1) instanceof Text scoreText)
+            scoreText.setText(String.valueOf(score));
+    }
+
     public void pause() throws Exception {
         PauseMenu pauseMenu = new PauseMenu();
         pauseMenu.start(stage);
@@ -153,7 +162,7 @@ public class GameMenu extends Application {
     }
 
     public void end() throws Exception {
-        this.stop();
+        stage.close();
         new MainMenu().start(stage);
     }
 }

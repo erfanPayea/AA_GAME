@@ -15,8 +15,8 @@ public class ShootingAnimation extends Transition {
     private final Pane pane;
     private final Ball ball;
 
-    public ShootingAnimation(GameMenuController gameMenuController, Pane pane, Ball ball) {
-        this.gameMenuController = gameMenuController;
+    public ShootingAnimation(Pane pane, Ball ball) {
+        this.gameMenuController = GameMenuController.getGameMenuController();
         this.pane = pane;
         this.ball = ball;
         this.setCycleDuration(Duration.millis(3));
@@ -38,8 +38,13 @@ public class ShootingAnimation extends Transition {
         }
 
         if (gameMenuController.isOnInvisibleCircle(ball)) {
-            if (pane.getChildren().get(0) instanceof InvisibleCircle invisibleCircle)
-                invisibleCircle.receiveBall(ball);
+            if (pane.getChildren().get(0) instanceof InvisibleCircle invisibleCircle) {
+                try {
+                    invisibleCircle.receiveBall(ball);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
 
             InvisibleCircleAnimation invisibleCircleAnimation = new InvisibleCircleAnimation((InvisibleCircle) pane.getChildren().get(0),
                     5, 1.2,
@@ -63,4 +68,5 @@ public class ShootingAnimation extends Transition {
         }
         return false;
     }
+
 }

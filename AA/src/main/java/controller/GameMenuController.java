@@ -22,11 +22,13 @@ public class GameMenuController {
     private final User currentUser;
     private final Settings settings;
     private ArrayList<Ball> balls;
+    private int score;
 
     public GameMenuController(GameMenu gameMenu) {
         this.currentUser = User.currentUser;
         this.settings = currentUser.getSettings();
         this.gameMenu = gameMenu;
+        this.score = 0;
         gameMenuController = this;
     }
 
@@ -63,6 +65,20 @@ public class GameMenuController {
         return hBox;
     }
 
+    public HBox createScoreSheet() {
+        Text yourScore = new Text("Your score: ");
+        Text score = new Text(String.valueOf(0));
+
+        yourScore.setFill(Color.WHITE);
+        score.setFill(Color.LIGHTCYAN);
+        yourScore.setFont(new Font(18));
+        score.setFont(new Font(20));
+        HBox hBox = new HBox(yourScore, score);
+        hBox.setSpacing(10); hBox.setLayoutY(20);
+        return hBox;
+    }
+
+
     public VBox createBallsGroup(Pane pane) {
         int size = this.settings.getBallNumbers();
 
@@ -94,12 +110,13 @@ public class GameMenuController {
         Ball shootedBall = new Ball(pane, ball.getNumber(), ball.getColor());
         shootedBall.setCenterX(350); shootedBall.setCenterY(440);
 
-        ShootingAnimation shootingAnimation = new ShootingAnimation(this, pane, shootedBall);
+        ShootingAnimation shootingAnimation = new ShootingAnimation(pane, shootedBall);
         pane.getChildren().add(shootedBall);
         shootingAnimation.play();
 
-        if (isOnInvisibleCircle(shootedBall))
-            winGame();
+        this.score += this.settings.getLevel().getScorePerBall();
+        gameMenu.changeScore(this.score);
+
     }
 
     public boolean isOnInvisibleCircle(Ball ball) {
@@ -124,18 +141,16 @@ public class GameMenuController {
         gameMenu.restart();
     }
 
-    private void winGame() throws Exception {
+    public void winGame() throws Exception {
         this.currentUser.hasWinLastGame = true;
-        int score = this.settings.getLevel().getScorePerBall() * (this.settings.getBallNumbers() - balls.size());
-        this.currentUser.lastTimePlayed = 10;
-        this.currentUser.setLastGameScore(score);
+        this.currentUser.lastTimePlayed = 10; // todo : time
+        this.currentUser.setLastGameScore(this.score);
         gameMenu.winGame();
     }
 
     public void looseGame() throws Exception {
         this.currentUser.hasWinLastGame = false;
-        int score = this.settings.getLevel().getScorePerBall() * (this.settings.getBallNumbers() - balls.size()); // todo : time
-        this.currentUser.lastTimePlayed = 10;
+        this.currentUser.lastTimePlayed = 10; // todo : time
         this.currentUser.setLastGameScore(score);
         gameMenu.looseGame();
     }

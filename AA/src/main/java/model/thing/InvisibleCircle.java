@@ -1,7 +1,9 @@
 package model.thing;
 
+import controller.GameMenuController;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
+import model.User;
 
 import java.util.ArrayList;
 
@@ -16,11 +18,16 @@ public class InvisibleCircle extends Circle {
         this.lines = new ArrayList<>();
     }
 
-    public void receiveBall(Ball ball) {
-        balls.add(ball);
+    public void receiveBall(Ball ball) throws Exception {
+        this.balls.add(ball);
         Line line = new Line(this.getCenterX(), this.getCenterY(), ball);
-        lines.add(line);
-        pane.getChildren().add(line);
+        this.lines.add(line);
+        this.pane.getChildren().add(line);
+
+        System.out.println(this.balls.size());
+
+        if (this.balls.size() == User.currentUser.getSettings().getBallNumbers())
+            GameMenuController.getGameMenuController().winGame();
     }
 
     public ArrayList<Ball> getBalls() {

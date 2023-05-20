@@ -101,7 +101,7 @@ public class User {
         this.password = password;
     }
 
-    public void setLastGameScore(int lastGameScore) {
+    public void setLastGameScore(int lastGameScore) { // todo : time
         this.lastGameScore = lastGameScore;
 
         if (lastGameScore > this.highScores[settings.getLevel().getNumber()])
