@@ -29,7 +29,7 @@ public class ShootingAnimation extends Transition {
 
         if (isHitAnotherBall())
         {
-            gameMenuController.finishGame();
+            gameMenuController.looseGame();
             this.stop();
         }
 

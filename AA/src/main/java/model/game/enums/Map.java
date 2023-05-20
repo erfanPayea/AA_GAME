@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public enum Map {
     MAP_1("Space", "space-bg.png", Color.BLACK),
-    MAP_2("Fruit", "fruit-bg.png", Color.ALICEBLUE), // todo : not null
+    MAP_2("Fruit", "fruit-bg.png", Color.ALICEBLUE),
     MAP_3("Nature", "nature-bg.png", Color.DARKBLUE),
     ;
 

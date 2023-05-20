@@ -2,21 +2,22 @@ package controller;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import model.game.Settings;
 import model.thing.Ball;
 import model.thing.InvisibleCircle;
 import view.animations.ShootingAnimation;
 import view.menus.GameMenu;
+import view.menus.MainMenu;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class GameMenuController {
+    private static GameMenuController gameMenuController;
     private final GameMenu gameMenu;
     private final Settings settings;
     private ArrayList<Ball> balls;
@@ -24,6 +25,11 @@ public class GameMenuController {
     public GameMenuController(GameMenu gameMenu, Settings settings) {
         this.settings = settings;
         this.gameMenu = gameMenu;
+        gameMenuController = this;
+    }
+
+    public static GameMenuController getGameMenuController() {
+        return gameMenuController;
     }
 
     public void createAndAddCenterCircle(Pane pane) {
@@ -40,6 +46,19 @@ public class GameMenuController {
         pane.getChildren().add(invisibleCircle);
         pane.getChildren().add(circle);
         pane.getChildren().add(name);
+    }
+
+    public HBox createRemainingBalls() {
+        Text remainingBalls = new Text("Remaining balls: ");
+        Text balls = new Text(String.valueOf(settings.getBallNumbers()));
+
+        remainingBalls.setFill(Color.WHITE);
+        balls.setFill(Color.ORANGERED);
+        remainingBalls.setFont(new Font(18));
+        balls.setFont(new Font(20));
+        HBox hBox = new HBox(remainingBalls, balls);
+        hBox.setSpacing(10);
+        return hBox;
     }
 
     public VBox createBallsGroup(Pane pane) {
@@ -88,6 +107,24 @@ public class GameMenuController {
                 (ball1.getCenterY() - ball2.getCenterY()) * (ball1.getCenterY() - ball2.getCenterY()) < 450.03;
     }
 
-    public void finishGame() {
+    public void pause(Pane pane) throws Exception {
+//        gameMenu.restart();
     }
+
+    public void continueGame() {
+        gameMenu.continueGame();
+    }
+
+    public void restartGame() throws Exception {
+        gameMenu.restart();
+    }
+
+    public void looseGame() {
+        int score = settings.getLevel().getScorePerBall() * (settings.getBallNumbers() - balls.size()); // todo : time
+    }
+
+    public void finishGame() throws Exception {
+        gameMenu.end();
+    }
+
 }
