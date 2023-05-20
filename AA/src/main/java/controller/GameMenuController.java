@@ -12,20 +12,20 @@ import model.game.Settings;
 import model.thing.Ball;
 import model.thing.InvisibleCircle;
 import view.animations.ShootingAnimation;
-import view.menus.FinishMenu;
 import view.menus.GameMenu;
-import view.menus.MainMenu;
 
 import java.util.ArrayList;
 
 public class GameMenuController {
     private static GameMenuController gameMenuController;
     private final GameMenu gameMenu;
+    private final User currentUser;
     private final Settings settings;
     private ArrayList<Ball> balls;
 
-    public GameMenuController(GameMenu gameMenu, Settings settings) {
-        this.settings = settings;
+    public GameMenuController(GameMenu gameMenu) {
+        this.currentUser = User.currentUser;
+        this.settings = currentUser.getSettings();
         this.gameMenu = gameMenu;
         gameMenuController = this;
     }
@@ -36,7 +36,7 @@ public class GameMenuController {
 
     public void createAndAddCenterCircle(Pane pane) {
         Label name = new Label(settings.getMap().getName());
-        if (settings.getMap().getColor() != Color.ALICEBLUE) name.setTextFill(Color.WHITE);
+        if (this.settings.getMap().getColor() != Color.ALICEBLUE) name.setTextFill(Color.WHITE);
         name.setFont(new Font(40)); name.setAlignment(Pos.CENTER);
         name.setPrefHeight(54); name.setPrefWidth(153);
         name.setLayoutX(274); name.setLayoutY(173);
@@ -64,7 +64,7 @@ public class GameMenuController {
     }
 
     public VBox createBallsGroup(Pane pane) {
-        int size = settings.getBallNumbers();
+        int size = this.settings.getBallNumbers();
 
         ArrayList<Ball> balls = new ArrayList<>();
 
@@ -83,7 +83,7 @@ public class GameMenuController {
         return ballsGroup;
     }
 
-    public void shoot(Pane pane) {
+    public void shoot(Pane pane) throws Exception {
         if (this.balls.size() == 0)
             return;
 
@@ -97,6 +97,9 @@ public class GameMenuController {
         ShootingAnimation shootingAnimation = new ShootingAnimation(this, pane, shootedBall);
         pane.getChildren().add(shootedBall);
         shootingAnimation.play();
+
+        if (isOnInvisibleCircle(shootedBall))
+            winGame();
     }
 
     public boolean isOnInvisibleCircle(Ball ball) {
@@ -106,7 +109,7 @@ public class GameMenuController {
 
     public boolean areBallsHit(Ball ball1, Ball ball2) {
         return (ball1.getCenterX() - ball2.getCenterX()) * (ball1.getCenterX() - ball2.getCenterX()) +
-                (ball1.getCenterY() - ball2.getCenterY()) * (ball1.getCenterY() - ball2.getCenterY()) < 450.03;
+                (ball1.getCenterY() - ball2.getCenterY()) * (ball1.getCenterY() - ball2.getCenterY()) < 400.03;
     }
 
     public void pause(Pane pane) throws Exception {
@@ -121,11 +124,19 @@ public class GameMenuController {
         gameMenu.restart();
     }
 
+    private void winGame() throws Exception {
+        this.currentUser.hasWinLastGame = true;
+        int score = this.settings.getLevel().getScorePerBall() * (this.settings.getBallNumbers() - balls.size());
+        this.currentUser.lastTimePlayed = 10;
+        this.currentUser.setLastGameScore(score);
+        gameMenu.winGame();
+    }
+
     public void looseGame() throws Exception {
-        User.currentUser.hasWinLastGame = false;
-        int score = settings.getLevel().getScorePerBall() * (settings.getBallNumbers() - balls.size()); // todo : time
-        User.currentUser.lastTimePlayed = 10;
-        User.currentUser.setLastGameScore(score);
+        this.currentUser.hasWinLastGame = false;
+        int score = this.settings.getLevel().getScorePerBall() * (this.settings.getBallNumbers() - balls.size()); // todo : time
+        this.currentUser.lastTimePlayed = 10;
+        this.currentUser.setLastGameScore(score);
         gameMenu.looseGame();
     }
 

@@ -25,9 +25,9 @@ public class GameMenu extends Application {
     private HBox remainingBallsHBox;
     private VBox ballsGroupVBox;
 
-    public GameMenu(Settings settings) {
-        this.settings = settings;
-        this.controller = new GameMenuController(this, settings);
+    {
+        this.settings = User.currentUser.getSettings();
+        this.controller = new GameMenuController(this);
     }
 
     @Override
@@ -85,8 +85,13 @@ public class GameMenu extends Application {
             public void handle(KeyEvent keyEvent) {
                 String keyName = keyEvent.getCode().getName();
 
-                if (keyName.equals("Space"))
-                    controller.shoot(pane);
+                if (keyName.equals("Space")) {
+                    try {
+                        controller.shoot(pane);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
 
                 if (keyName.equals("Esc")) {
                     try {
@@ -133,6 +138,13 @@ public class GameMenu extends Application {
         start(stage);
     }
 
+    public void winGame() throws Exception {
+        this.pane.setBackground(new Background(new BackgroundFill(Color.GREEN, null, null)));
+        this.pane.getChildren().get(1).requestFocus();
+
+        new FinishMenu().start(new Stage());
+    }
+
     public void looseGame() throws Exception {
         this.pane.setBackground(new Background(new BackgroundFill(Color.ORANGERED, null, null)));
         this.pane.getChildren().get(1).requestFocus();
@@ -144,5 +156,4 @@ public class GameMenu extends Application {
         this.stop();
         new MainMenu().start(stage);
     }
-
 }

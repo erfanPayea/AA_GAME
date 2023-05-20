@@ -56,12 +56,12 @@ public class FinishMenu extends Application {
     @FXML
     private void restart() throws Exception {
         GameMenuController.getGameMenuController().restartGame();
-        this.stop();
+        stage.close();
     }
 
     @FXML
     private void goMainMenu() throws Exception {
         GameMenuController.getGameMenuController().finishGame();
-        this.stop();
+        stage.close();
     }
 }

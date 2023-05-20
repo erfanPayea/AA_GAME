@@ -1,1 +1,1 @@
-[{"username":"amin","password":"1234","settings":{"level":"LEVEL_2","ballNumbers":25,"map":"MAP_1","isMute":false},"score":0,"highScores":[0,0,0,0]}]
+[{"username":"amin","password":"1234","settings":{"level":"LEVEL_2","ballNumbers":25,"map":"MAP_1","isMute":false},"lastGameScore":0,"highScores":[0,0,0,0],"lastTimePlayed":0,"hasWinLastGame":false}]

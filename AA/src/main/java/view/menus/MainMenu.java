@@ -34,7 +34,7 @@ public class MainMenu extends Application {
     }
 
     public void startGame() throws Exception {
-        new GameMenu(User.currentUser.getSettings()).start(stage);
+        new GameMenu().start(stage);
     }
 
     public void continueGame() throws Exception {
