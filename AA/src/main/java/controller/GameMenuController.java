@@ -43,11 +43,14 @@ public class GameMenuController {
         this.score = 0;
         Label name = new Label(settings.getMap().getName());
         if (this.settings.getMap().getColor() != Color.ALICEBLUE) name.setTextFill(Color.WHITE);
-        name.setFont(new Font(40)); name.setAlignment(Pos.CENTER);
-        name.setPrefHeight(54); name.setPrefWidth(153);
-        name.setLayoutX(274); name.setLayoutY(173);
+        name.setFont(new Font(40));
+        name.setAlignment(Pos.CENTER);
+        name.setPrefHeight(54);
+        name.setPrefWidth(153);
+        name.setLayoutX(274);
+        name.setLayoutY(173);
 
-        Circle circle = new Circle(350, 200,60, settings.getMap().getColor());
+        Circle circle = new Circle(350, 200, 60, settings.getMap().getColor());
 
         this.invisibleCircle = new InvisibleCircle(350, 200, 160, pane, settings);
         this.invisibleCircle.setVisible(false);
@@ -78,7 +81,8 @@ public class GameMenuController {
         yourScore.setFont(new Font(18));
         score.setFont(new Font(20));
         HBox hBox = new HBox(yourScore, score);
-        hBox.setSpacing(10); hBox.setLayoutY(20);
+        hBox.setSpacing(10);
+        hBox.setLayoutY(20);
         return hBox;
     }
 
@@ -102,7 +106,7 @@ public class GameMenuController {
         return ballsGroup;
     }
 
-    public void shoot(Pane pane) throws Exception {
+    public void shoot(Pane pane) {
         if (this.balls.size() == 0)
             return;
 
@@ -111,7 +115,8 @@ public class GameMenuController {
         this.gameMenu.shootFirst();
 
         Ball shootedBall = new Ball(ball.getNumber(), ball.getColor());
-        shootedBall.setCenterX(350); shootedBall.setCenterY(440);
+        shootedBall.setCenterX(350);
+        shootedBall.setCenterY(440);
 
         ShootingAnimation shootingAnimation = new ShootingAnimation(pane, shootedBall);
         pane.getChildren().add(shootedBall);
@@ -134,8 +139,7 @@ public class GameMenuController {
     public boolean areBallsHit(Ball ball1, Ball ball2) {
         if (ball1 == ball2)
             return false;
-//        return (ball1.getCenterX() - ball2.getCenterX()) * (ball1.getCenterX() - ball2.getCenterX()) +
-//                (ball1.getCenterY() - ball2.getCenterY()) * (ball1.getCenterY() - ball2.getCenterY()) < 380;
+
         return ball1.getBoundsInParent().intersects(ball2.getBoundsInParent());
     }
 

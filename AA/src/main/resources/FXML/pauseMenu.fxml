@@ -3,14 +3,18 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="283.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.PauseMenu">
-   <children>
-      <HBox layoutX="90.0" layoutY="74.0" prefHeight="35.0" prefWidth="370.0" spacing="35.0">
-         <children>
-            <Button mnemonicParsing="false" onAction="#restartGame" prefHeight="42.0" prefWidth="100.0" text="Restart game" textFill="#1e00ff" />
-            <Button mnemonicParsing="false" onAction="#continueGame" prefHeight="42.0" prefWidth="100.0" text="Continue game" />
-            <Button mnemonicParsing="false" onAction="#exitGame" prefHeight="42.0" prefWidth="100.0" text="Exit game" textFill="RED" />
-         </children>
-      </HBox>
-   </children>
+<AnchorPane prefHeight="283.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.PauseMenu">
+    <children>
+        <HBox layoutX="90.0" layoutY="74.0" prefHeight="35.0" prefWidth="370.0" spacing="35.0">
+            <children>
+                <Button mnemonicParsing="false" onAction="#restartGame" prefHeight="42.0" prefWidth="100.0"
+                        text="Restart game" textFill="#1e00ff"/>
+                <Button mnemonicParsing="false" onAction="#continueGame" prefHeight="42.0" prefWidth="100.0"
+                        text="Continue game"/>
+                <Button mnemonicParsing="false" onAction="#exitGame" prefHeight="42.0" prefWidth="100.0"
+                        text="Exit game" textFill="RED"/>
+            </children>
+        </HBox>
+    </children>
 </AnchorPane>

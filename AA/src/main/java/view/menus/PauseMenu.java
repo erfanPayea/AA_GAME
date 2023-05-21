@@ -5,7 +5,6 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -19,6 +18,7 @@ public class PauseMenu extends Application {
     {
         gameMenuController = GameMenuController.getGameMenuController();
     }
+
     @Override
     public void start(Stage stage) throws Exception {
         PauseMenu.stage = stage;
@@ -34,10 +34,12 @@ public class PauseMenu extends Application {
         gameMenuController.continueGame();
         stage.close();
     }
+
     @FXML
     private void restartGame() throws Exception {
         gameMenuController.restartGame();
     }
+
     @FXML
     private void exitGame() throws Exception {
         gameMenuController.finishGame();

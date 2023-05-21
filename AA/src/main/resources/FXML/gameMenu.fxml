@@ -5,23 +5,26 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="550.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.GameMenu">
+<AnchorPane prefHeight="550.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.GameMenu">
     <children>
-        <Circle layoutX="170.0" layoutY="167.0" radius="60.0" stroke="#0037fc" strokeType="INSIDE" />
-        <Label alignment="CENTER" layoutX="114.0" layoutY="179.0" prefHeight="54.0" prefWidth="153.0" text="35" textFill="WHITE">
+        <Circle layoutX="170.0" layoutY="167.0" radius="60.0" stroke="#0037fc" strokeType="INSIDE"/>
+        <Label alignment="CENTER" layoutX="114.0" layoutY="179.0" prefHeight="54.0" prefWidth="153.0" text="35"
+               textFill="WHITE">
             <font>
-                <Font size="36.0" />
+                <Font size="36.0"/>
             </font>
         </Label>
-      <VBox layoutX="340.0" layoutY="460.0" prefHeight="20.0" prefWidth="20.0" />
-      <Circle layoutX="242.0" layoutY="327.0" radius="12.0" stroke="RED" strokeType="INSIDE" strokeWidth="2.0" />
-      <Line fill="#061afc" layoutX="230.0" layoutY="293.0" startY="-155" stroke="BLUE" />
-      <Button layoutX="600.0" layoutY="15.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Pause" />
-      <Label alignment="CENTER" layoutX="355.0" layoutY="433.0" prefHeight="0.0" prefWidth="10.0" text="66" textFill="RED">
-         <font>
-            <Font size="9.0" />
-         </font>
-      </Label>
+        <VBox layoutX="340.0" layoutY="460.0" prefHeight="20.0" prefWidth="20.0"/>
+        <Circle layoutX="242.0" layoutY="327.0" radius="12.0" stroke="RED" strokeType="INSIDE" strokeWidth="2.0"/>
+        <Line fill="#061afc" layoutX="230.0" layoutY="293.0" startY="-155" stroke="BLUE"/>
+        <Button layoutX="600.0" layoutY="15.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Pause"/>
+        <Label alignment="CENTER" layoutX="355.0" layoutY="433.0" prefHeight="0.0" prefWidth="10.0" text="66"
+               textFill="RED">
+            <font>
+                <Font size="9.0"/>
+            </font>
+        </Label>
     </children>
 
 </AnchorPane>

@@ -27,7 +27,7 @@ public enum Map {
     Map(String name, String backgroundName, Color color) {
         this.name = name;
         this.backgroundImage = new BackgroundImage(new Image(Objects.requireNonNull(Map.class.getResource(
-                "/images/background/" + backgroundName)).toExternalForm(),700, 560, false, false),
+                "/images/background/" + backgroundName)).toExternalForm(), 700, 560, false, false),
                 BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         this.color = color;

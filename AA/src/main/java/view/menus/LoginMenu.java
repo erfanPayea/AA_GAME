@@ -72,7 +72,7 @@ public class LoginMenu extends Application {
         message.sendMessage(this.result);
     }
 
-    public void playAsGuest() throws Exception{
+    public void playAsGuest() throws Exception {
         Message message = controller.playAsGuest(statLoggedIn.isSelected());
         if (message == null) {
             new MainMenu().start(stage);

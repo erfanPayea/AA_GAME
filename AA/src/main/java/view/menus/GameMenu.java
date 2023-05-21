@@ -36,7 +36,8 @@ public class GameMenu extends Application {
     public void start(Stage stage) throws Exception {
         GameMenu.stage = stage;
         this.pane = new Pane();
-        this.pane.setPrefWidth(700); this.pane.setPrefHeight(550);
+        this.pane.setPrefWidth(700);
+        this.pane.setPrefHeight(550);
 
         controller.initializeFirstParameters(this.pane);
 
@@ -74,8 +75,10 @@ public class GameMenu extends Application {
             }
         });
 
-        pauseButton.setLayoutX(600); pauseButton.setLayoutY(2);
-        pauseButton.setPrefHeight(30); pauseButton.setPrefWidth(80);
+        pauseButton.setLayoutX(600);
+        pauseButton.setLayoutY(2);
+        pauseButton.setPrefHeight(30);
+        pauseButton.setPrefWidth(80);
         pauseButton.setTextFill(Color.WHITE);
         pauseButton.setBackground(new Background(new BackgroundFill(Color.CHOCOLATE, CornerRadii.EMPTY, Insets.EMPTY)));
 
@@ -113,18 +116,6 @@ public class GameMenu extends Application {
 
     private HBox createRemainingBalls() {
         return controller.createRemainingBalls();
-    }
-
-    public HBox getRemainingBallsHBox() {
-        return remainingBallsHBox;
-    }
-
-    public HBox getScoreSheet() {
-        return scoreSheet;
-    }
-
-    public VBox getBallsGroupVBox() {
-        return ballsGroupVBox;
     }
 
     public void shootFirst() {

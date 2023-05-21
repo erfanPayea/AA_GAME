@@ -2,14 +2,11 @@ package view.animations;
 
 import controller.GameMenuController;
 import javafx.animation.Transition;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import model.thing.Ball;
-import model.thing.InvisibleCircle;
 
-import java.util.ArrayList;
 
 public class ShootingAnimation extends Transition {
     private final GameMenuController gameMenuController;
@@ -28,8 +25,7 @@ public class ShootingAnimation extends Transition {
     protected void interpolate(double v) {
         double nextY = this.ball.getCenterY() - 1;
 
-        if (isHitAnotherBall() || nextY < 20)
-        {
+        if (isHitAnotherBall() || nextY < 20) {
             try {
                 gameMenuController.looseGame();
             } catch (Exception e) {

@@ -1,7 +1,6 @@
 package view.animations;
 
 import javafx.animation.Transition;
-import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import model.thing.Ball;
 
@@ -27,7 +26,8 @@ public class TurningAnimation extends Transition {
     protected void interpolate(double v) {
 
         // set new place :
-        angle += angleSpeed; angle %= 360;
+        angle += angleSpeed;
+        angle %= 360;
         this.ball.setCenterX(350 + 160 * Math.cos(Math.toRadians(angle)));
         this.ball.setCenterY(200 + 160 * Math.sin(Math.toRadians(angle)));
         this.ball.setLineLocation();

@@ -23,9 +23,11 @@ public class FinishMenu extends Application {
     @FXML
     private Label timePlayed;
     private final User currentUser;
+
     {
         currentUser = User.getCurrentUser();
     }
+
     @Override
     public void start(Stage stage) throws Exception {
         FinishMenu.stage = stage;
@@ -42,8 +44,7 @@ public class FinishMenu extends Application {
         if (currentUser.hasWinLastGame) {
             this.winOrLoose.setText("You win!");
             this.winOrLoose.setTextFill(Color.GREEN);
-        }
-        else {
+        } else {
             this.winOrLoose.setText("You loose!");
             this.winOrLoose.setTextFill(Color.ORANGERED);
         }

@@ -15,6 +15,7 @@ public class InvisibleCircle extends Circle {
     private final Group balls;
     private int defaultBallsNumber;
     private final Settings settings;
+
     public InvisibleCircle(double v, double v1, double v2, Pane pane, Settings settings) {
         super(v, v1, v2);
         this.pane = pane;
@@ -79,8 +80,7 @@ public class InvisibleCircle extends Circle {
                 if (node instanceof Ball ball)
                     ball.getTurningAnimation().play();
             }
-        }
-        catch (Exception ignored) {
+        } catch (Exception ignored) {
 
         }
     }
@@ -91,8 +91,7 @@ public class InvisibleCircle extends Circle {
                 if (node instanceof Ball ball)
                     ball.getTurningAnimation().stop();
             }
-        }
-        catch (Exception ignored) {
+        } catch (Exception ignored) {
         }
     }
 }
