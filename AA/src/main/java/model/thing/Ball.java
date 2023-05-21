@@ -13,7 +13,7 @@ public class Ball extends Circle {
     private final static int radius;
     private final int number;
     private final Color color;
-
+    private Line line;
     private TurningAnimation turningAnimation;
 
     static {
@@ -45,5 +45,13 @@ public class Ball extends Circle {
 
     public void setTurningAnimation(int rotationSpeed, double windSpeed, int freezeTime) {
         this.turningAnimation = new TurningAnimation(this, rotationSpeed, windSpeed, freezeTime);
+    }
+
+    public void setLine(Line line) {
+        this.line = line;
+    }
+
+    public Line getLine() {
+        return line;
     }
 }

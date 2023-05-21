@@ -11,7 +11,6 @@ import java.util.ArrayList;
 public class InvisibleCircle extends Circle {
     private final Pane pane;
     private final ArrayList<Ball> balls;
-    private final ArrayList<Line> lines;
     private final int rotationSpeed;
     private final double windSpeed;
     private final int freezeTime;
@@ -22,19 +21,17 @@ public class InvisibleCircle extends Circle {
         this.windSpeed = windSpeed;
         this.freezeTime = freezeTime;
         this.balls = new ArrayList<>();
-        this.lines = new ArrayList<>();
     }
 
     public void receiveBall(Ball ball) throws Exception {
         if (!this.balls.contains(ball)) {
             this.balls.add(ball);
             Line line = new Line(this.getCenterX(), this.getCenterY(), ball);
+            this.pane.getChildren().add(line);
 
             ball.setTurningAnimation(rotationSpeed, windSpeed, freezeTime);
-            line.setTurningAnimation(rotationSpeed, windSpeed, freezeTime);
-
-            this.lines.add(line);
-            this.pane.getChildren().add(line);
+            ball.getTurningAnimation().play();
+//            line.setTurningAnimation(rotationSpeed, windSpeed, freezeTime);
 
             if (this.balls.size() == User.currentUser.getSettings().getBallNumbers()) {
                 GameMenuController.getGameMenuController().winGame();
@@ -46,10 +43,13 @@ public class InvisibleCircle extends Circle {
         return balls;
     }
 
+    public void play() {
+        for (Ball ball : this.balls)
+            ball.getTurningAnimation().play();
+    }
+
     public void stop() {
         for (Ball ball : this.balls)
             ball.getTurningAnimation().stop();
-        for (Line line : this.lines)
-            line.getTurningAnimation().stop();
     }
 }

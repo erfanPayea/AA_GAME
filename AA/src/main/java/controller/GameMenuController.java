@@ -51,6 +51,7 @@ public class GameMenuController {
         this.invisibleCircle.setVisible(false);
 
         pane.getChildren().add(this.invisibleCircle);
+        this.invisibleCircle.play();
         pane.getChildren().add(circle);
         pane.getChildren().add(name);
     }
@@ -80,7 +81,6 @@ public class GameMenuController {
         hBox.setSpacing(10); hBox.setLayoutY(20);
         return hBox;
     }
-
 
     public VBox createBallsGroup(Pane pane) {
         int size = this.settings.getBallNumbers();
@@ -136,7 +136,8 @@ public class GameMenuController {
     }
 
     public void continueGame() {
-        gameMenu.continueGame();
+        this.gameMenu.continueGame();
+        this.invisibleCircle.play();
     }
 
     public void restartGame() throws Exception {
@@ -152,6 +153,7 @@ public class GameMenuController {
     }
 
     public void looseGame() throws Exception {
+        this.pause();
         this.currentUser.hasWinLastGame = false;
         this.currentUser.lastTimePlayed = 10; // todo : time
         this.currentUser.setLastGameScore(score);
