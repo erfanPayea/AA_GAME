@@ -36,8 +36,8 @@ public class GameMenu extends Application {
     public void start(Stage stage) throws Exception {
         GameMenu.stage = stage;
         this.pane = new Pane();
-
         this.pane.setPrefWidth(700); this.pane.setPrefHeight(550);
+
         controller.initializeFirstParameters(this.pane);
 
         this.ballsGroupVBox = createBallsGroup(this.pane);
@@ -113,6 +113,18 @@ public class GameMenu extends Application {
 
     private HBox createRemainingBalls() {
         return controller.createRemainingBalls();
+    }
+
+    public HBox getRemainingBallsHBox() {
+        return remainingBallsHBox;
+    }
+
+    public HBox getScoreSheet() {
+        return scoreSheet;
+    }
+
+    public VBox getBallsGroupVBox() {
+        return ballsGroupVBox;
     }
 
     public void shootFirst() {

@@ -11,14 +11,17 @@ public class LoginMenuController {
         User user = User.getUserByUsername(username);
         if (user == null)
             return Message.NOT_MATCH;
-        else if (user.isPasswordIncorrect(password))
-            return Message.NOT_MATCH;
-        else {
-            if (stayLoggedIn)
-                User.setStayLoggedIn(user);
 
-            return null;
-        }
+        if (user.isPasswordIncorrect(password))
+            return Message.NOT_MATCH;
+
+        User.setCurrentUser(user);
+
+        if (stayLoggedIn)
+            User.setStayLoggedIn(user);
+
+        return null;
+
     }
 
     public Message register(String username, String password) {

@@ -7,8 +7,8 @@
    <children>
       <HBox layoutX="90.0" layoutY="74.0" prefHeight="35.0" prefWidth="370.0" spacing="35.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#continueGame" prefHeight="42.0" prefWidth="100.0" text="Continue game" textFill="#168912" />
             <Button mnemonicParsing="false" onAction="#restartGame" prefHeight="42.0" prefWidth="100.0" text="Restart game" textFill="#1e00ff" />
+            <Button mnemonicParsing="false" onAction="#continueGame" prefHeight="42.0" prefWidth="100.0" text="Continue game" />
             <Button mnemonicParsing="false" onAction="#exitGame" prefHeight="42.0" prefWidth="100.0" text="Exit game" textFill="RED" />
          </children>
       </HBox>

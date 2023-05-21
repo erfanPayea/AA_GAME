@@ -39,7 +39,7 @@ public class GameMenuController {
         return gameMenuController;
     }
 
-    public void initializeFirstParameters(Pane pane) throws Exception {
+    public void initializeFirstParameters(Pane pane) {
         this.score = 0;
         Label name = new Label(settings.getMap().getName());
         if (this.settings.getMap().getColor() != Color.ALICEBLUE) name.setTextFill(Color.WHITE);
@@ -48,12 +48,12 @@ public class GameMenuController {
         name.setLayoutX(274); name.setLayoutY(173);
 
         Circle circle = new Circle(350, 200,60, settings.getMap().getColor());
+
         this.invisibleCircle = new InvisibleCircle(350, 200, 160, pane, settings);
         this.invisibleCircle.setVisible(false);
-
-        this.invisibleCircle.play();
         pane.getChildren().add(circle);
         pane.getChildren().add(name);
+        this.invisibleCircle.play();
     }
 
     public HBox createRemainingBalls() {
@@ -174,5 +174,4 @@ public class GameMenuController {
     public void finishGame() throws Exception {
         gameMenu.end();
     }
-
 }
