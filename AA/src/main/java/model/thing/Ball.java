@@ -1,17 +1,25 @@
 package model.thing;
 
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import view.animations.ShootingAnimation;
+import view.animations.TurningAnimation;
 
 public class Ball extends Circle {
     private final static int radius;
     private final int number;
     private final Color color;
+
+    private TurningAnimation turningAnimation;
+
     static {
         radius = 10;
     }
+
     public Ball(Pane pane, int number, Color color) {
         super(radius, color);
         this.number = number;
@@ -20,6 +28,7 @@ public class Ball extends Circle {
         if (color != Color.ALICEBLUE)
             this.setStroke(Color.ALICEBLUE);
         else this.setStroke(Color.BLACK);
+        this.setStrokeWidth(2);
     }
 
     public int getNumber() {
@@ -30,4 +39,11 @@ public class Ball extends Circle {
         return color;
     }
 
+    public TurningAnimation getTurningAnimation() {
+        return turningAnimation;
+    }
+
+    public void setTurningAnimation(int rotationSpeed, double windSpeed, int freezeTime) {
+        this.turningAnimation = new TurningAnimation(this, rotationSpeed, windSpeed, freezeTime);
+    }
 }

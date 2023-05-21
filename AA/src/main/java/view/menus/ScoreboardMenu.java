@@ -2,6 +2,7 @@ package view.menus;
 
 import controller.ScoreboardController;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -57,6 +58,8 @@ public class ScoreboardMenu extends Application {
         setTable();
     }
 
+
+
     private void setTable() {
         int level;
         try {
@@ -102,7 +105,13 @@ public class ScoreboardMenu extends Application {
         label.setPrefHeight(10);
     }
 
-    public void sort() {
+    @FXML
+    private void sort() {
         setTable();
     }
+    @FXML
+    private void goMainMenu() throws Exception {
+        new MainMenu().start(stage);
+    }
+
 }

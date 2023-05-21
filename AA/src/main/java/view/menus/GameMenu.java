@@ -11,13 +11,14 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.User;
 import model.game.Settings;
 
 
 public class GameMenu extends Application {
-    private static Stage stage;
+    public static Stage stage;
     private Scene scene;
     private final GameMenuController controller;
     private final Settings settings;
@@ -37,7 +38,7 @@ public class GameMenu extends Application {
         this.pane = new Pane();
 
         this.pane.setPrefWidth(700); this.pane.setPrefHeight(550);
-        controller.createAndAddCenterCircle(this.pane);
+        controller.initializeFirstParameters(this.pane);
 
         this.ballsGroupVBox = createBallsGroup(this.pane);
         this.pane.getChildren().add(ballsGroupVBox);
@@ -66,7 +67,7 @@ public class GameMenu extends Application {
             public void handle(Event event) {
                 try {
                     pause();
-                    controller.pause(pane);
+                    controller.pause();
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -100,7 +101,7 @@ public class GameMenu extends Application {
                 if (keyName.equals("Esc")) {
                     try {
                         pause();
-                        controller.pause(pane);
+                        controller.pause();
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
@@ -115,7 +116,6 @@ public class GameMenu extends Application {
     }
 
     public void shootFirst() {
-        this.ballsGroupVBox.getChildren().remove(0);
         if (this.remainingBallsHBox.getChildren().get(1) instanceof Text ballsNumberText) {
             int newBallsNumber = Integer.parseInt(ballsNumberText.getText()) - 1;
             ballsNumberText.setText(String.valueOf(newBallsNumber));
@@ -129,6 +129,10 @@ public class GameMenu extends Application {
     public void changeScore(int score) {
         if (this.scoreSheet.getChildren().get(1) instanceof Text scoreText)
             scoreText.setText(String.valueOf(score));
+    }
+
+    public Pane getPane() {
+        return this.pane;
     }
 
     public void pause() throws Exception {
@@ -150,19 +154,25 @@ public class GameMenu extends Application {
     public void winGame() throws Exception {
         this.pane.setBackground(new Background(new BackgroundFill(Color.GREEN, null, null)));
         this.pane.getChildren().get(1).requestFocus();
-
-        new FinishMenu().start(new Stage());
+        showFinish();
     }
 
     public void looseGame() throws Exception {
         this.pane.setBackground(new Background(new BackgroundFill(Color.ORANGERED, null, null)));
         this.pane.getChildren().get(1).requestFocus();
+        showFinish();
+    }
 
-        new FinishMenu().start(new Stage());
+    public void showFinish() throws Exception {
+        Stage finishStage = new Stage();
+        finishStage.initModality(Modality.APPLICATION_MODAL);
+        finishStage.initOwner(stage);
+        new FinishMenu().start(finishStage);
     }
 
     public void end() throws Exception {
         stage.close();
         new MainMenu().start(stage);
     }
+
 }

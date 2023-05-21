@@ -21,6 +21,7 @@ public class GameMenuController {
     private final GameMenu gameMenu;
     private final User currentUser;
     private final Settings settings;
+    private InvisibleCircle invisibleCircle;
     private ArrayList<Ball> balls;
     private int score;
 
@@ -36,7 +37,8 @@ public class GameMenuController {
         return gameMenuController;
     }
 
-    public void createAndAddCenterCircle(Pane pane) {
+    public void initializeFirstParameters(Pane pane) {
+        this.score = 0;
         Label name = new Label(settings.getMap().getName());
         if (this.settings.getMap().getColor() != Color.ALICEBLUE) name.setTextFill(Color.WHITE);
         name.setFont(new Font(40)); name.setAlignment(Pos.CENTER);
@@ -44,10 +46,11 @@ public class GameMenuController {
         name.setLayoutX(274); name.setLayoutY(173);
 
         Circle circle = new Circle(350, 200,60, settings.getMap().getColor());
-        InvisibleCircle invisibleCircle = new InvisibleCircle(350, 200, 170, pane);
-        invisibleCircle.setVisible(false);
+        this.invisibleCircle = new InvisibleCircle(350, 200, 160, pane, settings.getLevel().getRotationSpeed(),
+                settings.getLevel().getWindSpeed(), settings.getLevel().getFreezeTime());
+        this.invisibleCircle.setVisible(false);
 
-        pane.getChildren().add(invisibleCircle);
+        pane.getChildren().add(this.invisibleCircle);
         pane.getChildren().add(circle);
         pane.getChildren().add(name);
     }
@@ -120,17 +123,16 @@ public class GameMenuController {
     }
 
     public boolean isOnInvisibleCircle(Ball ball) {
-        return (ball.getCenterX() - 350) * (ball.getCenterX() - 350) +
-                (ball.getCenterY() - 200) * (ball.getCenterY() - 200) < 28900.03 ;
+        return ball.getBoundsInParent().intersects(this.invisibleCircle.getLayoutBounds());
     }
 
     public boolean areBallsHit(Ball ball1, Ball ball2) {
         return (ball1.getCenterX() - ball2.getCenterX()) * (ball1.getCenterX() - ball2.getCenterX()) +
-                (ball1.getCenterY() - ball2.getCenterY()) * (ball1.getCenterY() - ball2.getCenterY()) < 400.03;
+                (ball1.getCenterY() - ball2.getCenterY()) * (ball1.getCenterY() - ball2.getCenterY()) < 350;
     }
 
-    public void pause(Pane pane) throws Exception {
-//        gameMenu.restart();
+    public void pause() throws Exception {
+        this.invisibleCircle.stop();
     }
 
     public void continueGame() {
@@ -142,6 +144,7 @@ public class GameMenuController {
     }
 
     public void winGame() throws Exception {
+        this.pause();
         this.currentUser.hasWinLastGame = true;
         this.currentUser.lastTimePlayed = 10; // todo : time
         this.currentUser.setLastGameScore(this.score);

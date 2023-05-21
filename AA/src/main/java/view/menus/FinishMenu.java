@@ -32,9 +32,9 @@ public class FinishMenu extends Application {
         URL url = new URL(Objects.requireNonNull(this.getClass().getResource("/FXML/finishMenu.fxml")).toExternalForm());
         AnchorPane pane = FXMLLoader.load(url);
         Scene scene = new Scene(pane);
-        stage.setScene(scene);
+        FinishMenu.stage.setScene(scene);
 
-        stage.show();
+        FinishMenu.stage.show();
     }
 
     @FXML
@@ -54,13 +54,14 @@ public class FinishMenu extends Application {
 
     @FXML
     private void restart() throws Exception {
+        FinishMenu.stage.close();
         GameMenuController.getGameMenuController().restartGame();
-        stage.close();
+        FinishMenu.stage.close();
     }
 
     @FXML
     private void goMainMenu() throws Exception {
+        FinishMenu.stage.close();
         GameMenuController.getGameMenuController().finishGame();
-        stage.close();
     }
 }

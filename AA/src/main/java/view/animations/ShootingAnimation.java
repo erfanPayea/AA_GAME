@@ -27,7 +27,7 @@ public class ShootingAnimation extends Transition {
     protected void interpolate(double v) {
         double nextY = this.ball.getCenterY() - 1;
 
-        if (isHitAnotherBall())
+        if (isHitAnotherBall() || nextY < 20)
         {
             try {
                 gameMenuController.looseGame();
