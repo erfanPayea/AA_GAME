@@ -16,7 +16,7 @@ import model.game.enums.Map;
 
 public class User {
     private static ArrayList<User> users;
-    public static User currentUser;
+    private static User currentUser;
     private static final Gson gson = new Gson();
     private String username;
     private String password;
@@ -66,7 +66,15 @@ public class User {
     public static void remove() {
         users.remove(currentUser);
         currentUser = null;
-        saveToDatabase();
+        saveToDatabase(null);
+    }
+
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+
+    public static void setCurrentUser(User currentUser) {
+        User.currentUser = currentUser;
     }
 
     public String getUsername() {
@@ -134,9 +142,11 @@ public class User {
     }
 
     // dataBase :
-    public static void saveToDatabase() {
-        if (User.loadStayLoggedIn() != null)
-            User.setStayLoggedIn(currentUser);
+    public static void saveToDatabase(User user) {
+        if (User.loadStayLoggedIn() != null) {
+            System.out.println(user.getSettings().getMap().getName());
+            User.setStayLoggedIn(user);
+        }
 
         User.saveUsersToFile();
     }
@@ -162,6 +172,7 @@ public class User {
     }
 
     public static void setStayLoggedIn(User loggedInUser) {
+        User.currentUser = loggedInUser;
         String filePath = "./src/main/resources/database/stayLoggedIn.json";
         saveToFile(filePath, gson.toJson(loggedInUser));
     }

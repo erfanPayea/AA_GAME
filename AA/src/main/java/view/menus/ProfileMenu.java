@@ -45,8 +45,8 @@ public class ProfileMenu extends Application {
 
     @FXML
     public void initialize() {
-        this.username.setText(User.currentUser.getUsername());
-        this.password.setText(User.currentUser.getPassword());
+        this.username.setText(User.getCurrentUser().getUsername());
+        this.password.setText(User.getCurrentUser().getPassword());
         Message.DEFAULT.sendMessage(this.result);
         // todo : avatar
     }
@@ -55,8 +55,8 @@ public class ProfileMenu extends Application {
         Message message = this.editor.saveProfileChanges(this.newUsername.getText(), this.newPassword.getText());
         message.sendMessage(this.result);
 
-        this.username.setText(User.currentUser.getUsername());
-        this.password.setText(User.currentUser.getPassword());
+        this.username.setText(User.getCurrentUser().getUsername());
+        this.password.setText(User.getCurrentUser().getPassword());
     }
 
     public void backMainMenu() throws Exception {
@@ -65,7 +65,6 @@ public class ProfileMenu extends Application {
 
     // todo : add alert for these :
     public void logout() throws Exception {
-        User.currentUser = null;
         User.setStayLoggedIn(null);
         new LoginMenu().start(stage);
     }

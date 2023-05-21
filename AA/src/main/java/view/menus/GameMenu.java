@@ -18,7 +18,7 @@ import model.game.Settings;
 
 
 public class GameMenu extends Application {
-    public static Stage stage;
+    private static Stage stage;
     private Scene scene;
     private final GameMenuController controller;
     private final Settings settings;
@@ -28,7 +28,7 @@ public class GameMenu extends Application {
     private VBox ballsGroupVBox;
 
     {
-        this.settings = User.currentUser.getSettings();
+        this.settings = User.getCurrentUser().getSettings();
         this.controller = new GameMenuController(this);
     }
 

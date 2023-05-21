@@ -36,7 +36,7 @@ public class SettingsMenu extends Application {
 
     {
         editor = new Editor();
-        currentSettings = User.currentUser.getSettings();
+        currentSettings = User.getCurrentUser().getSettings();
     }
 
     @Override

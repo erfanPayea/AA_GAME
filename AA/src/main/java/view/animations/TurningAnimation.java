@@ -7,14 +7,15 @@ import model.thing.Ball;
 
 public class TurningAnimation extends Transition {
     private final Ball ball;
-    private final double rotationSpeed;
+    private final double angleSpeed;
     private final double windSpeed;
     private final int freezeTime;
-    private double angle = 1.5 * Math.PI ;
+    private double angle;
 
-    public TurningAnimation(Ball ball, double rotationSpeed, double windSpeed, int freezeTime) {
+    public TurningAnimation(Ball ball, double firstAngle, double rotationSpeed, double windSpeed, int freezeTime) {
         this.ball = ball;
-        this.rotationSpeed = rotationSpeed / (1.5 * Math.PI);
+        this.angle = firstAngle;
+        this.angleSpeed = rotationSpeed / 5;
         this.windSpeed = windSpeed;
         this.freezeTime = freezeTime;
 
@@ -24,11 +25,11 @@ public class TurningAnimation extends Transition {
 
     @Override
     protected void interpolate(double v) {
-        Rotate rotate = new Rotate();
-        rotate.setPivotX(350);
-        rotate.setPivotY(200);
-        rotate.setAngle(rotationSpeed);
-        this.ball.getTransforms().add(rotate);
-        this.ball.getLine().getTransforms().add(rotate);
+
+        // set new place :
+        angle += angleSpeed; angle %= 360;
+        this.ball.setCenterX(350 + 160 * Math.cos(Math.toRadians(angle)));
+        this.ball.setCenterY(200 + 160 * Math.sin(Math.toRadians(angle)));
+        this.ball.setLineLocation();
     }
 }

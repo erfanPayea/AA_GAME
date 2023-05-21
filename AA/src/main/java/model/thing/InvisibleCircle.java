@@ -6,42 +6,60 @@ import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import model.User;
-import view.animations.TurningAnimation;
+import model.game.Settings;
 
 import java.util.ArrayList;
 
 public class InvisibleCircle extends Circle {
     private final Pane pane;
     private final Group balls;
-    private final int rotationSpeed;
-    private final double windSpeed;
-    private final int freezeTime;
-    public InvisibleCircle(double v, double v1, double v2, Pane pane, int rotationSpeed, double windSpeed, int freezeTime) {
+    private int defaultBallsNumber;
+    private final Settings settings;
+    public InvisibleCircle(double v, double v1, double v2, Pane pane, Settings settings) {
         super(v, v1, v2);
         this.pane = pane;
-        this.rotationSpeed = rotationSpeed;
-        this.windSpeed = windSpeed;
-        this.freezeTime = freezeTime;
+        this.settings = settings;
         this.balls = new Group();
+        this.setDefaultBalls();
         this.pane.getChildren().add(this);
         this.pane.getChildren().add(this.balls);
+    }
+
+    private void setDefaultBalls() {
+        this.defaultBallsNumber = 1;
+        switch (settings.getMap().getName()) {
+            case "Space" -> defaultBallsNumber = 5;
+            case "Fruit" -> defaultBallsNumber = 6;
+            case "Nature" -> defaultBallsNumber = 7;
+        }
+
+        for (int i = 0; i < defaultBallsNumber; i++) {
+            double angle = (double) (i * 360) / (double) defaultBallsNumber;
+            Ball ball = new Ball(angle, this.settings.getMap().getColor());
+
+            ball.setTurningAnimation(angle, settings.getLevel().getRotationSpeed(), settings.getLevel().getWindSpeed(),
+                    settings.getLevel().getFreezeTime());
+            balls.getChildren().add(ball);
+
+            Line line = new Line(this.getCenterX(), this.getCenterY(), ball);
+            this.pane.getChildren().add(line);
+        }
     }
 
     public void receiveBall(Ball ball) throws Exception {
         if (!this.balls.getChildren().contains(ball)) {
             pane.getChildren().remove(ball);
-            ball.setCenterY(ball.getCenterY()); ball.setCenterX(ball.getCenterX());
             this.balls.getChildren().add(ball);
 
             Line line = new Line(this.getCenterX(), this.getCenterY(), ball);
             this.pane.getChildren().add(line);
 
-            ball.setTurningAnimation(rotationSpeed, windSpeed, freezeTime);
+            ball.setTurningAnimation(settings.getLevel().getRotationSpeed(), settings.getLevel().getWindSpeed(),
+                    settings.getLevel().getFreezeTime());
             ball.getTurningAnimation().play();
 
-            if (this.balls.getChildren().size() == User.currentUser.getSettings().getBallNumbers()) {
+            if (this.balls.getChildren().size() == User.getCurrentUser().getSettings().getBallNumbers() + defaultBallsNumber)
                 GameMenuController.getGameMenuController().winGame();
-            }
         }
     }
 
@@ -56,16 +74,25 @@ public class InvisibleCircle extends Circle {
     }
 
     public void play() {
-        for (Node node : this.balls.getChildren()) {
-            if (node instanceof Ball ball)
-                ball.getTurningAnimation().play();
+        try {
+            for (Node node : this.balls.getChildren()) {
+                if (node instanceof Ball ball)
+                    ball.getTurningAnimation().play();
+            }
+        }
+        catch (Exception ignored) {
+
         }
     }
 
     public void stop() {
-        for (Node node : this.balls.getChildren()) {
-            if (node instanceof Ball ball)
-                ball.getTurningAnimation().stop();
+        try {
+            for (Node node : this.balls.getChildren()) {
+                if (node instanceof Ball ball)
+                    ball.getTurningAnimation().stop();
+            }
+        }
+        catch (Exception ignored) {
         }
     }
 }

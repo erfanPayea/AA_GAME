@@ -40,7 +40,7 @@ public class LoginMenu extends Application {
     public void start(Stage stage) throws Exception {
         User loggedInUser;
         if ((loggedInUser = User.loadStayLoggedIn()) != null) {
-            User.currentUser = loggedInUser;
+            User.setCurrentUser(loggedInUser);
             new MainMenu().start(stage);
             return;
         }

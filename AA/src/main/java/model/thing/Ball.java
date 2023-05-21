@@ -24,22 +24,23 @@ public class Ball extends Circle {
         super(radius, color);
         this.number = number;
         this.color = color;
-        this.setAccessibleText(String.valueOf(number));
         if (color != Color.ALICEBLUE)
             this.setStroke(Color.ALICEBLUE);
         else this.setStroke(Color.BLACK);
         this.setStrokeWidth(2);
     }
 
-    public Ball(double centerX, double centerY, int number, Color color) {
-        super(centerX, centerY, radius, color);
-        this.number = number;
+    public Ball(double angle, Color color) {
+        super(radius, color);
+        number = 0;
         this.color = color;
-        this.setAccessibleText(String.valueOf(number));
         if (color != Color.ALICEBLUE)
             this.setStroke(Color.ALICEBLUE);
         else this.setStroke(Color.BLACK);
         this.setStrokeWidth(2);
+
+        this.setCenterX(350 + 160 * Math.cos(Math.toRadians(angle)));
+        this.setCenterY(200 + 160 * Math.sin(Math.toRadians(angle)));
     }
 
     public int getNumber() {
@@ -55,14 +56,19 @@ public class Ball extends Circle {
     }
 
     public void setTurningAnimation(int rotationSpeed, double windSpeed, int freezeTime) {
-        this.turningAnimation = new TurningAnimation(this, rotationSpeed, windSpeed, freezeTime);
+        this.turningAnimation = new TurningAnimation(this, 90, rotationSpeed, windSpeed, freezeTime);
+    }
+
+    public void setTurningAnimation(double firstAngle, int rotationSpeed, double windSpeed, int freezeTime) {
+        this.turningAnimation = new TurningAnimation(this, firstAngle, rotationSpeed, windSpeed, freezeTime);
     }
 
     public void setLine(Line line) {
         this.line = line;
     }
 
-    public Line getLine() {
-        return line;
+    public void setLineLocation() {
+        this.line.setEndX(this.getCenterX());
+        this.line.setEndY(this.getCenterY());
     }
 }

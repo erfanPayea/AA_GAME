@@ -24,7 +24,7 @@ public class FinishMenu extends Application {
     private Label timePlayed;
     private final User currentUser;
     {
-        currentUser = User.currentUser;
+        currentUser = User.getCurrentUser();
     }
     @Override
     public void start(Stage stage) throws Exception {

@@ -17,7 +17,6 @@ public class LoginMenuController {
             if (stayLoggedIn)
                 User.setStayLoggedIn(user);
 
-            User.currentUser = user;
             return null;
         }
     }

@@ -23,7 +23,7 @@ public class MainMenu extends Application {
         MainMenu.stage = stage;
         URL url = new URL(Objects.requireNonNull(this.getClass().getResource("/FXML/mainMenu.fxml")).toExternalForm());
         AnchorPane pane = FXMLLoader.load(url);
-        Text name = new Text(0, 20, User.currentUser.getUsername() + "'s room");
+        Text name = new Text(0, 20, User.getCurrentUser().getUsername() + "'s room");
         name.setFill(Color.RED);
         name.setTextAlignment(TextAlignment.CENTER);
         name.setFont(Font.font(20));

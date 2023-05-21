@@ -28,29 +28,22 @@ public class ShootingAnimation extends Transition {
     protected void interpolate(double v) {
         double nextY = this.ball.getCenterY() - 1;
 
-//        if (isHitAnotherBall() || nextY < 20)
-//        {
-//            try {
-//                gameMenuController.looseGame();
-//            } catch (Exception e) {
-//                throw new RuntimeException(e);
-//            }
-//            this.stop();
-//        }
+        if (isHitAnotherBall() || nextY < 20)
+        {
+            try {
+                gameMenuController.looseGame();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            this.stop();
+        }
 
         if (gameMenuController.isOnInvisibleCircle(ball)) {
-            if (pane.getChildren().get(0) instanceof InvisibleCircle invisibleCircle) {
-                try {
-                    invisibleCircle.receiveBall(ball);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
+            try {
+                gameMenuController.getInvisibleCircle().receiveBall(ball);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
-
-            InvisibleCircleAnimation invisibleCircleAnimation = new InvisibleCircleAnimation((InvisibleCircle) pane.getChildren().get(0),
-                    5, 1.2,
-                    7);
-            invisibleCircleAnimation.play();
 
             this.stop();
         }
@@ -59,16 +52,12 @@ public class ShootingAnimation extends Transition {
     }
 
     private boolean isHitAnotherBall() {
-        if (this.pane.getChildren().get(1) instanceof Group group) {
-            for (Node node : group.getChildren()) {
-                if (node instanceof Ball target) {
-                    if (gameMenuController.areBallsHit(target, this.ball))
-                        return true;
-                }
+        for (Node node : gameMenuController.getInvisibleCircle().getBalls()) {
+            if (node instanceof Ball target) {
+                if (gameMenuController.areBallsHit(this.ball, target))
+                    return true;
             }
-            return false;
         }
-
         return false;
     }
 

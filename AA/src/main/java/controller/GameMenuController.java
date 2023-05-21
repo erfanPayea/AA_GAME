@@ -23,13 +23,15 @@ public class GameMenuController {
     private final Settings settings;
     private InvisibleCircle invisibleCircle;
     private ArrayList<Ball> balls;
+    private final ArrayList<ShootingAnimation> shootingAnimations;
     private int score;
 
     public GameMenuController(GameMenu gameMenu) {
-        this.currentUser = User.currentUser;
+        this.currentUser = User.getCurrentUser();
         this.settings = currentUser.getSettings();
         this.gameMenu = gameMenu;
         this.score = 0;
+        this.shootingAnimations = new ArrayList<>();
         gameMenuController = this;
     }
 
@@ -37,7 +39,7 @@ public class GameMenuController {
         return gameMenuController;
     }
 
-    public void initializeFirstParameters(Pane pane) {
+    public void initializeFirstParameters(Pane pane) throws Exception {
         this.score = 0;
         Label name = new Label(settings.getMap().getName());
         if (this.settings.getMap().getColor() != Color.ALICEBLUE) name.setTextFill(Color.WHITE);
@@ -46,8 +48,7 @@ public class GameMenuController {
         name.setLayoutX(274); name.setLayoutY(173);
 
         Circle circle = new Circle(350, 200,60, settings.getMap().getColor());
-        this.invisibleCircle = new InvisibleCircle(350, 200, 160, pane, settings.getLevel().getRotationSpeed(),
-                settings.getLevel().getWindSpeed(), settings.getLevel().getFreezeTime());
+        this.invisibleCircle = new InvisibleCircle(350, 200, 160, pane, settings);
         this.invisibleCircle.setVisible(false);
 
         this.invisibleCircle.play();
@@ -114,6 +115,7 @@ public class GameMenuController {
 
         ShootingAnimation shootingAnimation = new ShootingAnimation(pane, shootedBall);
         pane.getChildren().add(shootedBall);
+        this.shootingAnimations.add(shootingAnimation);
         shootingAnimation.play();
 
         this.score += this.settings.getLevel().getScorePerBall();
@@ -132,12 +134,16 @@ public class GameMenuController {
     public boolean areBallsHit(Ball ball1, Ball ball2) {
         if (ball1 == ball2)
             return false;
-        return (ball1.getCenterX() - ball2.getCenterX()) * (ball1.getCenterX() - ball2.getCenterX()) +
-                (ball1.getCenterY() - ball2.getCenterY()) * (ball1.getCenterY() - ball2.getCenterY()) < 350;
+//        return (ball1.getCenterX() - ball2.getCenterX()) * (ball1.getCenterX() - ball2.getCenterX()) +
+//                (ball1.getCenterY() - ball2.getCenterY()) * (ball1.getCenterY() - ball2.getCenterY()) < 380;
+        return ball1.getBoundsInParent().intersects(ball2.getBoundsInParent());
     }
 
     public void pause() throws Exception {
         this.invisibleCircle.stop();
+        for (ShootingAnimation shootingAnimation : this.shootingAnimations) {
+            shootingAnimation.stop();
+        }
     }
 
     public void continueGame() {

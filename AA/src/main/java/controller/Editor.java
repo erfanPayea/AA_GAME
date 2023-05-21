@@ -9,7 +9,7 @@ public class Editor {
     private final User currentUser;
 
     public Editor() {
-        this.currentUser = User.currentUser;
+        this.currentUser = User.getCurrentUser();
     }
 
 
@@ -36,7 +36,7 @@ public class Editor {
             currentUser.setPassword(password);
         }
 
-        User.saveToDatabase();
+        User.saveToDatabase(currentUser);
         return Message.CHANGE_SUCCESS;
     }
 
@@ -50,7 +50,7 @@ public class Editor {
         currentSettings.setBallNumbers(ballsNumber);
         currentSettings.setMute(isMute);
 
-        User.saveToDatabase();
+        User.saveToDatabase(currentUser);
         return Message.CHANGE_SUCCESS;
     }
 
