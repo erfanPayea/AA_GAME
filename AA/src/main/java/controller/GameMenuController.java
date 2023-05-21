@@ -50,7 +50,6 @@ public class GameMenuController {
                 settings.getLevel().getWindSpeed(), settings.getLevel().getFreezeTime());
         this.invisibleCircle.setVisible(false);
 
-        pane.getChildren().add(this.invisibleCircle);
         this.invisibleCircle.play();
         pane.getChildren().add(circle);
         pane.getChildren().add(name);
@@ -82,13 +81,13 @@ public class GameMenuController {
         return hBox;
     }
 
-    public VBox createBallsGroup(Pane pane) {
+    public VBox createBallsGroup() {
         int size = this.settings.getBallNumbers();
 
         ArrayList<Ball> balls = new ArrayList<>();
 
         for (int ballNumber = size; ballNumber > 0; ballNumber--)
-            balls.add(new Ball(pane, ballNumber, settings.getMap().getColor()));
+            balls.add(new Ball(ballNumber, settings.getMap().getColor()));
 
         VBox ballsGroup = new VBox();
         ballsGroup.setSpacing(5);
@@ -110,7 +109,7 @@ public class GameMenuController {
         this.balls.remove(0);
         this.gameMenu.shootFirst();
 
-        Ball shootedBall = new Ball(pane, ball.getNumber(), ball.getColor());
+        Ball shootedBall = new Ball(ball.getNumber(), ball.getColor());
         shootedBall.setCenterX(350); shootedBall.setCenterY(440);
 
         ShootingAnimation shootingAnimation = new ShootingAnimation(pane, shootedBall);
@@ -122,11 +121,17 @@ public class GameMenuController {
 
     }
 
+    public InvisibleCircle getInvisibleCircle() {
+        return this.invisibleCircle;
+    }
+
     public boolean isOnInvisibleCircle(Ball ball) {
         return ball.getBoundsInParent().intersects(this.invisibleCircle.getLayoutBounds());
     }
 
     public boolean areBallsHit(Ball ball1, Ball ball2) {
+        if (ball1 == ball2)
+            return false;
         return (ball1.getCenterX() - ball2.getCenterX()) * (ball1.getCenterX() - ball2.getCenterX()) +
                 (ball1.getCenterY() - ball2.getCenterY()) * (ball1.getCenterY() - ball2.getCenterY()) < 350;
     }

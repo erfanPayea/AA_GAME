@@ -2,6 +2,7 @@ package view.animations;
 
 import controller.GameMenuController;
 import javafx.animation.Transition;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
@@ -27,15 +28,15 @@ public class ShootingAnimation extends Transition {
     protected void interpolate(double v) {
         double nextY = this.ball.getCenterY() - 1;
 
-        if (isHitAnotherBall() || nextY < 20)
-        {
-            try {
-                gameMenuController.looseGame();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-            this.stop();
-        }
+//        if (isHitAnotherBall() || nextY < 20)
+//        {
+//            try {
+//                gameMenuController.looseGame();
+//            } catch (Exception e) {
+//                throw new RuntimeException(e);
+//            }
+//            this.stop();
+//        }
 
         if (gameMenuController.isOnInvisibleCircle(ball)) {
             if (pane.getChildren().get(0) instanceof InvisibleCircle invisibleCircle) {
@@ -58,14 +59,16 @@ public class ShootingAnimation extends Transition {
     }
 
     private boolean isHitAnotherBall() {
-        for (Node node : pane.getChildren()) {
-            if (node instanceof Ball target) {
-                if (target != this.ball) {
-                    if (gameMenuController.areBallsHit(this.ball, target))
+        if (this.pane.getChildren().get(1) instanceof Group group) {
+            for (Node node : group.getChildren()) {
+                if (node instanceof Ball target) {
+                    if (gameMenuController.areBallsHit(target, this.ball))
                         return true;
                 }
             }
+            return false;
         }
+
         return false;
     }
 

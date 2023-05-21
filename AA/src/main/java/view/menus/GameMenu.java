@@ -83,7 +83,7 @@ public class GameMenu extends Application {
     }
 
     private VBox createBallsGroup(Pane pane) {
-        VBox ballsGroup = controller.createBallsGroup(pane);
+        VBox ballsGroup = controller.createBallsGroup();
 
         ballsGroup.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
@@ -116,13 +116,16 @@ public class GameMenu extends Application {
     }
 
     public void shootFirst() {
-        if (this.remainingBallsHBox.getChildren().get(1) instanceof Text ballsNumberText) {
-            int newBallsNumber = Integer.parseInt(ballsNumberText.getText()) - 1;
-            ballsNumberText.setText(String.valueOf(newBallsNumber));
-            if (newBallsNumber < 6)
-                ballsNumberText.setFill(Color.GREEN);
-            else if (newBallsNumber <= settings.getBallNumbers() / 2 + 1)
-                ballsNumberText.setFill(Color.GOLD);
+        if (ballsGroupVBox.getChildren().size() > 0) {
+            ballsGroupVBox.getChildren().remove(0);
+            if (this.remainingBallsHBox.getChildren().get(1) instanceof Text ballsNumberText) {
+                int newBallsNumber = Integer.parseInt(ballsNumberText.getText()) - 1;
+                ballsNumberText.setText(String.valueOf(newBallsNumber));
+                if (newBallsNumber < 6)
+                    ballsNumberText.setFill(Color.GREEN);
+                else if (newBallsNumber <= settings.getBallNumbers() / 2 + 1)
+                    ballsNumberText.setFill(Color.GOLD);
+            }
         }
     }
 

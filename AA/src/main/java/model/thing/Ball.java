@@ -20,8 +20,19 @@ public class Ball extends Circle {
         radius = 10;
     }
 
-    public Ball(Pane pane, int number, Color color) {
+    public Ball(int number, Color color) {
         super(radius, color);
+        this.number = number;
+        this.color = color;
+        this.setAccessibleText(String.valueOf(number));
+        if (color != Color.ALICEBLUE)
+            this.setStroke(Color.ALICEBLUE);
+        else this.setStroke(Color.BLACK);
+        this.setStrokeWidth(2);
+    }
+
+    public Ball(double centerX, double centerY, int number, Color color) {
+        super(centerX, centerY, radius, color);
         this.number = number;
         this.color = color;
         this.setAccessibleText(String.valueOf(number));
