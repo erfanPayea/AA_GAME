@@ -23,7 +23,6 @@ public class GameMenu extends Application {
     private final GameMenuController controller;
     private final Settings settings;
     private Pane pane;
-    private HBox remainingBallsHBox;
     private HBox scoreSheet;
     private VBox ballsGroupVBox;
 
@@ -44,11 +43,9 @@ public class GameMenu extends Application {
         this.ballsGroupVBox = createBallsGroup(this.pane);
         this.pane.getChildren().add(ballsGroupVBox);
 
-        this.remainingBallsHBox = createRemainingBalls();
-        this.pane.getChildren().add(this.remainingBallsHBox);
-
-        this.scoreSheet = controller.createScoreSheet();
-        this.pane.getChildren().add(scoreSheet);
+        this.controller.createRemainingBalls(pane);
+        this.controller.createScoreSheet(pane);
+        this.controller.createFreezeBar(pane);
 
         this.pane.setBackground(new Background(settings.getMap().getBackgroundImage()));
         createPauseButton(this.pane);
@@ -109,36 +106,30 @@ public class GameMenu extends Application {
                         throw new RuntimeException(e);
                     }
                 }
+
+                if (keyName.equals("Z")) {
+                    try {
+                        controller.playFreeze();
+                    }
+                    catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
             }
         });
         return ballsGroup;
     }
 
-    private HBox createRemainingBalls() {
-        return controller.createRemainingBalls();
-    }
-
-    public void shootFirst() {
-        if (ballsGroupVBox.getChildren().size() > 0) {
-            ballsGroupVBox.getChildren().remove(0);
-            if (this.remainingBallsHBox.getChildren().get(1) instanceof Text ballsNumberText) {
-                int newBallsNumber = Integer.parseInt(ballsNumberText.getText()) - 1;
-                ballsNumberText.setText(String.valueOf(newBallsNumber));
-                if (newBallsNumber < 6)
-                    ballsNumberText.setFill(Color.GREEN);
-                else if (newBallsNumber <= settings.getBallNumbers() / 2 + 1)
-                    ballsNumberText.setFill(Color.GOLD);
-            }
-        }
-    }
-
     public void changeScore(int score) {
-        if (this.scoreSheet.getChildren().get(1) instanceof Text scoreText)
-            scoreText.setText(String.valueOf(score));
+
     }
 
     public Pane getPane() {
         return this.pane;
+    }
+
+    public VBox getBallsGroupVBox() {
+        return ballsGroupVBox;
     }
 
     public void pause() throws Exception {

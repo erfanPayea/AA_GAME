@@ -55,12 +55,12 @@ public class Ball extends Circle {
         return turningAnimation;
     }
 
-    public void setTurningAnimation(int rotationSpeed, double windSpeed, int freezeTime) {
-        this.turningAnimation = new TurningAnimation(this, 90, rotationSpeed, windSpeed, freezeTime);
+    public void setTurningAnimation() {
+        this.turningAnimation = new TurningAnimation(this, 90);
     }
 
-    public void setTurningAnimation(double firstAngle, int rotationSpeed, double windSpeed, int freezeTime) {
-        this.turningAnimation = new TurningAnimation(this, firstAngle, rotationSpeed, windSpeed, freezeTime);
+    public void setTurningAnimation(double firstAngle) {
+        this.turningAnimation = new TurningAnimation(this, firstAngle);
     }
 
     public void setLine(Line line) {

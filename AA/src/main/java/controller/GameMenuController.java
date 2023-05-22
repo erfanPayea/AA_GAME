@@ -1,27 +1,41 @@
 package controller;
 
+import javafx.animation.FadeTransition;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import model.User;
 import model.game.Settings;
 import model.thing.Ball;
 import model.thing.InvisibleCircle;
+import view.animations.ReceivingBallAnimation;
 import view.animations.ShootingAnimation;
+import view.animations.TurningAnimation;
 import view.menus.GameMenu;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class GameMenuController {
+    public Circle center;
     private static GameMenuController gameMenuController;
     private final GameMenu gameMenu;
     private final User currentUser;
     private final Settings settings;
+    private ReceivingBallAnimation receivingBallAnimation;
+    private MediaPlayer mediaPlayer;
     private InvisibleCircle invisibleCircle;
+    private Text ballsNumberText;
+    private Text scoreSheetText;
+    private ProgressBar freezeBar;
     private ArrayList<Ball> balls;
     private final ArrayList<ShootingAnimation> shootingAnimations;
     private int score;
@@ -50,40 +64,57 @@ public class GameMenuController {
         name.setLayoutX(274);
         name.setLayoutY(173);
 
-        Circle circle = new Circle(350, 200, 60, settings.getMap().getColor());
+        Circle centerCircle = new Circle(350, 200, 60, settings.getMap().getColor());
+        this.receivingBallAnimation = new ReceivingBallAnimation(centerCircle);
+        this.center = centerCircle;
 
         this.invisibleCircle = new InvisibleCircle(350, 200, 160, pane, settings);
         this.invisibleCircle.setVisible(false);
-        pane.getChildren().add(circle);
+        pane.getChildren().add(centerCircle);
         pane.getChildren().add(name);
         this.invisibleCircle.play();
+
+        TurningAnimation.setParameters(settings.getLevel());
     }
 
-    public HBox createRemainingBalls() {
+    public void createRemainingBalls(Pane pane) {
         Text remainingBalls = new Text("Remaining balls: ");
-        Text balls = new Text(String.valueOf(settings.getBallNumbers()));
+        this.ballsNumberText = new Text(String.valueOf(settings.getBallNumbers()));
 
         remainingBalls.setFill(Color.WHITE);
-        balls.setFill(Color.ORANGERED);
+        this.ballsNumberText.setFill(Color.ORANGERED);
         remainingBalls.setFont(new Font(18));
-        balls.setFont(new Font(20));
-        HBox hBox = new HBox(remainingBalls, balls);
+        this.ballsNumberText.setFont(new Font(20));
+        HBox hBox = new HBox(remainingBalls, this.ballsNumberText);
         hBox.setSpacing(10);
-        return hBox;
+        pane.getChildren().add(hBox);
     }
 
-    public HBox createScoreSheet() {
+    public void createScoreSheet(Pane pane) {
         Text yourScore = new Text("Your score: ");
-        Text score = new Text(String.valueOf(0));
+        this.scoreSheetText = new Text(String.valueOf(0));
 
         yourScore.setFill(Color.WHITE);
-        score.setFill(Color.LIGHTCYAN);
+        this.scoreSheetText.setFill(Color.LIGHTCYAN);
         yourScore.setFont(new Font(18));
-        score.setFont(new Font(20));
-        HBox hBox = new HBox(yourScore, score);
+        this.scoreSheetText.setFont(new Font(20));
+        HBox hBox = new HBox(yourScore, this.scoreSheetText);
         hBox.setSpacing(10);
         hBox.setLayoutY(20);
-        return hBox;
+
+        pane.getChildren().add(hBox);
+    }
+
+    public void createFreezeBar(Pane pane) {
+        Text freezeBarText = new Text("Freeze access: ");
+        this.freezeBar = new ProgressBar(0);
+
+        freezeBarText.setFill(Color.WHITE);
+        freezeBarText.setFont(new Font(18));
+        freezeBarText.setLayoutY(65);
+        this.freezeBar.setLayoutY(80);
+
+        pane.getChildren().add(freezeBarText); pane.getChildren().add(this.freezeBar);
     }
 
     public VBox createBallsGroup() {
@@ -112,7 +143,6 @@ public class GameMenuController {
 
         Ball ball = this.balls.get(0);
         this.balls.remove(0);
-        this.gameMenu.shootFirst();
 
         Ball shootedBall = new Ball(ball.getNumber(), ball.getColor());
         shootedBall.setCenterX(350);
@@ -123,13 +153,46 @@ public class GameMenuController {
         this.shootingAnimations.add(shootingAnimation);
         shootingAnimation.play();
 
-        this.score += this.settings.getLevel().getScorePerBall();
-        gameMenu.changeScore(this.score);
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000), shootedBall);
+        fadeTransition.setFromValue(0.3);
+        fadeTransition.setToValue(1);
+        fadeTransition.play();
 
+        this.score += this.settings.getLevel().getScorePerBall();
+
+        // view changes :
+
+        this.gameMenu.getBallsGroupVBox().getChildren().remove(0);
+
+        int newBallsNumber = Integer.parseInt(this.ballsNumberText.getText()) - 1;
+        this.ballsNumberText.setText(String.valueOf(newBallsNumber));
+        if (newBallsNumber < 6)
+            this.ballsNumberText.setFill(Color.GREEN);
+        else if (newBallsNumber <= this.settings.getBallNumbers() / 2 + 1)
+            this.ballsNumberText.setFill(Color.GOLD);
+
+        this.scoreSheetText.setText(String.valueOf(this.score));
+
+        if (this.freezeBar.getProgress() != 1 && !TurningAnimation.isIsOnFreeze())
+            this.freezeBar.setProgress(this.freezeBar.getProgress() + 0.125);
+    }
+
+    public void playFreeze() {
+        if (freezeBar.getProgress() == 1)
+            this.invisibleCircle.playFreeze();
+        freezeBar.setProgress(0);
     }
 
     public InvisibleCircle getInvisibleCircle() {
         return this.invisibleCircle;
+    }
+
+    public void doReceiveAnimation() {
+        this.receivingBallAnimation.play();
+
+        this.mediaPlayer = new MediaPlayer(new Media(Objects.requireNonNull(
+                this.getClass().getResource("/Media/receiveBall.mp3")).toExternalForm()));
+        mediaPlayer.play();
     }
 
     public boolean isOnInvisibleCircle(Ball ball) {
@@ -143,7 +206,7 @@ public class GameMenuController {
         return ball1.getBoundsInParent().intersects(ball2.getBoundsInParent());
     }
 
-    public void pause() throws Exception {
+    public void pause() {
         this.invisibleCircle.stop();
         for (ShootingAnimation shootingAnimation : this.shootingAnimations) {
             shootingAnimation.stop();
