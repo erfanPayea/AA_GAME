@@ -1,6 +1,8 @@
 package controller;
 
 import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -23,6 +25,7 @@ import view.menus.GameMenu;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Random;
 
 public class GameMenuController {
     public Circle center;
@@ -75,6 +78,7 @@ public class GameMenuController {
         this.invisibleCircle.play();
 
         TurningAnimation.setParameters(settings.getLevel());
+        TurningAnimation.stopReverse();
     }
 
     public void createRemainingBalls(Pane pane) {
@@ -114,7 +118,8 @@ public class GameMenuController {
         freezeBarText.setLayoutY(65);
         this.freezeBar.setLayoutY(80);
 
-        pane.getChildren().add(freezeBarText); pane.getChildren().add(this.freezeBar);
+        pane.getChildren().add(freezeBarText);
+        pane.getChildren().add(this.freezeBar);
     }
 
     public VBox createBallsGroup() {
@@ -153,11 +158,6 @@ public class GameMenuController {
         this.shootingAnimations.add(shootingAnimation);
         shootingAnimation.play();
 
-        FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000), shootedBall);
-        fadeTransition.setFromValue(0.3);
-        fadeTransition.setToValue(1);
-        fadeTransition.play();
-
         this.score += this.settings.getLevel().getScorePerBall();
 
         // view changes :
@@ -175,12 +175,64 @@ public class GameMenuController {
 
         if (this.freezeBar.getProgress() != 1 && !TurningAnimation.isIsOnFreeze())
             this.freezeBar.setProgress(this.freezeBar.getProgress() + 0.125);
+
+        //Phase changes :
+
+        if (balls.size() == Math.floor(settings.getBallNumbers() * 0.75))
+            this.runPhase2();
+
+        else if (balls.size() == Math.floor(settings.getBallNumbers() * 0.5))
+            this.runPhase3();
+//
+//        else if (balls.size() == Math.floor(settings.getBallNumbers() * 0.25))
+//            this.runPhase4();
     }
 
     public void playFreeze() {
         if (freezeBar.getProgress() == 1)
-            this.invisibleCircle.playFreeze();
+            TurningAnimation.playFreeze();
+
         freezeBar.setProgress(0);
+    }
+
+    public void runPhase2() {
+        this.invisibleCircle.getRadiusSizeAnimation().play();
+        TurningAnimation.playReverse();
+    }
+
+    public void runPhase3() {
+        FadeTransition ballsFadeTransition = new FadeTransition(Duration.millis(2000), invisibleCircle.getGroupOfBalls());
+        FadeTransition linessFadeTransition = new FadeTransition(Duration.millis(2000), invisibleCircle.getGroupOfLines());
+        ballsFadeTransition.setCycleCount(-1);
+        linessFadeTransition.setCycleCount(-1);
+
+        Timeline showTimeLine = new Timeline(new KeyFrame(Duration.millis(2000), actionEvent -> {
+            ballsFadeTransition.setFromValue(0);
+            linessFadeTransition.setFromValue(0);
+            ballsFadeTransition.setToValue(1);
+            linessFadeTransition.setToValue(1);
+
+            ballsFadeTransition.play();
+            linessFadeTransition.play();
+        }));
+
+        showTimeLine.setCycleCount(1);
+
+        Timeline fadeTimeLine = new Timeline(new KeyFrame(Duration.millis(1000), actionEvent ->
+        {
+            ballsFadeTransition.setFromValue(1);
+            linessFadeTransition.setFromValue(1);
+            ballsFadeTransition.setToValue(0);
+            linessFadeTransition.setToValue(0);
+
+            ballsFadeTransition.play();
+            linessFadeTransition.play();
+
+        }));
+
+        fadeTimeLine.setCycleCount(1);
+        fadeTimeLine.play();
+        showTimeLine.play();
     }
 
     public InvisibleCircle getInvisibleCircle() {

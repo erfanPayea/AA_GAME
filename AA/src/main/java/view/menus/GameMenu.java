@@ -107,7 +107,7 @@ public class GameMenu extends Application {
                     }
                 }
 
-                if (keyName.equals("Z")) {
+                if (keyName.equals("F")) {
                     try {
                         controller.playFreeze();
                     }
@@ -117,6 +117,7 @@ public class GameMenu extends Application {
                 }
             }
         });
+
         return ballsGroup;
     }
 

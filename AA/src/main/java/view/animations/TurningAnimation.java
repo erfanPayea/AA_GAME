@@ -1,6 +1,5 @@
 package view.animations;
 
-import controller.GameMenuController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.Transition;
@@ -8,16 +7,24 @@ import javafx.util.Duration;
 import model.game.enums.Level;
 import model.thing.Ball;
 
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicReference;
+
 public class TurningAnimation extends Transition {
     private static boolean isOnFreeze;
     private static int freezeTime;
+    private static int direction;
+    private static Timeline reverseTimeLine;
     private static double angleSpeed;
     private static double windSpeed;
+    private static boolean hasWindEffect;
     private final Ball ball;
     private double angle;
 
     static {
         isOnFreeze = false;
+        hasWindEffect = false;
+        direction = 1;
     }
 
     public TurningAnimation(Ball ball, double firstAngle) {
@@ -43,6 +50,26 @@ public class TurningAnimation extends Transition {
         timeline.play();
     }
 
+    public static void playReverse() {
+        Random random = new Random();
+
+        AtomicReference<Double> randomNumber = new AtomicReference<>(random.nextDouble(4, 6));
+
+        reverseTimeLine = new Timeline(new KeyFrame(Duration.millis(randomNumber.get() * 1000), actionEvent ->
+        {
+            direction *= -1;
+            randomNumber.set(random.nextDouble(4, 6));
+        }));
+        reverseTimeLine.setCycleCount(-1);
+        reverseTimeLine.play();
+    }
+
+    public static void stopReverse() {
+        if (reverseTimeLine == null)
+            return;
+        reverseTimeLine.stop();
+    }
+
     public static boolean isIsOnFreeze() {
         return isOnFreeze;
     }
@@ -50,8 +77,8 @@ public class TurningAnimation extends Transition {
     @Override
     protected void interpolate(double v) {
         if (!isOnFreeze)
-            this.angle += angleSpeed;
-        else this.angle += angleSpeed * 0.35;
+            this.angle += direction * angleSpeed;
+        else this.angle += direction * angleSpeed * 0.35;
 
         this.angle %= 360;
         this.ball.setCenterX(350 + 160 * Math.cos(Math.toRadians(angle)));

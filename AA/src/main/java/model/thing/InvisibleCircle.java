@@ -7,12 +7,15 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import model.User;
 import model.game.Settings;
+import view.animations.RadiusSizeAnimation;
 
 import java.util.ArrayList;
 
 public class InvisibleCircle extends Circle {
     private final Pane pane;
     private final Group balls;
+    private final Group lines;
+    private final RadiusSizeAnimation radiusSizeAnimation;
     private int defaultBallsNumber;
     private final Settings settings;
 
@@ -21,9 +24,12 @@ public class InvisibleCircle extends Circle {
         this.pane = pane;
         this.settings = settings;
         this.balls = new Group();
+        this.lines = new Group();
+        this.radiusSizeAnimation = new RadiusSizeAnimation(this.balls);
         this.setDefaultBalls();
         this.pane.getChildren().add(this);
         this.pane.getChildren().add(this.balls);
+        this.pane.getChildren().add(this.lines);
     }
 
     private void setDefaultBalls() {
@@ -42,7 +48,8 @@ public class InvisibleCircle extends Circle {
             balls.getChildren().add(ball);
 
             Line line = new Line(this.getCenterX(), this.getCenterY(), ball);
-            this.pane.getChildren().add(line);
+
+            this.lines.getChildren().add(line);
         }
     }
 
@@ -54,7 +61,7 @@ public class InvisibleCircle extends Circle {
             this.balls.getChildren().add(ball);
 
             Line line = new Line(this.getCenterX(), this.getCenterY(), ball);
-            this.pane.getChildren().add(line);
+            this.lines.getChildren().add(line);
 
             ball.setTurningAnimation();
             ball.getTurningAnimation().play();
@@ -74,6 +81,18 @@ public class InvisibleCircle extends Circle {
         return ballArrayList;
     }
 
+    public Group getGroupOfBalls() {
+        return balls;
+    }
+
+    public Group getGroupOfLines() {
+        return this.lines;
+    }
+
+    public RadiusSizeAnimation getRadiusSizeAnimation() {
+        return radiusSizeAnimation;
+    }
+
     public void play() {
         try {
             for (Node node : this.balls.getChildren()) {
@@ -81,18 +100,6 @@ public class InvisibleCircle extends Circle {
                     ball.getTurningAnimation().play();
             }
         } catch (Exception ignored) {
-
-        }
-    }
-
-    public void playFreeze() {
-        try {
-            for (Node node : this.balls.getChildren()) {
-                if (node instanceof Ball ball)
-                    ball.getTurningAnimation().playFreeze();
-            }
-        }
-        catch (Exception ignored) {
 
         }
     }
