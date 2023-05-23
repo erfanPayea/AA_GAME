@@ -12,7 +12,7 @@ public class FinishAnimation extends Transition {
     public FinishAnimation(boolean isWin, ArrayList<Ball> balls) {
         this.isWin = isWin;
         this.balls = balls;
-        this.setCycleCount(5);
+        this.setCycleCount(-1);
         this.setCycleDuration(Duration.seconds(0.5));
     }
 
@@ -27,8 +27,8 @@ public class FinishAnimation extends Transition {
         }
         else {
             for (Ball ball : balls) {
-                ball.setCenterX((350 - ball.getCenterX()) / 30 + ball.getCenterX());
-                ball.setCenterY((360 - ball.getCenterY()) / 30 + ball.getCenterY());
+                ball.setCenterX((350 - ball.getCenterX()) / 10 + ball.getCenterX());
+                ball.setCenterY((360 - ball.getCenterY()) / 10 + ball.getCenterY());
                 ball.setLineLocation();
             }
         }

@@ -171,15 +171,23 @@ public class GameMenu extends Application {
         finishStage.initModality(Modality.APPLICATION_MODAL);
         finishStage.initOwner(stage);
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1.5), actionEvent -> {
-            try {
+//        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1.5), actionEvent -> {
+//            try {
+//                new FinishMenu().start(new Stage());
+//            } catch (Exception e) {
+//                throw new RuntimeException(e);
+//            }
+//        }));
+//
+//        timeline.setCycleCount(1);
+//        timeline.play();
+
+        try {
                 new FinishMenu().start(new Stage());
-            } catch (Exception e) {
+            }
+        catch (Exception e) {
                 throw new RuntimeException(e);
             }
-        }));
-        timeline.setCycleCount(1);
-        timeline.play();
     }
 
     public void end() throws Exception {

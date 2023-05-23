@@ -30,7 +30,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/erfan/IdeaProjects/WTF/AA",
+    "last_opened_file_path": "C:/Users/erfan/IdeaProjects/aaGame/AA",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -53,6 +53,7 @@
       <workItem from="1684221805576" duration="20000" />
       <workItem from="1684436906806" duration="19000" />
       <workItem from="1684595051510" duration="20000" />
+      <workItem from="1684870288577" duration="70000" />
     </task>
     <servers />
   </component>
