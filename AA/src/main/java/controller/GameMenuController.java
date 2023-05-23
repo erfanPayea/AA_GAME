@@ -38,9 +38,11 @@ public class GameMenuController {
     private InvisibleCircle invisibleCircle;
     private Text ballsNumberText;
     private Text scoreSheetText;
+    private VBox ballsGroupVBox;
     private ProgressBar freezeBar;
     private ArrayList<Ball> balls;
     private final ArrayList<ShootingAnimation> shootingAnimations;
+    private boolean isOnPhase4;
     private int score;
 
     public GameMenuController(GameMenu gameMenu) {
@@ -79,6 +81,7 @@ public class GameMenuController {
 
         TurningAnimation.setParameters(settings.getLevel());
         TurningAnimation.stopReverse();
+        this.isOnPhase4 = false;
     }
 
     public void createRemainingBalls(Pane pane) {
@@ -122,6 +125,21 @@ public class GameMenuController {
         pane.getChildren().add(this.freezeBar);
     }
 
+    public void createDegreeHBox(Pane pane) {
+        Text yourDegree = new Text("degree: ");
+        yourDegree.setFill(Color.WHITE);
+        yourDegree.setFont(new Font(18));
+
+        Text degreeText = ShootingAnimation.getDegreeText();
+        degreeText.setFill(Color.WHITE);
+        degreeText.setFont(new Font(20));
+
+        HBox hBox = new HBox(yourDegree, degreeText);
+        hBox.setSpacing(10);
+        hBox.setLayoutY(105);
+        pane.getChildren().add(hBox);
+    }
+
     public VBox createBallsGroup() {
         int size = this.settings.getBallNumbers();
 
@@ -130,16 +148,16 @@ public class GameMenuController {
         for (int ballNumber = size; ballNumber > 0; ballNumber--)
             balls.add(new Ball(ballNumber, settings.getMap().getColor()));
 
-        VBox ballsGroup = new VBox();
-        ballsGroup.setSpacing(5);
+        this.ballsGroupVBox = new VBox();
+        ballsGroupVBox.setSpacing(5);
         for (Ball ball : balls)
-            ballsGroup.getChildren().add(ball);
+            ballsGroupVBox.getChildren().add(ball);
 
-        ballsGroup.setLayoutX(338);
-        ballsGroup.setLayoutY(450);
+        ballsGroupVBox.setLayoutX(338);
+        ballsGroupVBox.setLayoutY(450);
 
         this.balls = balls;
-        return ballsGroup;
+        return ballsGroupVBox;
     }
 
     public void shoot(Pane pane) {
@@ -150,7 +168,7 @@ public class GameMenuController {
         this.balls.remove(0);
 
         Ball shootedBall = new Ball(ball.getNumber(), ball.getColor());
-        shootedBall.setCenterX(350);
+        shootedBall.setCenterX(gameMenu.getBallsGroupVBox().getLayoutX() + 10);
         shootedBall.setCenterY(440);
 
         ShootingAnimation shootingAnimation = new ShootingAnimation(pane, shootedBall);
@@ -162,7 +180,7 @@ public class GameMenuController {
 
         // view changes :
 
-        this.gameMenu.getBallsGroupVBox().getChildren().remove(0);
+        this.ballsGroupVBox.getChildren().remove(0);
 
         int newBallsNumber = Integer.parseInt(this.ballsNumberText.getText()) - 1;
         this.ballsNumberText.setText(String.valueOf(newBallsNumber));
@@ -181,11 +199,11 @@ public class GameMenuController {
         if (balls.size() == Math.floor(settings.getBallNumbers() * 0.75))
             this.runPhase2();
 
-        else if (balls.size() == Math.floor(settings.getBallNumbers() * 0.5))
+        else if (balls.size() == Math.floor(settings.getBallNumbers() * 0.5) + 1)
             this.runPhase3();
 //
-//        else if (balls.size() == Math.floor(settings.getBallNumbers() * 0.25))
-//            this.runPhase4();
+        else if (balls.size() == Math.floor(settings.getBallNumbers() * 0.25) + 1)
+            runPhase4();
     }
 
     public void playFreeze() {
@@ -235,6 +253,28 @@ public class GameMenuController {
         showTimeLine.play();
     }
 
+    public void runPhase4() {
+        this.isOnPhase4 = true;
+        ShootingAnimation.setWindSpeed(settings.getLevel().getWindSpeed());
+        ShootingAnimation.playPhase4();
+    }
+
+    public void moveRight() {
+        if (this.isOnPhase4) {
+            double nextX = this.ballsGroupVBox.getLayoutX() + 10;
+            if (nextX < 680)
+                this.ballsGroupVBox.setLayoutX(nextX);
+        }
+    }
+
+    public void moveLeft() {
+        if (this.isOnPhase4) {
+            double nextX = this.ballsGroupVBox.getLayoutX() - 10;
+            if (nextX > 20)
+                this.ballsGroupVBox.setLayoutX(nextX);
+        }
+    }
+
     public InvisibleCircle getInvisibleCircle() {
         return this.invisibleCircle;
     }
@@ -255,7 +295,9 @@ public class GameMenuController {
         if (ball1 == ball2)
             return false;
 
-        return ball1.getBoundsInParent().intersects(ball2.getBoundsInParent());
+        return (ball1.getRadius() + ball2.getRadius()) * (ball1.getRadius() + ball2.getRadius()) - 60
+                > (ball1.getCenterY() - ball2.getCenterY()) * (ball1.getCenterY() - ball2.getCenterY()) +
+                (ball1.getCenterX() - ball2.getCenterX()) * (ball1.getCenterX() - ball2.getCenterX());
     }
 
     public void pause() {

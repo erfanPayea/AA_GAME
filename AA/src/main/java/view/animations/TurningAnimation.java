@@ -16,14 +16,11 @@ public class TurningAnimation extends Transition {
     private static int direction;
     private static Timeline reverseTimeLine;
     private static double angleSpeed;
-    private static double windSpeed;
-    private static boolean hasWindEffect;
     private final Ball ball;
     private double angle;
 
     static {
         isOnFreeze = false;
-        hasWindEffect = false;
         direction = 1;
     }
 
@@ -37,9 +34,7 @@ public class TurningAnimation extends Transition {
 
     public static void setParameters(Level level) {
         angleSpeed = (double) level.getRotationSpeed() / 5;
-        windSpeed = level.getWindSpeed();
         freezeTime = level.getFreezeTime();
-
     }
 
     public static void playFreeze() {
@@ -51,11 +46,14 @@ public class TurningAnimation extends Transition {
     }
 
     public static void playReverse() {
-        Random random = new Random();
+        Timeline firstreverseTimeLine = new Timeline(new KeyFrame(Duration.seconds(1), actionEvent -> direction *= -1));
+        firstreverseTimeLine.setCycleCount(1);
+        firstreverseTimeLine.play();
 
+        Random random = new Random();
         AtomicReference<Double> randomNumber = new AtomicReference<>(random.nextDouble(4, 6));
 
-        reverseTimeLine = new Timeline(new KeyFrame(Duration.millis(randomNumber.get() * 1000), actionEvent ->
+        reverseTimeLine = new Timeline(new KeyFrame(Duration.seconds(randomNumber.get()), actionEvent ->
         {
             direction *= -1;
             randomNumber.set(random.nextDouble(4, 6));

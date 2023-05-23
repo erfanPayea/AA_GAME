@@ -43,9 +43,10 @@ public class GameMenu extends Application {
         this.ballsGroupVBox = createBallsGroup(this.pane);
         this.pane.getChildren().add(ballsGroupVBox);
 
-        this.controller.createRemainingBalls(pane);
-        this.controller.createScoreSheet(pane);
-        this.controller.createFreezeBar(pane);
+        this.controller.createRemainingBalls(this.pane);
+        this.controller.createScoreSheet(this.pane);
+        this.controller.createFreezeBar(this.pane);
+        this.controller.createDegreeHBox(this.pane);
 
         this.pane.setBackground(new Background(settings.getMap().getBackgroundImage()));
         createPauseButton(this.pane);
@@ -90,30 +91,31 @@ public class GameMenu extends Application {
             public void handle(KeyEvent keyEvent) {
                 String keyName = keyEvent.getCode().getName();
 
-                if (keyName.equals("Space")) {
-                    try {
-                        controller.shoot(pane);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
+                switch (keyName) {
+                    case "Space" -> {
+                        try {
+                            controller.shoot(pane);
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
                     }
-                }
-
-                if (keyName.equals("Esc")) {
-                    try {
-                        pause();
-                        controller.pause();
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
+                    case "Esc" -> {
+                        try {
+                            pause();
+                            controller.pause();
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
                     }
-                }
-
-                if (keyName.equals("F")) {
-                    try {
-                        controller.playFreeze();
+                    case "Shift" -> {
+                        try {
+                            controller.playFreeze();
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
                     }
-                    catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
+                    case "Z" -> controller.moveLeft();
+                    case "X" -> controller.moveRight();
                 }
             }
         });

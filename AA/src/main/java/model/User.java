@@ -39,7 +39,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.lastGameScore = 0;
-        this.settings = new Settings(2, 25, Map.getMapByName("Space"), false);
+        this.settings = new Settings(2, 20, Map.getMapByName("Space"), false);
         users.add(this);
         User.saveUsersToFile();
     }
@@ -47,7 +47,7 @@ public class User {
     public User() {
         this.username = "guest";
         this.lastGameScore = 0;
-        this.settings = new Settings(2, 25, Map.getMapByName("Space"), false);
+        this.settings = new Settings(2, 20, Map.getMapByName("Space"), false);
         User.currentUser = this;
     }
 

@@ -64,7 +64,7 @@ public class SettingsMenu extends Application {
             this.levelNumberChoiceBox.getItems().add(String.valueOf(level.getNumber()));
         this.levelNumberChoiceBox.setValue(String.valueOf(this.currentSettings.getLevel().getNumber()));
 
-        for (int ballNumber = 21; ballNumber < 31; ballNumber++)
+        for (int ballNumber = 16; ballNumber < 26; ballNumber++)
             this.ballsNumberChoiceBox.getItems().add(String.valueOf(ballNumber));
         this.ballsNumberChoiceBox.setValue(String.valueOf(this.currentSettings.getBallNumbers()));
 

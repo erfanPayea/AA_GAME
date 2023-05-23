@@ -52,11 +52,15 @@ public class RadiusSizeAnimation extends Transition {
         for (Node node : balls.getChildren()) {
             if (node instanceof Ball target) {
                 if (target != ball) {
-                    if (ball.getBoundsInParent().intersects(target.getBoundsInParent()))
+                    if (this.areBallsHit(ball, target))
                         return true;
                 }
             }
         }
         return false;
+    }
+
+    private boolean areBallsHit(Ball ball1, Ball ball2) {
+        return GameMenuController.getGameMenuController().areBallsHit(ball1, ball2);
     }
 }
