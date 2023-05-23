@@ -53,7 +53,7 @@ public class InvisibleCircle extends Circle {
         }
     }
 
-    public void receiveBall(Ball ball) throws Exception {
+    public void receiveBall(Ball ball) {
         if (!this.balls.getChildren().contains(ball)) {
             GameMenuController.getGameMenuController().doReceiveAnimation();
 

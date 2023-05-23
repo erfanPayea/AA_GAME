@@ -18,6 +18,7 @@ import model.User;
 import model.game.Settings;
 import model.thing.Ball;
 import model.thing.InvisibleCircle;
+import view.animations.FinishAnimation;
 import view.animations.ReceivingBallAnimation;
 import view.animations.ShootingAnimation;
 import view.animations.TurningAnimation;
@@ -316,7 +317,10 @@ public class GameMenuController {
         gameMenu.restart();
     }
 
-    public void winGame() throws Exception {
+    public void winGame() {
+        FinishAnimation finishAnimation = new FinishAnimation(true, invisibleCircle.getBalls());
+        finishAnimation.play();
+
         this.pause();
         this.currentUser.hasWinLastGame = true;
         this.currentUser.lastTimePlayed = 10; // todo : time
@@ -324,7 +328,10 @@ public class GameMenuController {
         gameMenu.winGame();
     }
 
-    public void looseGame() throws Exception {
+    public void looseGame() {
+        FinishAnimation finishAnimation = new FinishAnimation(false, invisibleCircle.getBalls());
+        finishAnimation.play();
+
         this.pause();
         this.currentUser.hasWinLastGame = false;
         this.currentUser.lastTimePlayed = 10; // todo : time

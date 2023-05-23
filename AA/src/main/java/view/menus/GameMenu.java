@@ -1,6 +1,8 @@
 package view.menus;
 
 import controller.GameMenuController;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -13,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import model.User;
 import model.game.Settings;
 
@@ -151,23 +154,32 @@ public class GameMenu extends Application {
         start(stage);
     }
 
-    public void winGame() throws Exception {
+    public void winGame() {
         this.pane.setBackground(new Background(new BackgroundFill(Color.GREEN, null, null)));
         this.pane.getChildren().get(1).requestFocus();
         showFinish();
     }
 
-    public void looseGame() throws Exception {
+    public void looseGame() {
         this.pane.setBackground(new Background(new BackgroundFill(Color.ORANGERED, null, null)));
         this.pane.getChildren().get(1).requestFocus();
         showFinish();
     }
 
-    public void showFinish() throws Exception {
+    public void showFinish(){
         Stage finishStage = new Stage();
         finishStage.initModality(Modality.APPLICATION_MODAL);
         finishStage.initOwner(stage);
-        new FinishMenu().start(finishStage);
+
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1.5), actionEvent -> {
+            try {
+                new FinishMenu().start(new Stage());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }));
+        timeline.setCycleCount(1);
+        timeline.play();
     }
 
     public void end() throws Exception {
