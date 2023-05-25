@@ -32,6 +32,7 @@ import java.util.Random;
 public class GameMenuController {
     public Circle center;
     private static GameMenuController gameMenuController;
+    private static boolean is2Player;
     private final GameMenu gameMenu;
     private final User currentUser;
     private final Settings settings;
@@ -40,6 +41,7 @@ public class GameMenuController {
     private Text ballsNumberText;
     private Text scoreSheetText;
     private VBox ballsGroupVBox;
+    private VBox upBallsGroupVBox;
     private ProgressBar freezeBar;
     private ArrayList<Ball> balls;
     private final ArrayList<ShootingAnimation> shootingAnimations;
@@ -59,6 +61,14 @@ public class GameMenuController {
 
     public static GameMenuController getGameMenuController() {
         return gameMenuController;
+    }
+
+    public static boolean isIs2Player() {
+        return is2Player;
+    }
+
+    public static void setIs2Player(boolean is2Player) {
+        GameMenuController.is2Player = is2Player;
     }
 
     public void initializeFirstParameters(Pane pane) {
@@ -147,7 +157,7 @@ public class GameMenuController {
         pane.getChildren().add(hBox);
     }
 
-    public VBox createBallsGroup() {
+    public VBox createBallsGroup(Pane pane) {
         int size = this.settings.getBallNumbers();
 
         ArrayList<Ball> balls = new ArrayList<>();
@@ -156,14 +166,26 @@ public class GameMenuController {
             balls.add(new Ball(ballNumber, settings.getMap().getColor()));
 
         this.ballsGroupVBox = new VBox();
-        ballsGroupVBox.setSpacing(5);
+        this.ballsGroupVBox.setSpacing(5);
         for (Ball ball : balls)
-            ballsGroupVBox.getChildren().add(ball);
+            this.ballsGroupVBox.getChildren().add(ball);
 
-        ballsGroupVBox.setLayoutX(755);
-        ballsGroupVBox.setLayoutY(700);
+        this.ballsGroupVBox.setLayoutX(755);
+        this.ballsGroupVBox.setLayoutY(700);
 
         this.balls = balls;
+
+        if (is2Player) {
+            this.upBallsGroupVBox = new VBox();
+            for (Ball ball : balls)
+                this.upBallsGroupVBox.getChildren().add(ball.for2Player());
+
+            this.upBallsGroupVBox.setLayoutX(755);
+            this.upBallsGroupVBox.setLayoutY(-330);
+            this.upBallsGroupVBox.setSpacing(5);
+            pane.getChildren().add(upBallsGroupVBox);
+        }
+
         return ballsGroupVBox;
     }
 
@@ -175,7 +197,7 @@ public class GameMenuController {
         this.balls.remove(0);
 
         Ball shootedBall = new Ball(ball.getNumber(), ball.getColor());
-        shootedBall.setCenterX(gameMenu.getBallsGroupVBox().getLayoutX() + 10);
+        shootedBall.setCenterX(ballsGroupVBox.getLayoutX() + 10);
         shootedBall.setCenterY(690);
 
         ShootingAnimation shootingAnimation = new ShootingAnimation(pane, shootedBall);

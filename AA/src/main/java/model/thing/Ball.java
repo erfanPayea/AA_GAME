@@ -66,4 +66,10 @@ public class Ball extends Circle {
         this.line.setEndX(this.getCenterX());
         this.line.setEndY(this.getCenterY());
     }
+
+    public Ball for2Player() {
+        Ball secondBall = new Ball(this.number, Color.LIME);
+        secondBall.setStroke(Color.BLACK);
+        return secondBall;
+    }
 }

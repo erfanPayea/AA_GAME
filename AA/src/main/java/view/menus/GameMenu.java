@@ -75,7 +75,7 @@ public class GameMenu extends Application {
             }
         });
 
-        pauseButton.setLayoutX(600);
+        pauseButton.setLayoutX(1430);
         pauseButton.setLayoutY(2);
         pauseButton.setPrefHeight(30);
         pauseButton.setPrefWidth(80);
@@ -86,7 +86,7 @@ public class GameMenu extends Application {
     }
 
     private VBox createBallsGroup(Pane pane) {
-        VBox ballsGroup = controller.createBallsGroup();
+        VBox ballsGroup = controller.createBallsGroup(pane);
 
         ballsGroup.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
@@ -129,16 +129,8 @@ public class GameMenu extends Application {
         return ballsGroup;
     }
 
-    public void changeScore(int score) {
-
-    }
-
     public Pane getPane() {
         return this.pane;
-    }
-
-    public VBox getBallsGroupVBox() {
-        return ballsGroupVBox;
     }
 
     public void pause() throws Exception {

@@ -1,5 +1,6 @@
 package view.menus;
 
+import controller.GameMenuController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -33,10 +34,12 @@ public class MainMenu extends Application {
     }
 
     public void startGame() throws Exception {
+        GameMenuController.setIs2Player(false);
         new GameMenu().start(stage);
     }
 
-    public void continueGame() throws Exception {
+    public void twoPlayerGame() throws Exception {
+        GameMenuController.setIs2Player(true);
         new GameMenu().start(stage);
     }
 
