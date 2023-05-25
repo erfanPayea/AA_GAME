@@ -2,6 +2,7 @@ package controller;
 
 import model.User;
 import model.game.Settings;
+import view.enums.HotKeys;
 import view.enums.Message;
 
 
@@ -40,15 +41,22 @@ public class Editor {
         return Message.CHANGE_SUCCESS;
     }
 
-    public Message saveSettingsChanges(String mapName, String level, String ballsNumber, boolean isMute) {
+    public Message saveSettingsChanges(String mapName, String level, String ballsNumber, boolean isMute, String shootKey,
+                           String freezeKey, String leftKey, String rightKey) {
         Settings currentSettings = currentUser.getSettings();
-        if (mapName == null && level == null && ballsNumber == null)
+        if (mapName == null && level == null && ballsNumber == null && HotKeys.SHOOT.equals(shootKey)
+                && HotKeys.FREEZE.equals(freezeKey) && HotKeys.LEFT.equals(leftKey) && HotKeys.RIGHT.equals(rightKey))
             return Message.ALL_EMPTY;
 
         currentSettings.setMap(mapName);
         currentSettings.setLevel(level);
         currentSettings.setBallNumbers(ballsNumber);
         currentSettings.setMute(isMute);
+
+        HotKeys.SHOOT.setKeyName(shootKey);
+        HotKeys.FREEZE.setKeyName(freezeKey);
+        HotKeys.LEFT.setKeyName(leftKey);
+        HotKeys.RIGHT.setKeyName(rightKey);
 
         User.saveToDatabase(currentUser);
         return Message.CHANGE_SUCCESS;

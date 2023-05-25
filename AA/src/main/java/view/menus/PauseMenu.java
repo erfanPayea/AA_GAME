@@ -5,8 +5,10 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import view.enums.HotKeys;
 
 import java.net.URL;
 import java.util.Objects;
@@ -14,6 +16,15 @@ import java.util.Objects;
 public class PauseMenu extends Application {
     private static Stage stage;
     private final GameMenuController gameMenuController;
+
+    @FXML
+    private Label shootKey;
+    @FXML
+    private Label freezeKey;
+    @FXML
+    private Label rightKey;
+    @FXML
+    private Label leftKey;
 
     {
         gameMenuController = GameMenuController.getGameMenuController();
@@ -27,6 +38,14 @@ public class PauseMenu extends Application {
         Scene scene = new Scene(pane);
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    private void initialize() {
+        this.leftKey.setText(HotKeys.LEFT.toString());
+        this.rightKey.setText(HotKeys.RIGHT.toString());
+        this.freezeKey.setText(HotKeys.FREEZE.toString());
+        this.shootKey.setText(HotKeys.SHOOT.toString());
     }
 
     @FXML

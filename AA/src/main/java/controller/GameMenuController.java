@@ -4,6 +4,7 @@ import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.*;
@@ -43,6 +44,8 @@ public class GameMenuController {
     private ProgressBar freezeBar;
     private ArrayList<Ball> balls;
     private final ArrayList<ShootingAnimation> shootingAnimations;
+    private FadeTransition ballsFadeTransition;
+    private FadeTransition linessFadeTransition;
     private boolean isOnPhase4;
     private int score;
 
@@ -83,6 +86,10 @@ public class GameMenuController {
         TurningAnimation.setParameters(settings.getLevel());
         TurningAnimation.stopReverse();
         this.isOnPhase4 = false;
+
+        if (balls != null) {
+            this.checkFordPhase();
+        }
     }
 
     public void createRemainingBalls(Pane pane) {
@@ -195,14 +202,16 @@ public class GameMenuController {
         if (this.freezeBar.getProgress() != 1 && !TurningAnimation.isIsOnFreeze())
             this.freezeBar.setProgress(this.freezeBar.getProgress() + 0.125);
 
-        //Phase changes :
+        this.checkFordPhase();
+    }
 
+    private void checkFordPhase() {
         if (balls.size() == Math.floor(settings.getBallNumbers() * 0.75))
             this.runPhase2();
 
         else if (balls.size() == Math.floor(settings.getBallNumbers() * 0.5) + 1)
             this.runPhase3();
-//
+
         else if (balls.size() == Math.floor(settings.getBallNumbers() * 0.25) + 1)
             runPhase4();
     }
@@ -220,8 +229,8 @@ public class GameMenuController {
     }
 
     public void runPhase3() {
-        FadeTransition ballsFadeTransition = new FadeTransition(Duration.millis(2000), invisibleCircle.getGroupOfBalls());
-        FadeTransition linessFadeTransition = new FadeTransition(Duration.millis(2000), invisibleCircle.getGroupOfLines());
+        this.ballsFadeTransition = new FadeTransition(Duration.millis(2000), invisibleCircle.getGroupOfBalls());
+        this.linessFadeTransition = new FadeTransition(Duration.millis(2000), invisibleCircle.getGroupOfLines());
         ballsFadeTransition.setCycleCount(-1);
         linessFadeTransition.setCycleCount(-1);
 
@@ -306,6 +315,10 @@ public class GameMenuController {
         for (ShootingAnimation shootingAnimation : this.shootingAnimations) {
             shootingAnimation.stop();
         }
+        if (this.linessFadeTransition != null) {
+            this.ballsFadeTransition.stop();
+            this.linessFadeTransition.stop();
+        }
     }
 
     public void continueGame() {
@@ -328,7 +341,12 @@ public class GameMenuController {
         gameMenu.winGame();
     }
 
-    public void looseGame() {
+    public void looseGame(Ball lastBall) {
+        if (lastBall != null)
+            gameMenu.getPane().getChildren().remove(lastBall);
+
+        gameMenu.getPane().getChildren().remove(ballsGroupVBox);
+
         FinishAnimation finishAnimation = new FinishAnimation(false, invisibleCircle.getBalls());
         finishAnimation.play();
 

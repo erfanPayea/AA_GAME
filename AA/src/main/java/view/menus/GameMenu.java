@@ -1,8 +1,7 @@
 package view.menus;
 
 import controller.GameMenuController;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+
 import javafx.application.Application;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -12,10 +11,10 @@ import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Duration;
+
+import view.enums.HotKeys;
 import model.User;
 import model.game.Settings;
 
@@ -94,32 +93,36 @@ public class GameMenu extends Application {
             public void handle(KeyEvent keyEvent) {
                 String keyName = keyEvent.getCode().getName();
 
-                switch (keyName) {
-                    case "Space" -> {
-                        try {
-                            controller.shoot(pane);
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
+                if (HotKeys.SHOOT.equals(keyName)) {
+                    try {
+                        controller.shoot(pane);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
                     }
-                    case "Esc" -> {
-                        try {
-                            pause();
-                            controller.pause();
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                    case "Shift" -> {
-                        try {
-                            controller.playFreeze();
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                    case "Z" -> controller.moveLeft();
-                    case "X" -> controller.moveRight();
                 }
+
+                else if (HotKeys.FREEZE.equals(keyName)) {
+                    try {
+                        controller.playFreeze();
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                else if (HotKeys.RIGHT.equals(keyName))
+                    controller.moveRight();
+
+                else if (HotKeys.LEFT.equals(keyName))
+                    controller.moveLeft();
+
+                else if (keyName.equals("Esc")){
+                    try {
+                        pause();
+                        controller.pause();
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+
             }
         });
 
@@ -166,7 +169,7 @@ public class GameMenu extends Application {
         showFinish();
     }
 
-    public void showFinish(){
+    public void showFinish() {
         Stage finishStage = new Stage();
         finishStage.initModality(Modality.APPLICATION_MODAL);
         finishStage.initOwner(stage);

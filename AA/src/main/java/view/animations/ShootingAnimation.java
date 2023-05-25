@@ -65,7 +65,7 @@ public class ShootingAnimation extends Transition {
 
         if (isHitAnotherBall() || nextY < 20 || nextX < 20 || nextX > 680) {
             try {
-                gameMenuController.looseGame();
+                gameMenuController.looseGame(this.ball);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

@@ -35,7 +35,7 @@ public class RadiusSizeAnimation extends Transition {
                 if (radius > 11) {
                     if (isHitAnother(ball)) {
                         try {
-                            GameMenuController.getGameMenuController().looseGame();
+                            GameMenuController.getGameMenuController().looseGame(null);
                         } catch (Exception e) {
                             throw new RuntimeException(e);
                         }

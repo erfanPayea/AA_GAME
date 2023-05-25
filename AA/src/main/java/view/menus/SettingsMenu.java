@@ -8,12 +8,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.User;
 import model.game.Settings;
 import model.game.enums.Level;
 import model.game.enums.Map;
+import view.enums.HotKeys;
 import view.enums.Message;
 
 import java.net.URL;
@@ -33,6 +35,14 @@ public class SettingsMenu extends Application {
     private Label result;
     @FXML
     private CheckBox isMute;
+    @FXML
+    private TextField shootKey;
+    @FXML
+    private TextField freezeKey;
+    @FXML
+    private TextField rightKey;
+    @FXML
+    private TextField leftKey;
 
     {
         editor = new Editor();
@@ -68,13 +78,19 @@ public class SettingsMenu extends Application {
             this.ballsNumberChoiceBox.getItems().add(String.valueOf(ballNumber));
         this.ballsNumberChoiceBox.setValue(String.valueOf(this.currentSettings.getBallNumbers()));
 
+        this.leftKey.setText(HotKeys.LEFT.toString());
+        this.rightKey.setText(HotKeys.RIGHT.toString());
+        this.freezeKey.setText(HotKeys.FREEZE.toString());
+        this.shootKey.setText(HotKeys.SHOOT.toString());
+
         Message.DEFAULT.sendMessage(this.result);
     }
 
     @FXML
     public void saveChanges() {
         Message message = editor.saveSettingsChanges(this.mapChoiceBox.getValue(), this.levelNumberChoiceBox.getValue(),
-                ballsNumberChoiceBox.getValue(), isMute.isSelected());
+                ballsNumberChoiceBox.getValue(), isMute.isSelected(), this.shootKey.getText(), this.freezeKey.getText(),
+                this.leftKey.getText(), this.rightKey.getText());
 
         this.isMute.setSelected(currentSettings.isMute());
         message.sendMessage(this.result);
