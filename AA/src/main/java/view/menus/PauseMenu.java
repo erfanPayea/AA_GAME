@@ -25,6 +25,8 @@ public class PauseMenu extends Application {
     private Label rightKey;
     @FXML
     private Label leftKey;
+    @FXML
+    private Label player2ShootKey;
 
     {
         gameMenuController = GameMenuController.getGameMenuController();
@@ -46,6 +48,7 @@ public class PauseMenu extends Application {
         this.rightKey.setText(HotKeys.RIGHT.toString());
         this.freezeKey.setText(HotKeys.FREEZE.toString());
         this.shootKey.setText(HotKeys.SHOOT.toString());
+        this.player2ShootKey.setText(HotKeys.PLAYER2SHOOT.toString());
     }
 
     @FXML

@@ -4,7 +4,6 @@ import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.*;
@@ -27,7 +26,6 @@ import view.menus.GameMenu;
 
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Random;
 
 public class GameMenuController {
     public Circle center;
@@ -61,10 +59,6 @@ public class GameMenuController {
 
     public static GameMenuController getGameMenuController() {
         return gameMenuController;
-    }
-
-    public static boolean isIs2Player() {
-        return is2Player;
     }
 
     public static void setIs2Player(boolean is2Player) {
@@ -367,6 +361,7 @@ public class GameMenuController {
             gameMenu.getPane().getChildren().remove(lastBall);
 
         gameMenu.getPane().getChildren().remove(ballsGroupVBox);
+        gameMenu.getPane().getChildren().remove(upBallsGroupVBox);
 
         FinishAnimation finishAnimation = new FinishAnimation(false, invisibleCircle.getBalls());
         finishAnimation.play();

@@ -4,7 +4,8 @@ public enum HotKeys {
     FREEZE("Shift"),
     LEFT("Z"),
     RIGHT("X"),
-    SHOOT("Space")
+    SHOOT("Space"),
+    PLAYER2SHOOT("Enter")
     ;
     private String keyName;
 
