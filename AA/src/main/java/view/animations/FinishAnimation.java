@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class FinishAnimation extends Transition {
     private final boolean isWin;
     private final ArrayList<Ball> balls;
+
     public FinishAnimation(boolean isWin, ArrayList<Ball> balls) {
         this.isWin = isWin;
         this.balls = balls;
@@ -24,17 +25,14 @@ public class FinishAnimation extends Transition {
                 ball.setCenterY((ball.getCenterY() - 400) * 1.1 + 400);
                 ball.setLineLocation();
             }
-        }
-        else {
+        } else {
             if (v > 0.95) {
                 for (Ball ball : balls) {
                     ball.setCenterX(767);
                     ball.setLineLocation();
                     this.stop();
                 }
-            }
-
-            else if (v > 0.6) {
+            } else if (v > 0.6) {
                 for (Ball ball : balls) {
                     ball.setCenterX((767 - ball.getCenterX()) / 10 + ball.getCenterX());
                     ball.setCenterY(ball.getCenterY() + 50);

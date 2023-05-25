@@ -5,7 +5,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="379.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.SettingsMenu">
+<AnchorPane prefHeight="379.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.SettingsMenu">
     <children>
         <VBox layoutX="93.0" layoutY="22.0" prefHeight="147.0" prefWidth="422.0" spacing="15.0">
             <children>
@@ -13,13 +14,13 @@
                     <children>
                         <Label prefHeight="38.0" prefWidth="81.0" textFill="#004eff">
                             <font>
-                                <Font size="13.0" />
+                                <Font size="13.0"/>
                             </font>
                         </Label>
-                        <Label alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="125.0" text="The game map :    " />
+                        <Label alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="125.0" text="The game map :    "/>
                         <ChoiceBox fx:id="mapChoiceBox" prefHeight="19.0" prefWidth="138.0">
                             <HBox.margin>
-                                <Insets top="5.0" />
+                                <Insets top="5.0"/>
                             </HBox.margin>
                         </ChoiceBox>
                     </children>
@@ -28,13 +29,14 @@
                     <children>
                         <Label prefHeight="38.0" prefWidth="81.0" textFill="RED">
                             <font>
-                                <Font size="13.0" />
+                                <Font size="13.0"/>
                             </font>
                         </Label>
-                        <Label alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="126.0" text="The game level :     " />
+                        <Label alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="126.0"
+                               text="The game level :     "/>
                         <ChoiceBox fx:id="levelNumberChoiceBox" prefHeight="19.0" prefWidth="138.0">
                             <HBox.margin>
-                                <Insets top="5.0" />
+                                <Insets top="5.0"/>
                             </HBox.margin>
                         </ChoiceBox>
                     </children>
@@ -43,41 +45,50 @@
                     <children>
                         <Label prefHeight="35.0" prefWidth="77.0" textFill="#0cff00">
                             <font>
-                                <Font size="13.0" />
+                                <Font size="13.0"/>
                             </font>
                         </Label>
-                        <Label prefHeight="35.0" prefWidth="130.0" text="Starting ball number :" />
+                        <Label prefHeight="35.0" prefWidth="130.0" text="Starting ball number :"/>
                         <ChoiceBox fx:id="ballsNumberChoiceBox" prefHeight="26.0" prefWidth="137.0">
                             <HBox.margin>
-                                <Insets top="5.0" />
+                                <Insets top="5.0"/>
                             </HBox.margin>
                         </ChoiceBox>
                     </children>
                 </HBox>
             </children>
         </VBox>
-        <Button layoutX="165.0" layoutY="316.0" mnemonicParsing="false" onAction="#saveChanges" prefHeight="35.0" prefWidth="102.0" text="Save changes" textFill="#1c9926" />
-        <Button layoutX="329.0" layoutY="316.0" mnemonicParsing="false" onAction="#backMainMenu" prefHeight="35.0" prefWidth="102.0" text="Main menu" textFill="#2d00ff" />
+        <Button layoutX="165.0" layoutY="316.0" mnemonicParsing="false" onAction="#saveChanges" prefHeight="35.0"
+                prefWidth="102.0" text="Save changes" textFill="#1c9926"/>
+        <Button layoutX="329.0" layoutY="316.0" mnemonicParsing="false" onAction="#backMainMenu" prefHeight="35.0"
+                prefWidth="102.0" text="Main menu" textFill="#2d00ff"/>
         <Label fx:id="result" alignment="CENTER" layoutX="93.0" layoutY="351.0" prefHeight="35.0" prefWidth="422.0">
             <font>
-                <Font size="14.0" />
+                <Font size="14.0"/>
             </font>
         </Label>
-        <CheckBox fx:id="isMute" layoutX="261.0" layoutY="169.0" mnemonicParsing="false" text="Mute sound" textFill="#ea1212" />
+        <CheckBox fx:id="isMute" layoutX="261.0" layoutY="169.0" mnemonicParsing="false" text="Mute sound"
+                  textFill="#ea1212"/>
 
-        <Label alignment="CENTER" layoutX="76.0" layoutY="198.0" prefHeight="35.0" prefWidth="100.0" text="HotKeys : ">
+        <Label alignment="CENTER" layoutX="43.0" layoutY="193.0" prefHeight="35.0" prefWidth="100.0" text="HotKeys : ">
             <font>
-                <Font size="15.0" />
+                <Font size="15.0"/>
             </font>
         </Label>
-        <Label layoutX="197.0" layoutY="219.0" prefHeight="35.0" prefWidth="39.0" text="Shoot: " />
-        <Label layoutX="340.0" layoutY="228.0" text="Freeze: " />
-        <Label alignment="CENTER" layoutX="196.0" layoutY="263.0" prefHeight="18.0" prefWidth="39.0" text="Left: " />
-        <Label alignment="CENTER" layoutX="340.0" layoutY="263.0" prefHeight="18.0" prefWidth="39.0" text="Right: " />
-        <TextField fx:id="shootKey" layoutX="236.0" layoutY="224.0" prefHeight="18.0" prefWidth="78.0" />
-        <TextField fx:id="freezeKey" layoutX="386.0" layoutY="224.0" prefHeight="18.0" prefWidth="78.0" />
-        <TextField fx:id="leftKey" layoutX="236.0" layoutY="260.0" prefHeight="18.0" prefWidth="78.0" />
-        <TextField fx:id="rightKey" layoutX="386.0" layoutY="260.0" prefHeight="18.0" prefWidth="78.0" />
+        <Label layoutX="94.0" layoutY="228.0" prefHeight="35.0" prefWidth="39.0" text="Shoot: "/>
+        <Label layoutX="237.0" layoutY="237.0" text="Freeze: "/>
+        <Label alignment="CENTER" layoutX="43.0" layoutY="272.0" prefHeight="18.0" prefWidth="39.0" text="Left: "/>
+        <Label alignment="CENTER" layoutX="170.0" layoutY="272.0" prefHeight="18.0" prefWidth="39.0" text="Right: "/>
+        <TextField fx:id="shootKey" layoutX="133.0" layoutY="233.0" prefHeight="18.0" prefWidth="78.0"/>
+        <TextField fx:id="freezeKey" layoutX="283.0" layoutY="233.0" prefHeight="18.0" prefWidth="78.0"/>
+        <TextField fx:id="leftKey" layoutX="82.0" layoutY="269.0" prefHeight="18.0" prefWidth="78.0"/>
+        <TextField fx:id="rightKey" layoutX="207.0" layoutY="269.0" prefHeight="18.0" prefWidth="78.0"/>
+        <Label layoutX="300.0" layoutY="272.0" text="Left p2 :"/>
+        <TextField fx:id="left2Key" layoutX="347.0" layoutY="268.0" prefHeight="26.0" prefWidth="78.0"/>
+        <Label layoutX="431.0" layoutY="273.0" text="Right p2 :"/>
+        <TextField fx:id="right2Key" layoutX="489.0" layoutY="268.0" prefHeight="26.0" prefWidth="78.0"/>
+        <TextField fx:id="shoot2Key" layoutX="443.0" layoutY="232.0" prefHeight="26.0" prefWidth="78.0"/>
+        <Label layoutX="374.0" layoutY="237.0" prefHeight="18.0" prefWidth="64.0" text="Shoot p 2 :"/>
 
     </children>
 </AnchorPane>

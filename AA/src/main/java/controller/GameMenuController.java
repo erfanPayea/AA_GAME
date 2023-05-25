@@ -91,6 +91,8 @@ public class GameMenuController {
         if (balls != null) {
             this.checkFodPhases();
         }
+
+        currentUser.getSettings().updateHotkeys();
     }
 
     public void createRemainingBalls(Pane pane) {

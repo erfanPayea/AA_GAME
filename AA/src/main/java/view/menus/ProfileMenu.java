@@ -78,7 +78,7 @@ public class ProfileMenu extends Application {
 
         if (this.currentUser.getAvatar().length() == 1)
             this.avatar.setImage(new Image(Objects.requireNonNull(this.getClass().getResource(
-                    "/images/avatar/avatar"+ User.getCurrentUser().getAvatar() +".png")).toExternalForm()));
+                    "/images/avatar/avatar" + User.getCurrentUser().getAvatar() + ".png")).toExternalForm()));
         else this.avatar.setImage(new Image(currentUser.getAvatar()));
 
         Message.DEFAULT.sendMessage(this.result);
@@ -94,7 +94,7 @@ public class ProfileMenu extends Application {
 
         if (avatarFile == null)
             this.avatar.setImage(new Image(Objects.requireNonNull(this.getClass().getResource(
-                    "/images/avatar/avatar"+ User.getCurrentUser().getAvatar() +".png")).toExternalForm()));
+                    "/images/avatar/avatar" + User.getCurrentUser().getAvatar() + ".png")).toExternalForm()));
 
         else this.avatar.setImage(new Image(avatarFile.toString()));
     }

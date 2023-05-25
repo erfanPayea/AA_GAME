@@ -64,7 +64,7 @@ public class InvisibleCircle extends Circle {
             else ball.setTurningAnimation();
 
             ball.getTurningAnimation().play();
-            Line line = new Line(this.getCenterX(), this.getCenterY(), ball, ((Ball)balls.getChildren().get(0)).getColor());
+            Line line = new Line(this.getCenterX(), this.getCenterY(), ball, ((Ball) balls.getChildren().get(0)).getColor());
             this.lines.getChildren().add(line);
 
             if (this.balls.getChildren().size() == User.getCurrentUser().getSettings().getBallNumbers() + defaultBallsNumber)

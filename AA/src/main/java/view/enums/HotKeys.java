@@ -7,8 +7,7 @@ public enum HotKeys {
     LEFT2("O"),
     RIGHT2("P"),
     SHOOT("Space"),
-    PLAYER2SHOOT("L")
-    ;
+    PLAYER2SHOOT("L");
     private String keyName;
 
     HotKeys(String keyName) {
@@ -23,8 +22,7 @@ public enum HotKeys {
         return this.keyName.equals(keyName);
     }
 
-    @Override
-    public String toString() {
+    public String getKeyName() {
         return this.keyName;
     }
 }

@@ -58,7 +58,7 @@ public class Editor {
     }
 
     public Message saveSettingsChanges(String mapName, String level, String ballsNumber, boolean isMute, String shootKey,
-                           String freezeKey, String leftKey, String rightKey) {
+                                       String freezeKey, String leftKey, String rightKey, String shoot2Key, String left2Key, String right2Key) {
         Settings currentSettings = currentUser.getSettings();
         if (mapName == null && level == null && ballsNumber == null && HotKeys.SHOOT.equals(shootKey)
                 && HotKeys.FREEZE.equals(freezeKey) && HotKeys.LEFT.equals(leftKey) && HotKeys.RIGHT.equals(rightKey))
@@ -73,6 +73,11 @@ public class Editor {
         HotKeys.FREEZE.setKeyName(freezeKey);
         HotKeys.LEFT.setKeyName(leftKey);
         HotKeys.RIGHT.setKeyName(rightKey);
+        HotKeys.PLAYER2SHOOT.setKeyName(shoot2Key);
+        HotKeys.LEFT2.setKeyName(left2Key);
+        HotKeys.RIGHT2.setKeyName(right2Key);
+
+        currentSettings.setHotKeys(shootKey, shoot2Key, freezeKey, leftKey, rightKey, left2Key, right2Key);
 
         User.saveToDatabase(currentUser);
         return Message.CHANGE_SUCCESS;

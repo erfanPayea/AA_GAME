@@ -48,7 +48,7 @@ public class ShootingAnimation extends Transition {
         timeline = new Timeline(new KeyFrame(Duration.seconds(2.5), actionEvent -> {
             if (degree + direction.get() * windSpeed > 15)
                 direction.set(-1);
-            else if(degree + direction.get() * windSpeed < -15)
+            else if (degree + direction.get() * windSpeed < -15)
                 direction.set(1);
 
             degree += windSpeed * direction.get();

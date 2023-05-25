@@ -26,6 +26,10 @@ public class PauseMenu extends Application {
     @FXML
     private Label leftKey;
     @FXML
+    private Label right2Key;
+    @FXML
+    private Label left2Key;
+    @FXML
     private Label player2ShootKey;
 
     {
@@ -44,11 +48,13 @@ public class PauseMenu extends Application {
 
     @FXML
     private void initialize() {
-        this.leftKey.setText(HotKeys.LEFT.toString());
-        this.rightKey.setText(HotKeys.RIGHT.toString());
-        this.freezeKey.setText(HotKeys.FREEZE.toString());
-        this.shootKey.setText(HotKeys.SHOOT.toString());
-        this.player2ShootKey.setText(HotKeys.PLAYER2SHOOT.toString());
+        this.leftKey.setText(HotKeys.LEFT.getKeyName());
+        this.rightKey.setText(HotKeys.RIGHT.getKeyName());
+        this.left2Key.setText(HotKeys.LEFT2.getKeyName());
+        this.right2Key.setText(HotKeys.RIGHT2.getKeyName());
+        this.freezeKey.setText(HotKeys.FREEZE.getKeyName());
+        this.shootKey.setText(HotKeys.SHOOT.getKeyName());
+        this.player2ShootKey.setText(HotKeys.PLAYER2SHOOT.getKeyName());
     }
 
     @FXML

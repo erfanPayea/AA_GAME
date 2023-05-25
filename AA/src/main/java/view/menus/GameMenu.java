@@ -99,16 +99,13 @@ public class GameMenu extends Application {
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
-                }
-
-                else if (HotKeys.FREEZE.equals(keyName)) {
+                } else if (HotKeys.FREEZE.equals(keyName)) {
                     try {
                         controller.playFreeze();
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
-                }
-                else if (HotKeys.RIGHT.equals(keyName))
+                } else if (HotKeys.RIGHT.equals(keyName))
                     controller.moveRight();
 
                 else if (HotKeys.LEFT.equals(keyName))
@@ -123,7 +120,7 @@ public class GameMenu extends Application {
                 else if (HotKeys.PLAYER2SHOOT.equals(keyName))
                     controller.shootPlayer2(pane);
 
-                else if (keyName.equals("Esc")){
+                else if (keyName.equals("Esc")) {
                     try {
                         pause();
                         controller.pause();
@@ -187,11 +184,10 @@ public class GameMenu extends Application {
 //        timeline.play();
 
         try {
-                new FinishMenu().start(new Stage());
-            }
-        catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+            new FinishMenu().start(new Stage());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void end() throws Exception {

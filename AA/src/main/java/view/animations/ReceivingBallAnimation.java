@@ -7,6 +7,7 @@ import javafx.util.Duration;
 public class ReceivingBallAnimation extends Transition {
     private final Circle centerCircle;
     private int number;
+
     {
         number = 1;
     }
@@ -27,9 +28,7 @@ public class ReceivingBallAnimation extends Transition {
             centerCircle.setCenterY(400);
             number = 1;
             this.stop();
-        }
-
-        else centerCircle.setCenterY(centerCircle.getCenterY() + 0.2);
-        number ++;
+        } else centerCircle.setCenterY(centerCircle.getCenterY() + 0.2);
+        number++;
     }
 }

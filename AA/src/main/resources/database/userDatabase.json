@@ -1,1 +1,1 @@
-[{"username":"amin","password":"1387","avatar":"3","settings":{"level":"LEVEL_2","ballNumbers":16,"map":"MAP_1","isMute":false},"lastGameScore":375,"highScores":[375,0,375,0],"lastTimePlayed":10,"hasWinLastGame":false}]
+[{"username":"erfan","password":"1234","avatar":"2","settings":{"level":"LEVEL_2","ballNumbers":20,"map":"MAP_1","isMute":false,"hotKeys":{"LEFT":"Z","PLAYER2SHOOT":"L","SHOOT":"Space","FREEZE":"Shift","LEFT2":"F","RIGHT":"X","RIGHT2":"G"}},"lastGameScore":0,"highScores":[0,0,0,0],"lastTimePlayed":0,"hasWinLastGame":false}]

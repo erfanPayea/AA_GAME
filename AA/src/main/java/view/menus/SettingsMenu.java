@@ -38,11 +38,17 @@ public class SettingsMenu extends Application {
     @FXML
     private TextField shootKey;
     @FXML
+    private TextField shoot2Key;
+    @FXML
     private TextField freezeKey;
     @FXML
     private TextField rightKey;
     @FXML
     private TextField leftKey;
+    @FXML
+    private TextField right2Key;
+    @FXML
+    private TextField left2Key;
 
     {
         editor = new Editor();
@@ -64,6 +70,7 @@ public class SettingsMenu extends Application {
     @FXML
     public void initialize() {
         // current settings show :
+        currentSettings.updateHotkeys();
         this.isMute.setSelected(currentSettings.isMute());
 
         for (Map map : Map.values())
@@ -78,10 +85,13 @@ public class SettingsMenu extends Application {
             this.ballsNumberChoiceBox.getItems().add(String.valueOf(ballNumber));
         this.ballsNumberChoiceBox.setValue(String.valueOf(this.currentSettings.getBallNumbers()));
 
-        this.leftKey.setText(HotKeys.LEFT.toString());
-        this.rightKey.setText(HotKeys.RIGHT.toString());
-        this.freezeKey.setText(HotKeys.FREEZE.toString());
-        this.shootKey.setText(HotKeys.SHOOT.toString());
+        this.leftKey.setText(HotKeys.LEFT.getKeyName());
+        this.rightKey.setText(HotKeys.RIGHT.getKeyName());
+        this.left2Key.setText(HotKeys.LEFT2.getKeyName());
+        this.right2Key.setText(HotKeys.RIGHT2.getKeyName());
+        this.freezeKey.setText(HotKeys.FREEZE.getKeyName());
+        this.shootKey.setText(HotKeys.SHOOT.getKeyName());
+        this.shoot2Key.setText(HotKeys.PLAYER2SHOOT.getKeyName());
 
         Message.DEFAULT.sendMessage(this.result);
     }
@@ -90,7 +100,7 @@ public class SettingsMenu extends Application {
     public void saveChanges() {
         Message message = editor.saveSettingsChanges(this.mapChoiceBox.getValue(), this.levelNumberChoiceBox.getValue(),
                 ballsNumberChoiceBox.getValue(), isMute.isSelected(), this.shootKey.getText(), this.freezeKey.getText(),
-                this.leftKey.getText(), this.rightKey.getText());
+                this.leftKey.getText(), this.rightKey.getText(), shoot2Key.getText(), left2Key.getText(), right2Key.getText());
 
         this.isMute.setSelected(currentSettings.isMute());
         message.sendMessage(this.result);
