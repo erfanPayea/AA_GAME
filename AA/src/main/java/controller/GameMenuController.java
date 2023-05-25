@@ -69,14 +69,14 @@ public class GameMenuController {
         name.setAlignment(Pos.CENTER);
         name.setPrefHeight(54);
         name.setPrefWidth(153);
-        name.setLayoutX(274);
+        name.setLayoutX(691);
         name.setLayoutY(423);
 
-        Circle centerCircle = new Circle(350, 450, 60, settings.getMap().getColor());
+        Circle centerCircle = new Circle(767, 450, 60, settings.getMap().getColor());
         this.receivingBallAnimation = new ReceivingBallAnimation(centerCircle);
         this.center = centerCircle;
 
-        this.invisibleCircle = new InvisibleCircle(350, 450, 160, pane, settings);
+        this.invisibleCircle = new InvisibleCircle(767, 450, 160, pane, settings);
         this.invisibleCircle.setVisible(false);
         pane.getChildren().add(centerCircle);
         pane.getChildren().add(name);
@@ -160,7 +160,7 @@ public class GameMenuController {
         for (Ball ball : balls)
             ballsGroupVBox.getChildren().add(ball);
 
-        ballsGroupVBox.setLayoutX(338);
+        ballsGroupVBox.setLayoutX(755);
         ballsGroupVBox.setLayoutY(700);
 
         this.balls = balls;
@@ -271,7 +271,7 @@ public class GameMenuController {
     public void moveRight() {
         if (this.isOnPhase4) {
             double nextX = this.ballsGroupVBox.getLayoutX() + 10;
-            if (nextX < 680)
+            if (nextX < 1514)
                 this.ballsGroupVBox.setLayoutX(nextX);
         }
     }

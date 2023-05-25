@@ -37,7 +37,7 @@ public class GameMenu extends Application {
     public void start(Stage stage) throws Exception {
         GameMenu.stage = stage;
         this.pane = new Pane();
-        this.pane.setPrefWidth(700);
+        this.pane.setPrefWidth(1534);
         this.pane.setPrefHeight(820);
 
         controller.initializeFirstParameters(this.pane);

@@ -60,7 +60,7 @@ public class ShootingAnimation extends Transition {
         double nextY = this.ball.getCenterY() - 1;
         double nextX = this.ball.getCenterX() + Math.sin(Math.toRadians(degree));
 
-        if (isHitAnotherBall() || nextY < 20 || nextX < 20 || nextX > 680) {
+        if (isHitAnotherBall() || nextY < 20 || nextX < 20 || nextX > 1510) {
             try {
                 gameMenuController.looseGame(this.ball);
             } catch (Exception e) {

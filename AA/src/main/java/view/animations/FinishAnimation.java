@@ -20,7 +20,7 @@ public class FinishAnimation extends Transition {
     protected void interpolate(double v) {
         if (isWin) {
             for (Ball ball : balls) {
-                ball.setCenterX((ball.getCenterX() - 350) * 1.1 + 350);
+                ball.setCenterX((ball.getCenterX() - 767) * 1.1 + 767);
                 ball.setCenterY((ball.getCenterY() - 450) * 1.1 + 200);
                 ball.setLineLocation();
             }
@@ -28,7 +28,7 @@ public class FinishAnimation extends Transition {
         else {
             if (v > 0.95) {
                 for (Ball ball : balls) {
-                    ball.setCenterX(350);
+                    ball.setCenterX(767);
                     ball.setLineLocation();
                     this.stop();
                 }
@@ -36,7 +36,7 @@ public class FinishAnimation extends Transition {
 
             else if (v > 0.6) {
                 for (Ball ball : balls) {
-                    ball.setCenterX((350 - ball.getCenterX()) / 10 + ball.getCenterX());
+                    ball.setCenterX((767 - ball.getCenterX()) / 10 + ball.getCenterX());
                     ball.setCenterY(ball.getCenterY() + 50);
                     ball.setLineLocation();
                 }

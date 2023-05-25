@@ -79,7 +79,7 @@ public class TurningAnimation extends Transition {
         else this.angle += direction * angleSpeed * 0.35;
 
         this.angle %= 360;
-        this.ball.setCenterX(350 + 160 * Math.cos(Math.toRadians(angle)));
+        this.ball.setCenterX(767 + 160 * Math.cos(Math.toRadians(angle)));
         this.ball.setCenterY(450 + 160 * Math.sin(Math.toRadians(angle)));
         this.ball.setLineLocation();
     }
