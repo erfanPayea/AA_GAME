@@ -95,7 +95,7 @@ public class GameMenu extends Application {
 
                 if (HotKeys.SHOOT.equals(keyName)) {
                     try {
-                        controller.shoot(pane);
+                        controller.shootPlayer1(pane);
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
@@ -113,6 +113,9 @@ public class GameMenu extends Application {
 
                 else if (HotKeys.LEFT.equals(keyName))
                     controller.moveLeft();
+
+                else if (HotKeys.PLAYER2SHOOT.equals(keyName))
+                    controller.shootPlayer2(pane);
 
                 else if (keyName.equals("Esc")){
                     try {

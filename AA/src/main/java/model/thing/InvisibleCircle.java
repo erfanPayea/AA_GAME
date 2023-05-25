@@ -47,24 +47,35 @@ public class InvisibleCircle extends Circle {
             ball.setTurningAnimation(angle);
             balls.getChildren().add(ball);
 
-            Line line = new Line(this.getCenterX(), this.getCenterY(), ball);
+            Line line = new Line(this.getCenterX(), this.getCenterY(), ball, ball.getColor());
 
             this.lines.getChildren().add(line);
         }
     }
 
-    public void receiveBall(Ball ball) {
+    public void receiveBall(Ball ball, boolean isFromUp) {
         if (!this.balls.getChildren().contains(ball)) {
             GameMenuController.getGameMenuController().doReceiveAnimation();
 
             pane.getChildren().remove(ball);
-            this.balls.getChildren().add(ball);
 
-            Line line = new Line(this.getCenterX(), this.getCenterY(), ball);
+            Line line;
+            if (isFromUp) {
+                Ball fromUpBall;
+                this.balls.getChildren().add(fromUpBall = new Ball((double) 270, ball.getColor()));
+                fromUpBall.setTurningAnimation(270);
+                fromUpBall.getTurningAnimation().play();
+                line = new Line(this.getCenterX(), this.getCenterY(), fromUpBall, ((Ball)balls.getChildren().get(0)).getColor());
+            }
+
+            else {
+                this.balls.getChildren().add(ball);
+                ball.setTurningAnimation();
+                ball.getTurningAnimation().play();
+                line = new Line(this.getCenterX(), this.getCenterY(), ball, ((Ball)balls.getChildren().get(0)).getColor());
+            }
+
             this.lines.getChildren().add(line);
-
-            ball.setTurningAnimation();
-            ball.getTurningAnimation().play();
 
             if (this.balls.getChildren().size() == User.getCurrentUser().getSettings().getBallNumbers() + defaultBallsNumber)
                 GameMenuController.getGameMenuController().winGame();
@@ -105,6 +116,7 @@ public class InvisibleCircle extends Circle {
     }
 
     public void stop() {
+        radiusSizeAnimation.stop();
         try {
             for (Node node : this.balls.getChildren()) {
                 if (node instanceof Ball ball)

@@ -46,8 +46,12 @@ public class Editor {
         if (avatar != null && !avatar.isEmpty())
             currentUser.setAvatar(avatar);
 
-        if (avatarFile != null)
-            currentUser.setAvatar(avatarFile.toString());
+        if (avatarFile != null) {
+            if (avatar == null)
+                currentUser.setAvatar(avatarFile.toString());
+            else if (!avatar.isEmpty())
+                currentUser.setAvatar(avatarFile.toString());
+        }
 
         User.saveToDatabase(currentUser);
         return Message.CHANGE_SUCCESS;

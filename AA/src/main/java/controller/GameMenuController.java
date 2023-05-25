@@ -4,6 +4,7 @@ import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.*;
@@ -18,10 +19,7 @@ import model.User;
 import model.game.Settings;
 import model.thing.Ball;
 import model.thing.InvisibleCircle;
-import view.animations.FinishAnimation;
-import view.animations.ReceivingBallAnimation;
-import view.animations.ShootingAnimation;
-import view.animations.TurningAnimation;
+import view.animations.*;
 import view.menus.GameMenu;
 
 import java.util.ArrayList;
@@ -91,7 +89,7 @@ public class GameMenuController {
         this.isOnPhase4 = false;
 
         if (balls != null) {
-            this.checkFordPhase();
+            this.checkFodPhases();
         }
     }
 
@@ -183,32 +181,26 @@ public class GameMenuController {
         return ballsGroupVBox;
     }
 
-    public void shoot(Pane pane) {
+    public void shoot() {
         if (this.balls.size() == 0)
             return;
 
-        Ball ball = this.balls.get(0);
         this.balls.remove(0);
-
-        Ball shootedBall = new Ball(ball.getNumber(), ball.getColor());
-        shootedBall.setCenterX(ballsGroupVBox.getLayoutX() + 10);
-        shootedBall.setCenterY(640);
-
-        ShootingAnimation shootingAnimation = new ShootingAnimation(pane, shootedBall);
-        pane.getChildren().add(shootedBall);
-        this.shootingAnimations.add(shootingAnimation);
-        shootingAnimation.play();
+        this.ballsGroupVBox.getChildren().remove(0);
+        if (is2Player && upBallsGroupVBox.getChildren().size() > 0) {
+            this.upBallsGroupVBox.getChildren().remove(0);
+            this.upBallsGroupVBox.setLayoutY(this.upBallsGroupVBox.getLayoutY() + 25);
+        }
 
         this.score += this.settings.getLevel().getScorePerBall();
 
         // view changes :
 
-        this.ballsGroupVBox.getChildren().remove(0);
-
         int newBallsNumber = Integer.parseInt(this.ballsNumberText.getText()) - 1;
         this.ballsNumberText.setText(String.valueOf(newBallsNumber));
         if (newBallsNumber < 6)
             this.ballsNumberText.setFill(Color.GREEN);
+
         else if (newBallsNumber <= this.settings.getBallNumbers() / 2 + 1)
             this.ballsNumberText.setFill(Color.GOLD);
 
@@ -217,10 +209,44 @@ public class GameMenuController {
         if (this.freezeBar.getProgress() != 1 && !TurningAnimation.isIsOnFreeze())
             this.freezeBar.setProgress(this.freezeBar.getProgress() + 0.125);
 
-        this.checkFordPhase();
+        this.checkFodPhases();
     }
 
-    private void checkFordPhase() {
+    public void shootPlayer1(Pane pane) {
+        if (ballsGroupVBox.getChildren().size() == 0)
+            return;
+
+        Ball ball = this.balls.get(0);
+        Ball shootedBall = new Ball(ball.getNumber(), ((Ball) ballsGroupVBox.getChildren().get(0)).getColor());
+        shootedBall.setCenterX(ballsGroupVBox.getLayoutX() + 10);
+        shootedBall.setCenterY(640);
+
+        ShootingAnimation shootingAnimation = new ShootingAnimation(shootedBall, -1);
+        pane.getChildren().add(shootedBall);
+        this.shootingAnimations.add(shootingAnimation);
+        shootingAnimation.play();
+
+        shoot();
+    }
+
+    public void shootPlayer2(Pane pane) {
+        if (upBallsGroupVBox.getChildren().size() == 0)
+            return;
+
+        Ball ball = this.balls.get(0);
+        Ball shootedBall = new Ball(ball.getNumber(), ((Ball) upBallsGroupVBox.getChildren().get(0)).getColor());
+        shootedBall.setCenterX(upBallsGroupVBox.getLayoutX() + 10);
+        shootedBall.setCenterY(100); // todo :
+
+        ShootingAnimation upShootingAnimation = new ShootingAnimation(shootedBall, 1);
+        pane.getChildren().add(shootedBall);
+        this.shootingAnimations.add(upShootingAnimation);
+        upShootingAnimation.play();
+
+        shoot();
+    }
+
+    private void checkFodPhases() {
         if (balls.size() == Math.floor(settings.getBallNumbers() * 0.75))
             this.runPhase2();
 
@@ -326,6 +352,8 @@ public class GameMenuController {
     }
 
     public void pause() {
+        TurningAnimation.stopReverse();
+        ShootingAnimation.stopPhase4();
         this.invisibleCircle.stop();
         for (ShootingAnimation shootingAnimation : this.shootingAnimations) {
             shootingAnimation.stop();
@@ -339,9 +367,11 @@ public class GameMenuController {
     public void continueGame() {
         this.gameMenu.continueGame();
         this.invisibleCircle.play();
+        this.checkFodPhases();
     }
 
     public void restartGame() throws Exception {
+
         gameMenu.restart();
     }
 

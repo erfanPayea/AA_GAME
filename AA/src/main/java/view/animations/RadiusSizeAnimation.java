@@ -33,7 +33,7 @@ public class RadiusSizeAnimation extends Transition {
         for (Node node : balls.getChildren()) {
             if (node instanceof Ball ball) {
                 if (radius > 11) {
-                    if (isHitAnother(ball)) {
+                    if (isHitAnotherBall(ball)) {
                         try {
                             GameMenuController.getGameMenuController().looseGame(null);
                         } catch (Exception e) {
@@ -48,7 +48,7 @@ public class RadiusSizeAnimation extends Transition {
         }
     }
 
-    public boolean isHitAnother(Ball ball) {
+    public boolean isHitAnotherBall(Ball ball) {
         for (Node node : balls.getChildren()) {
             if (node instanceof Ball target) {
                 if (target != ball) {
