@@ -114,6 +114,12 @@ public class GameMenu extends Application {
                 else if (HotKeys.LEFT.equals(keyName))
                     controller.moveLeft();
 
+                else if (HotKeys.RIGHT2.equals(keyName))
+                    controller.moveRight2();
+
+                else if (HotKeys.LEFT2.equals(keyName))
+                    controller.moveLeft2();
+
                 else if (HotKeys.PLAYER2SHOOT.equals(keyName))
                     controller.shootPlayer2(pane);
 

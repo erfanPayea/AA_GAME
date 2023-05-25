@@ -56,25 +56,15 @@ public class InvisibleCircle extends Circle {
     public void receiveBall(Ball ball, boolean isFromUp) {
         if (!this.balls.getChildren().contains(ball)) {
             GameMenuController.getGameMenuController().doReceiveAnimation();
-
             pane.getChildren().remove(ball);
+            ball.setAngle(270);
+            this.balls.getChildren().add(ball);
 
-            Line line;
-            if (isFromUp) {
-                Ball fromUpBall;
-                this.balls.getChildren().add(fromUpBall = new Ball((double) 270, ball.getColor()));
-                fromUpBall.setTurningAnimation(270);
-                fromUpBall.getTurningAnimation().play();
-                line = new Line(this.getCenterX(), this.getCenterY(), fromUpBall, ((Ball)balls.getChildren().get(0)).getColor());
-            }
+            if (isFromUp) ball.setTurningAnimation(270);
+            else ball.setTurningAnimation();
 
-            else {
-                this.balls.getChildren().add(ball);
-                ball.setTurningAnimation();
-                ball.getTurningAnimation().play();
-                line = new Line(this.getCenterX(), this.getCenterY(), ball, ((Ball)balls.getChildren().get(0)).getColor());
-            }
-
+            ball.getTurningAnimation().play();
+            Line line = new Line(this.getCenterX(), this.getCenterY(), ball, ((Ball)balls.getChildren().get(0)).getColor());
             this.lines.getChildren().add(line);
 
             if (this.balls.getChildren().size() == User.getCurrentUser().getSettings().getBallNumbers() + defaultBallsNumber)

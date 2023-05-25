@@ -173,7 +173,7 @@ public class GameMenuController {
                 this.upBallsGroupVBox.getChildren().add(ball.for2Player());
 
             this.upBallsGroupVBox.setLayoutX(755);
-            this.upBallsGroupVBox.setLayoutY(-380);
+            this.upBallsGroupVBox.setLayoutY(-375 + (20 - currentUser.getSettings().getBallNumbers()) * 25);
             this.upBallsGroupVBox.setSpacing(5);
             pane.getChildren().add(upBallsGroupVBox);
         }
@@ -326,6 +326,22 @@ public class GameMenuController {
         }
     }
 
+    public void moveRight2() {
+        if (this.isOnPhase4) {
+            double nextX = this.upBallsGroupVBox.getLayoutX() + 10;
+            if (nextX < 1514)
+                this.upBallsGroupVBox.setLayoutX(nextX);
+        }
+    }
+
+    public void moveLeft2() {
+        if (this.isOnPhase4) {
+            double nextX = this.upBallsGroupVBox.getLayoutX() - 10;
+            if (nextX > 20)
+                this.upBallsGroupVBox.setLayoutX(nextX);
+        }
+    }
+
     public InvisibleCircle getInvisibleCircle() {
         return this.invisibleCircle;
     }
@@ -371,7 +387,7 @@ public class GameMenuController {
     }
 
     public void restartGame() throws Exception {
-
+        this.pause();
         gameMenu.restart();
     }
 
@@ -387,6 +403,7 @@ public class GameMenuController {
     }
 
     public void looseGame(Ball lastBall) {
+
         if (lastBall != null)
             gameMenu.getPane().getChildren().remove(lastBall);
 
@@ -404,6 +421,7 @@ public class GameMenuController {
     }
 
     public void finishGame() throws Exception {
+        this.pause();
         gameMenu.end();
     }
 }

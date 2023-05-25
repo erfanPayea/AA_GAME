@@ -62,10 +62,8 @@ public class ShootingAnimation extends Transition {
     public static void stopPhase4() {
         if (timeline != null)
             timeline.stop();
-    }
-
-    public static void stopPhase2() {
-
+        degree = 0;
+        degreeText.setText(String.valueOf(0));
     }
 
     @Override

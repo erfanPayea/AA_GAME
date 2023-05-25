@@ -34,7 +34,7 @@ public class Ball extends Circle {
         else this.setStroke(Color.BLACK);
         this.setStrokeWidth(2);
 
-        this.setCenterX(350 + 160 * Math.cos(Math.toRadians(angle)));
+        this.setCenterX(767 + 160 * Math.cos(Math.toRadians(angle)));
         this.setCenterY(400 + 160 * Math.sin(Math.toRadians(angle)));
     }
 
@@ -69,7 +69,12 @@ public class Ball extends Circle {
 
     public Ball for2Player() {
         Ball secondBall = new Ball(this.number, Color.LIME);
-        secondBall.setStroke(Color.BLACK);
+        secondBall.setStroke(this.getStroke());
         return secondBall;
+    }
+
+    public void setAngle(double angle) {
+        this.setCenterX(767 + 160 * Math.cos(Math.toRadians(angle)));
+        this.setCenterY(400 + 160 * Math.sin(Math.toRadians(angle)));
     }
 }
