@@ -11,16 +11,20 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.User;
 import view.enums.Message;
 
+import java.io.File;
 import java.net.URL;
 import java.util.Objects;
 
 public class ProfileMenu extends Application {
     private static Stage stage;
+    private final User currentUser;
     private final Editor editor;
+    private File avatarFile;
     @FXML
     private ImageView avatar1;
     @FXML
@@ -44,6 +48,7 @@ public class ProfileMenu extends Application {
 
     {
         editor = new Editor();
+        currentUser = User.getCurrentUser();
     }
 
     @Override
@@ -58,14 +63,11 @@ public class ProfileMenu extends Application {
 
     @FXML
     public void initialize() {
-        this.username.setText(User.getCurrentUser().getUsername());
-        this.password.setText(User.getCurrentUser().getPassword());
+        this.username.setText(this.currentUser.getUsername());
+        this.password.setText(this.currentUser.getPassword());
 
         for (int i = 1; i < 4; i++)
             avatarChoiceBox.getItems().add(String.valueOf(i));
-
-        this.avatar.setImage(new Image(Objects.requireNonNull(this.getClass().getResource("/images/avatar/avatar" +
-                User.getCurrentUser().getAvatarNumber() + ".png")).toExternalForm()));
 
         this.avatar1.setImage(new Image(Objects.requireNonNull(
                 this.getClass().getResource("/images/avatar/avatar1.png")).toExternalForm()));
@@ -74,25 +76,33 @@ public class ProfileMenu extends Application {
         this.avatar3.setImage(new Image(Objects.requireNonNull(
                 this.getClass().getResource("/images/avatar/avatar3.png")).toExternalForm()));
 
+        if (this.currentUser.getAvatar().length() == 1)
+            this.avatar.setImage(new Image(Objects.requireNonNull(this.getClass().getResource(
+                    "/images/avatar/avatar"+ User.getCurrentUser().getAvatar() +".png")).toExternalForm()));
+        else this.avatar.setImage(new Image(currentUser.getAvatar()));
+
         Message.DEFAULT.sendMessage(this.result);
     }
 
     public void saveChanges() {
         Message message = this.editor.saveProfileChanges(this.newUsername.getText(), this.newPassword.getText(),
-                avatarChoiceBox.getValue());
+                avatarChoiceBox.getValue(), avatarFile);
         message.sendMessage(this.result);
 
-        this.username.setText(User.getCurrentUser().getUsername());
-        this.password.setText(User.getCurrentUser().getPassword());
-        this.avatar.setImage(new Image(Objects.requireNonNull(this.getClass().getResource(
-                "/images/avatar/avatar"+ User.getCurrentUser().getAvatarNumber() +".png")).toExternalForm()));
+        this.username.setText(this.currentUser.getUsername());
+        this.password.setText(this.currentUser.getPassword());
+
+        if (avatarFile == null)
+            this.avatar.setImage(new Image(Objects.requireNonNull(this.getClass().getResource(
+                    "/images/avatar/avatar"+ User.getCurrentUser().getAvatar() +".png")).toExternalForm()));
+
+        else this.avatar.setImage(new Image(avatarFile.toString()));
     }
 
     public void backMainMenu() throws Exception {
         new MainMenu().start(stage);
     }
 
-    // todo : add alert for these :
     public void logout() throws Exception {
         User.setStayLoggedIn(null);
         new LoginMenu().start(stage);
@@ -101,5 +111,10 @@ public class ProfileMenu extends Application {
     public void deleteAccount() throws Exception {
         User.remove();
         new LoginMenu().start(stage);
+    }
+
+    public void chooseImage() {
+        FileChooser fileChooser = new FileChooser();
+        this.avatarFile = fileChooser.showOpenDialog(new Stage());
     }
 }

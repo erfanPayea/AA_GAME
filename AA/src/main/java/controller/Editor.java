@@ -5,6 +5,8 @@ import model.game.Settings;
 import view.enums.HotKeys;
 import view.enums.Message;
 
+import java.io.File;
+
 
 public class Editor {
     private final User currentUser;
@@ -14,12 +16,16 @@ public class Editor {
     }
 
 
-    public Message saveProfileChanges(String username, String password, String avatarNumber) {
+    public Message saveProfileChanges(String username, String password, String avatar, File avatarFile) {
         if (currentUser.getPassword() == null)
             return Message.GUEST_PROFILE;
 
-        if (password.isEmpty() && username.isEmpty() && avatarNumber.isEmpty())
-            return Message.ALL_EMPTY;
+        if (password.isEmpty() && username.isEmpty() && avatarFile == null) {
+            if (avatar == null)
+                return Message.ALL_EMPTY;
+            else if (avatar.isEmpty())
+                return Message.ALL_EMPTY;
+        }
 
         if (!username.isEmpty()) {
             if (username.length() < 4)
@@ -37,8 +43,11 @@ public class Editor {
             currentUser.setPassword(password);
         }
 
-        if (!avatarNumber.isEmpty())
-            currentUser.setAvatarNumber(avatarNumber);
+        if (avatar != null && !avatar.isEmpty())
+            currentUser.setAvatar(avatar);
+
+        if (avatarFile != null)
+            currentUser.setAvatar(avatarFile.toString());
 
         User.saveToDatabase(currentUser);
         return Message.CHANGE_SUCCESS;

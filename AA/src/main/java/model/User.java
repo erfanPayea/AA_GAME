@@ -21,7 +21,7 @@ public class User {
     private static final Gson gson = new Gson();
     private String username;
     private String password;
-    private String avatarNumber;
+    private String avatar;
     private final Settings settings;
     private int lastGameScore;
     private final int[] highScores;
@@ -35,7 +35,7 @@ public class User {
     {
         Random random = new Random();
         int randomNumber = random.nextInt(1, 4);
-        this.avatarNumber = String.valueOf(randomNumber);
+        this.avatar = String.valueOf(randomNumber);
 
         this.highScores = new int[4];
         Arrays.fill(highScores, 0);
@@ -91,8 +91,8 @@ public class User {
         return password;
     }
 
-    public String getAvatarNumber() {
-        return avatarNumber;
+    public String getAvatar() {
+        return avatar;
     }
 
     public Settings getSettings() {
@@ -119,8 +119,8 @@ public class User {
         this.password = password;
     }
 
-    public void setAvatarNumber(String avatarNumber) {
-        this.avatarNumber = avatarNumber;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public void setLastGameScore(int lastGameScore) { // todo : time
