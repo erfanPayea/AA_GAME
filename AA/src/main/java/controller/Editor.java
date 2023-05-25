@@ -14,11 +14,11 @@ public class Editor {
     }
 
 
-    public Message saveProfileChanges(String username, String password) { // todo : avatar
+    public Message saveProfileChanges(String username, String password, String avatarNumber) {
         if (currentUser.getPassword() == null)
             return Message.GUEST_PROFILE;
 
-        if (password.isEmpty() && username.isEmpty())
+        if (password.isEmpty() && username.isEmpty() && avatarNumber.isEmpty())
             return Message.ALL_EMPTY;
 
         if (!username.isEmpty()) {
@@ -36,6 +36,9 @@ public class Editor {
                 return Message.LOW_PASSWORD;
             currentUser.setPassword(password);
         }
+
+        if (!avatarNumber.isEmpty())
+            currentUser.setAvatarNumber(avatarNumber);
 
         User.saveToDatabase(currentUser);
         return Message.CHANGE_SUCCESS;

@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -20,6 +21,7 @@ public class User {
     private static final Gson gson = new Gson();
     private String username;
     private String password;
+    private String avatarNumber;
     private final Settings settings;
     private int lastGameScore;
     private final int[] highScores;
@@ -31,7 +33,11 @@ public class User {
     }
 
     {
-        highScores = new int[4];
+        Random random = new Random();
+        int randomNumber = random.nextInt(1, 4);
+        this.avatarNumber = String.valueOf(randomNumber);
+
+        this.highScores = new int[4];
         Arrays.fill(highScores, 0);
     }
 
@@ -85,6 +91,10 @@ public class User {
         return password;
     }
 
+    public String getAvatarNumber() {
+        return avatarNumber;
+    }
+
     public Settings getSettings() {
         return this.settings;
     }
@@ -107,6 +117,10 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setAvatarNumber(String avatarNumber) {
+        this.avatarNumber = avatarNumber;
     }
 
     public void setLastGameScore(int lastGameScore) { // todo : time

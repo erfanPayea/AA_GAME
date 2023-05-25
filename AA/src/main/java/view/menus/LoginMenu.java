@@ -15,6 +15,7 @@ import view.enums.Message;
 
 import java.net.URL;
 import java.util.Objects;
+import java.util.Random;
 
 public class LoginMenu extends Application {
     private static Stage stage;
