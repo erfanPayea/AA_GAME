@@ -1,12 +1,7 @@
 package model.thing;
 
-import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import view.animations.ShootingAnimation;
 import view.animations.TurningAnimation;
 
 public class Ball extends Circle {
@@ -40,7 +35,7 @@ public class Ball extends Circle {
         this.setStrokeWidth(2);
 
         this.setCenterX(350 + 160 * Math.cos(Math.toRadians(angle)));
-        this.setCenterY(200 + 160 * Math.sin(Math.toRadians(angle)));
+        this.setCenterY(450 + 160 * Math.sin(Math.toRadians(angle)));
     }
 
     public int getNumber() {

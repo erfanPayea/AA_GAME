@@ -24,7 +24,7 @@ public class ReceivingBallAnimation extends Transition {
             centerCircle.setCenterY(centerCircle.getCenterY() - 0.2);
 
         else if (number == 100) {
-            centerCircle.setCenterY(200);
+            centerCircle.setCenterY(450);
             number = 1;
             this.stop();
         }

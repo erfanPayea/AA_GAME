@@ -36,7 +36,6 @@ public class GameMenuController {
     private final User currentUser;
     private final Settings settings;
     private ReceivingBallAnimation receivingBallAnimation;
-    private MediaPlayer mediaPlayer;
     private InvisibleCircle invisibleCircle;
     private Text ballsNumberText;
     private Text scoreSheetText;
@@ -71,13 +70,13 @@ public class GameMenuController {
         name.setPrefHeight(54);
         name.setPrefWidth(153);
         name.setLayoutX(274);
-        name.setLayoutY(173);
+        name.setLayoutY(423);
 
-        Circle centerCircle = new Circle(350, 200, 60, settings.getMap().getColor());
+        Circle centerCircle = new Circle(350, 450, 60, settings.getMap().getColor());
         this.receivingBallAnimation = new ReceivingBallAnimation(centerCircle);
         this.center = centerCircle;
 
-        this.invisibleCircle = new InvisibleCircle(350, 200, 160, pane, settings);
+        this.invisibleCircle = new InvisibleCircle(350, 450, 160, pane, settings);
         this.invisibleCircle.setVisible(false);
         pane.getChildren().add(centerCircle);
         pane.getChildren().add(name);
@@ -162,7 +161,7 @@ public class GameMenuController {
             ballsGroupVBox.getChildren().add(ball);
 
         ballsGroupVBox.setLayoutX(338);
-        ballsGroupVBox.setLayoutY(450);
+        ballsGroupVBox.setLayoutY(700);
 
         this.balls = balls;
         return ballsGroupVBox;
@@ -177,7 +176,7 @@ public class GameMenuController {
 
         Ball shootedBall = new Ball(ball.getNumber(), ball.getColor());
         shootedBall.setCenterX(gameMenu.getBallsGroupVBox().getLayoutX() + 10);
-        shootedBall.setCenterY(440);
+        shootedBall.setCenterY(690);
 
         ShootingAnimation shootingAnimation = new ShootingAnimation(pane, shootedBall);
         pane.getChildren().add(shootedBall);
@@ -229,12 +228,12 @@ public class GameMenuController {
     }
 
     public void runPhase3() {
-        this.ballsFadeTransition = new FadeTransition(Duration.millis(2000), invisibleCircle.getGroupOfBalls());
-        this.linessFadeTransition = new FadeTransition(Duration.millis(2000), invisibleCircle.getGroupOfLines());
+        this.ballsFadeTransition = new FadeTransition(Duration.seconds(2), invisibleCircle.getGroupOfBalls());
+        this.linessFadeTransition = new FadeTransition(Duration.seconds(2), invisibleCircle.getGroupOfLines());
         ballsFadeTransition.setCycleCount(-1);
         linessFadeTransition.setCycleCount(-1);
 
-        Timeline showTimeLine = new Timeline(new KeyFrame(Duration.millis(2000), actionEvent -> {
+        Timeline showTimeLine = new Timeline(new KeyFrame(Duration.seconds(2), actionEvent -> {
             ballsFadeTransition.setFromValue(0);
             linessFadeTransition.setFromValue(0);
             ballsFadeTransition.setToValue(1);
@@ -246,7 +245,7 @@ public class GameMenuController {
 
         showTimeLine.setCycleCount(1);
 
-        Timeline fadeTimeLine = new Timeline(new KeyFrame(Duration.millis(1000), actionEvent ->
+        Timeline fadeTimeLine = new Timeline(new KeyFrame(Duration.seconds(1), actionEvent ->
         {
             ballsFadeTransition.setFromValue(1);
             linessFadeTransition.setFromValue(1);
@@ -292,7 +291,7 @@ public class GameMenuController {
     public void doReceiveAnimation() {
         this.receivingBallAnimation.play();
 
-        this.mediaPlayer = new MediaPlayer(new Media(Objects.requireNonNull(
+        MediaPlayer mediaPlayer = new MediaPlayer(new Media(Objects.requireNonNull(
                 this.getClass().getResource("/Media/receiveBall.mp3")).toExternalForm()));
         mediaPlayer.play();
     }

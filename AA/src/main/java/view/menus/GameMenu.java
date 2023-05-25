@@ -38,7 +38,7 @@ public class GameMenu extends Application {
         GameMenu.stage = stage;
         this.pane = new Pane();
         this.pane.setPrefWidth(700);
-        this.pane.setPrefHeight(550);
+        this.pane.setPrefHeight(820);
 
         controller.initializeFirstParameters(this.pane);
 

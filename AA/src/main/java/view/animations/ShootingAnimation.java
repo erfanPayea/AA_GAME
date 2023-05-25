@@ -15,12 +15,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class ShootingAnimation extends Transition {
     private final GameMenuController gameMenuController;
-    private final Pane pane;
     private final Ball ball;
-    private static double angle;
     public static double windSpeed;
     public static double degree;
-    private static Text degreeText;
+    private static final Text degreeText;
     static {
         degree = 0;
         degreeText = new Text(String.valueOf(0));
@@ -28,7 +26,6 @@ public class ShootingAnimation extends Transition {
 
     public ShootingAnimation(Pane pane, Ball ball) {
         this.gameMenuController = GameMenuController.getGameMenuController();
-        this.pane = pane;
         this.ball = ball;
         this.setCycleDuration(Duration.millis(3));
         this.setCycleCount(-1);

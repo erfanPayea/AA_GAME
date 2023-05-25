@@ -39,7 +39,7 @@ public class TurningAnimation extends Transition {
 
     public static void playFreeze() {
         isOnFreeze = true;
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(freezeTime * 1000), actionEvent ->
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(freezeTime), actionEvent ->
                 isOnFreeze = false));
         timeline.setCycleCount(1);
         timeline.play();
@@ -80,7 +80,7 @@ public class TurningAnimation extends Transition {
 
         this.angle %= 360;
         this.ball.setCenterX(350 + 160 * Math.cos(Math.toRadians(angle)));
-        this.ball.setCenterY(200 + 160 * Math.sin(Math.toRadians(angle)));
+        this.ball.setCenterY(450 + 160 * Math.sin(Math.toRadians(angle)));
         this.ball.setLineLocation();
     }
 }
