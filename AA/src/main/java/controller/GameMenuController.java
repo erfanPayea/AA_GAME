@@ -80,13 +80,13 @@ public class GameMenuController {
         name.setPrefHeight(54);
         name.setPrefWidth(153);
         name.setLayoutX(691);
-        name.setLayoutY(423);
+        name.setLayoutY(373);
 
-        Circle centerCircle = new Circle(767, 450, 60, settings.getMap().getColor());
+        Circle centerCircle = new Circle(767, 400, 60, settings.getMap().getColor());
         this.receivingBallAnimation = new ReceivingBallAnimation(centerCircle);
         this.center = centerCircle;
 
-        this.invisibleCircle = new InvisibleCircle(767, 450, 160, pane, settings);
+        this.invisibleCircle = new InvisibleCircle(767, 400, 160, pane, settings);
         this.invisibleCircle.setVisible(false);
         pane.getChildren().add(centerCircle);
         pane.getChildren().add(name);
@@ -171,7 +171,7 @@ public class GameMenuController {
             this.ballsGroupVBox.getChildren().add(ball);
 
         this.ballsGroupVBox.setLayoutX(755);
-        this.ballsGroupVBox.setLayoutY(700);
+        this.ballsGroupVBox.setLayoutY(650);
 
         this.balls = balls;
 
@@ -181,7 +181,7 @@ public class GameMenuController {
                 this.upBallsGroupVBox.getChildren().add(ball.for2Player());
 
             this.upBallsGroupVBox.setLayoutX(755);
-            this.upBallsGroupVBox.setLayoutY(-330);
+            this.upBallsGroupVBox.setLayoutY(-380);
             this.upBallsGroupVBox.setSpacing(5);
             pane.getChildren().add(upBallsGroupVBox);
         }
@@ -198,7 +198,7 @@ public class GameMenuController {
 
         Ball shootedBall = new Ball(ball.getNumber(), ball.getColor());
         shootedBall.setCenterX(ballsGroupVBox.getLayoutX() + 10);
-        shootedBall.setCenterY(690);
+        shootedBall.setCenterY(640);
 
         ShootingAnimation shootingAnimation = new ShootingAnimation(pane, shootedBall);
         pane.getChildren().add(shootedBall);

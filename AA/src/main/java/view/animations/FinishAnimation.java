@@ -21,7 +21,7 @@ public class FinishAnimation extends Transition {
         if (isWin) {
             for (Ball ball : balls) {
                 ball.setCenterX((ball.getCenterX() - 767) * 1.1 + 767);
-                ball.setCenterY((ball.getCenterY() - 450) * 1.1 + 200);
+                ball.setCenterY((ball.getCenterY() - 400) * 1.1 + 200);
                 ball.setLineLocation();
             }
         }

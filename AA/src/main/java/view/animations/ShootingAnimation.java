@@ -41,7 +41,7 @@ public class ShootingAnimation extends Transition {
 
     public static void playPhase4() {
         AtomicInteger direction = new AtomicInteger(1);
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), actionEvent -> {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2.5), actionEvent -> {
             if (degree + direction.get() * windSpeed > 15)
                 direction.set(-1);
             else if(degree + direction.get() * windSpeed < -15)

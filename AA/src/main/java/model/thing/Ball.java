@@ -35,7 +35,7 @@ public class Ball extends Circle {
         this.setStrokeWidth(2);
 
         this.setCenterX(350 + 160 * Math.cos(Math.toRadians(angle)));
-        this.setCenterY(450 + 160 * Math.sin(Math.toRadians(angle)));
+        this.setCenterY(400 + 160 * Math.sin(Math.toRadians(angle)));
     }
 
     public int getNumber() {
