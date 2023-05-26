@@ -4,38 +4,38 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="283.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.PauseMenu">
+<AnchorPane prefHeight="283.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.PauseMenu">
     <children>
         <HBox layoutX="90.0" layoutY="74.0" prefHeight="35.0" prefWidth="370.0" spacing="35.0">
             <children>
-                <Button mnemonicParsing="false" onAction="#restartGame" prefHeight="42.0" prefWidth="100.0"
-                        text="Restart game" textFill="#1e00ff"/>
-                <Button mnemonicParsing="false" onAction="#continueGame" prefHeight="42.0" prefWidth="100.0"
-                        text="Continue game" textFill="#0b9452"/>
-                <Button mnemonicParsing="false" onAction="#exitGame" prefHeight="42.0" prefWidth="100.0"
-                        text="Exit game" textFill="RED"/>
+                <Button mnemonicParsing="false" onAction="#restartGame" prefHeight="42.0" prefWidth="100.0" text="Restart game" textFill="#1e00ff" />
+                <Button mnemonicParsing="false" onAction="#continueGame" prefHeight="42.0" prefWidth="100.0" text="Continue game" textFill="#0b9452" />
+                <Button mnemonicParsing="false" onAction="#exitGame" prefHeight="42.0" prefWidth="100.0" text="Exit game" textFill="RED" />
             </children>
         </HBox>
         <Label alignment="CENTER" layoutX="65.0" layoutY="124.0" prefHeight="35.0" prefWidth="100.0" text="HotKeys : ">
             <font>
-                <Font size="15.0"/>
+                <Font size="15.0" />
             </font>
         </Label>
-        <Label layoutX="216.0" layoutY="140.0" prefHeight="35.0" prefWidth="39.0" text="Shoot: "/>
-        <Label fx:id="shootKey" layoutX="270.0" layoutY="149.0" prefHeight="18.0" prefWidth="47.0"/>
-        <Label layoutX="360.0" layoutY="149.0" text="Freeze: "/>
-        <Label fx:id="freezeKey" layoutX="416.0" layoutY="149.0" prefHeight="18.0" prefWidth="47.0"/>
-        <Label alignment="CENTER" layoutX="263.0" layoutY="198.0" prefHeight="18.0" prefWidth="39.0" text="Left : "/>
-        <Label fx:id="leftKey" layoutX="302.0" layoutY="198.0" prefHeight="18.0" prefWidth="47.0"/>
-        <Label alignment="CENTER" layoutX="396.0" layoutY="198.0" prefHeight="18.0" prefWidth="39.0" text="Right : "/>
-        <Label fx:id="rightKey" layoutX="442.0" layoutY="197.0" prefHeight="18.0" prefWidth="41.0"/>
-        <Label layoutX="78.0" layoutY="197.0" text="Player 2 shoot:"/>
-        <Label fx:id="player2ShootKey" alignment="CENTER" layoutX="165.0" layoutY="198.0" prefHeight="18.0"
-               prefWidth="42.0"/>
-        <Label alignment="CENTER" layoutX="255.0" layoutY="239.0" prefHeight="18.0" prefWidth="54.0" text="Left p2: "/>
-        <Label layoutX="380.0" layoutY="239.0" prefHeight="18.0" prefWidth="54.0" text="Right p2 :"/>
-        <Label fx:id="left2Key" layoutX="312.0" layoutY="240.0" prefHeight="18.0" prefWidth="47.0"/>
-        <Label fx:id="right2Key" layoutX="446.0" layoutY="239.0" prefHeight="18.0" prefWidth="47.0"/>
+        <Label layoutX="216.0" layoutY="140.0" prefHeight="35.0" prefWidth="39.0" text="Shoot: " />
+        <Label fx:id="shootKey" layoutX="270.0" layoutY="149.0" prefHeight="18.0" prefWidth="47.0" />
+        <Label layoutX="360.0" layoutY="149.0" text="Freeze: " />
+        <Label fx:id="freezeKey" layoutX="416.0" layoutY="149.0" prefHeight="18.0" prefWidth="47.0" />
+        <Label alignment="CENTER" layoutX="263.0" layoutY="198.0" prefHeight="18.0" prefWidth="39.0" text="Left : " />
+        <Label fx:id="leftKey" layoutX="302.0" layoutY="198.0" prefHeight="18.0" prefWidth="47.0" />
+        <Label alignment="CENTER" layoutX="396.0" layoutY="198.0" prefHeight="18.0" prefWidth="39.0" text="Right : " />
+        <Label fx:id="rightKey" layoutX="442.0" layoutY="197.0" prefHeight="18.0" prefWidth="41.0" />
+        <Label layoutX="78.0" layoutY="197.0" text="Player 2 shoot:" />
+        <Label fx:id="player2ShootKey" alignment="CENTER" layoutX="165.0" layoutY="198.0" prefHeight="18.0" prefWidth="42.0" />
+        <Label alignment="CENTER" layoutX="255.0" layoutY="239.0" prefHeight="18.0" prefWidth="54.0" text="Left p2: " />
+        <Label layoutX="380.0" layoutY="239.0" prefHeight="18.0" prefWidth="54.0" text="Right p2 :" />
+        <Label fx:id="left2Key" layoutX="312.0" layoutY="240.0" prefHeight="18.0" prefWidth="47.0" />
+        <Label fx:id="right2Key" layoutX="446.0" layoutY="239.0" prefHeight="18.0" prefWidth="47.0" />
+        <Button layoutX="28.0" layoutY="25.0" mnemonicParsing="false" onAction="#pauseMusic" prefHeight="35.0" prefWidth="100.0" text="Pause music" />
+        <Button layoutX="136.0" layoutY="25.0" mnemonicParsing="false" onAction="#playMusic" prefHeight="35.0" prefWidth="100.0" text="Play music" />
+        <Label layoutX="244.0" layoutY="33.0" prefHeight="18.0" prefWidth="90.0" text="Set new music :" />
+        <ChoiceBox fx:id="musicList" layoutX="342.0" layoutY="29.0" prefHeight="26.0" prefWidth="100.0" />
+      <Button layoutX="458.0" layoutY="24.0" mnemonicParsing="false" onAction="#setMusic" prefHeight="35.0" prefWidth="52.0" text="Set" textFill="#9e7817" />
     </children>
 </AnchorPane>

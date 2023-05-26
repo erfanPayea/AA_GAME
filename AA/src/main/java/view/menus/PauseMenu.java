@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -17,6 +18,8 @@ public class PauseMenu extends Application {
     private static Stage stage;
     private final GameMenuController gameMenuController;
 
+    @FXML
+    private ChoiceBox<String> musicList;
     @FXML
     private Label shootKey;
     @FXML
@@ -48,6 +51,10 @@ public class PauseMenu extends Application {
 
     @FXML
     private void initialize() {
+        this.musicList.getItems().add("Gta");
+        this.musicList.getItems().add("HipHop");
+        this.musicList.getItems().add("Windles");
+
         this.leftKey.setText(HotKeys.LEFT.getKeyName());
         this.rightKey.setText(HotKeys.RIGHT.getKeyName());
         this.left2Key.setText(HotKeys.LEFT2.getKeyName());
@@ -58,9 +65,24 @@ public class PauseMenu extends Application {
     }
 
     @FXML
+    private void pauseMusic() {
+        gameMenuController.pauseMusic();
+    }
+
+    @FXML
+    private void playMusic() {
+        gameMenuController.playMusic();
+    }
+
+    @FXML
     private void continueGame() {
         gameMenuController.continueGame();
         stage.close();
+    }
+
+    @FXML
+    private void setMusic() {
+        gameMenuController.changeMusic(musicList.getValue());
     }
 
     @FXML

@@ -32,6 +32,7 @@ public class GameMenuController {
     private final GameMenu gameMenu;
     private final User currentUser;
     private final Settings settings;
+    private MediaPlayer musicPlayer;
     private ReceivingBallAnimation receivingBallAnimation;
     private InvisibleCircle invisibleCircle;
     private Text ballsNumberText;
@@ -64,6 +65,13 @@ public class GameMenuController {
     }
 
     public void initializeFirstParameters(Pane pane) {
+        if (!currentUser.getSettings().isMute() && this.musicPlayer == null) {
+            this.musicPlayer = new MediaPlayer(new Media(Objects.requireNonNull(this.getClass().getResource(
+                            "/Media/Gta.mp3")).toExternalForm()));
+
+            this.musicPlayer.play();
+        }
+
         this.score = 0;
         Label name = new Label(settings.getMap().getName());
         if (this.settings.getMap().getColor() != Color.ALICEBLUE) name.setTextFill(Color.WHITE);
@@ -369,6 +377,23 @@ public class GameMenuController {
                 (ball1.getCenterX() - ball2.getCenterX()) * (ball1.getCenterX() - ball2.getCenterX());
     }
 
+    public void pauseMusic() {
+        this.musicPlayer.pause();
+    }
+
+    public void playMusic() {
+        this.musicPlayer.play();
+    }
+
+    public void changeMusic(String music) {
+        if (music != null) {
+            this.musicPlayer.stop();
+            this.musicPlayer = new MediaPlayer(new Media(Objects.requireNonNull(this.getClass().getResource(
+                    "/Media/" + music + ".mp3")).toExternalForm()));
+            this.musicPlayer.play();
+        }
+    }
+
     public void pause() {
         TurningAnimation.stopReverse();
         ShootingAnimation.stopPhase4();
@@ -391,9 +416,12 @@ public class GameMenuController {
     public void restartGame() throws Exception {
         this.pause();
         gameMenu.restart();
+        this.musicPlayer.play();
     }
 
     public void winGame() {
+        this.musicPlayer.stop();
+
         FinishAnimation finishAnimation = new FinishAnimation(true, invisibleCircle.getBalls());
         finishAnimation.play();
 
@@ -405,6 +433,7 @@ public class GameMenuController {
     }
 
     public void looseGame(Ball lastBall) {
+        this.musicPlayer.stop();
 
         if (lastBall != null)
             gameMenu.getPane().getChildren().remove(lastBall);
