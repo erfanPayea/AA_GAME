@@ -246,7 +246,7 @@ public class GameMenuController {
         Ball ball = this.balls.get(0);
         Ball shootedBall = new Ball(ball.getNumber(), ((Ball) upBallsGroupVBox.getChildren().get(0)).getColor());
         shootedBall.setCenterX(upBallsGroupVBox.getLayoutX() + 10);
-        shootedBall.setCenterY(100); // todo :
+        shootedBall.setCenterY(140);
 
         ShootingAnimation upShootingAnimation = new ShootingAnimation(shootedBall, 1);
         pane.getChildren().add(shootedBall);
@@ -416,6 +416,7 @@ public class GameMenuController {
     public void restartGame() throws Exception {
         this.pause();
         gameMenu.restart();
+        this.musicPlayer.stop();
         this.musicPlayer.play();
     }
 
@@ -427,7 +428,6 @@ public class GameMenuController {
 
         this.pause();
         this.currentUser.hasWinLastGame = true;
-        this.currentUser.lastTimePlayed = 10; // todo : time
         this.currentUser.setLastGameScore(this.score);
         gameMenu.winGame();
     }
@@ -446,13 +446,13 @@ public class GameMenuController {
 
         this.pause();
         this.currentUser.hasWinLastGame = false;
-        this.currentUser.lastTimePlayed = 10; // todo : time
         this.currentUser.setLastGameScore(score);
         gameMenu.looseGame();
     }
 
     public void finishGame() throws Exception {
         this.pause();
+        this.musicPlayer.stop();
         gameMenu.end();
     }
 }

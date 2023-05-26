@@ -4,33 +4,29 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="242.0" prefWidth="354.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.FinishMenu">
+<AnchorPane prefHeight="242.0" prefWidth="354.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.FinishMenu">
     <children>
         <Label fx:id="winOrLoose" alignment="CENTER" layoutX="97.0" layoutY="26.0" prefHeight="42.0" prefWidth="160.0">
             <font>
-                <Font size="24.0"/>
+                <Font size="24.0" />
             </font>
         </Label>
         <VBox layoutX="97.0" layoutY="79.0" spacing="6">
             <HBox layoutX="97.0" layoutY="79.0" prefHeight="31.0" prefWidth="160.0">
                 <children>
-                    <Label alignment="CENTER" prefHeight="31.0" prefWidth="101.0" text="Your score: "/>
-                    <Label fx:id="score" prefHeight="31.0" prefWidth="79.0"/>
+                    <Label alignment="CENTER" prefHeight="31.0" prefWidth="101.0" text="Your score: " />
+                    <Label fx:id="score" prefHeight="31.0" prefWidth="79.0" />
                 </children>
             </HBox>
             <HBox layoutX="97.0" layoutY="79.0" prefHeight="31.0" prefWidth="160.0">
                 <children>
-                    <Label alignment="CENTER" prefHeight="31.0" prefWidth="101.0" text="Time played: "/>
-                    <Label fx:id="timePlayed" prefHeight="31.0" prefWidth="79.0"/>
+                    <Label fx:id="timePlayed" prefHeight="31.0" prefWidth="79.0" />
                 </children>
             </HBox>
             <HBox prefHeight="30.0" prefWidth="160.0" spacing="6">
                 <children>
-                    <Button mnemonicParsing="false" onAction="#goMainMenu" prefHeight="30.0" prefWidth="77.0"
-                            text="Main menu" textFill="#2d00ff"/>
-                    <Button mnemonicParsing="false" onAction="#restart" prefHeight="30.0" prefWidth="77.0"
-                            text="Restart" textFill="#168912"/>
+                    <Button mnemonicParsing="false" onAction="#goMainMenu" prefHeight="30.0" prefWidth="77.0" text="Main menu" textFill="#2d00ff" />
+                    <Button mnemonicParsing="false" onAction="#restart" prefHeight="30.0" prefWidth="77.0" text="Restart" textFill="#168912" />
                 </children>
             </HBox>
         </VBox>

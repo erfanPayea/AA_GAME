@@ -23,8 +23,7 @@ public class FinishMenu extends Application {
     private Label winOrLoose;
     @FXML
     private Label score;
-    @FXML
-    private Label timePlayed;
+
     private final User currentUser;
 
     {
@@ -53,7 +52,6 @@ public class FinishMenu extends Application {
         }
 
         this.score.setText(String.valueOf(currentUser.getLastGameScore()));
-        this.timePlayed.setText(String.valueOf(currentUser.lastTimePlayed));
     }
 
     @FXML

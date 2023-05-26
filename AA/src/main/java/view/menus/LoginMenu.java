@@ -67,7 +67,7 @@ public class LoginMenu extends Application {
     public void login() throws Exception {
         Message message = controller.login(username.getText(), password.getText(), statLoggedIn.isSelected());
         if (message == null) {
-            new MainMenu().start(stage); //TODO : fix all new menus
+            new MainMenu().start(stage);
             return;
         }
         message.sendMessage(this.result);

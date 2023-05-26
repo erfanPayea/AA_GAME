@@ -25,7 +25,6 @@ public class User {
     private final Settings settings;
     private int lastGameScore;
     private final int[] highScores;
-    public int lastTimePlayed;
     public boolean hasWinLastGame;
 
     static {
@@ -123,7 +122,7 @@ public class User {
         this.avatar = avatar;
     }
 
-    public void setLastGameScore(int lastGameScore) { // todo : time
+    public void setLastGameScore(int lastGameScore) {
         this.lastGameScore = lastGameScore;
 
         if (lastGameScore > this.highScores[settings.getLevel().getNumber()])
