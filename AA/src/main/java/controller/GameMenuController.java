@@ -4,7 +4,6 @@ import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.*;
@@ -97,7 +96,8 @@ public class GameMenuController {
         this.isOnPhase4 = false;
 
         if (balls != null) {
-            this.checkFodPhases();
+            if ( balls.size() != 0)
+                this.checkFodPhases();
         }
 
         currentUser.getSettings().updateHotkeys();
@@ -240,6 +240,9 @@ public class GameMenuController {
     }
 
     public void shootPlayer2(Pane pane) {
+        if (upBallsGroupVBox == null)
+            return;
+
         if (upBallsGroupVBox.getChildren().size() == 0)
             return;
 
