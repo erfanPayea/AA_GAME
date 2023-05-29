@@ -96,8 +96,7 @@ public class GameMenuController {
         this.isOnPhase4 = false;
 
         if (balls != null) {
-            if ( balls.size() != 0)
-                this.checkFodPhases();
+            this.checkFodPhases();
         }
 
         currentUser.getSettings().updateHotkeys();
@@ -419,12 +418,15 @@ public class GameMenuController {
     public void restartGame() throws Exception {
         this.pause();
         gameMenu.restart();
-        this.musicPlayer.stop();
-        this.musicPlayer.play();
+        if (!settings.isMute()) {
+            this.musicPlayer.stop();
+            this.musicPlayer.play();
+        }
     }
 
     public void winGame() {
-        this.musicPlayer.stop();
+        if (!settings.isMute())
+            this.musicPlayer.stop();
 
         FinishAnimation finishAnimation = new FinishAnimation(true, invisibleCircle.getBalls());
         finishAnimation.play();
@@ -436,7 +438,8 @@ public class GameMenuController {
     }
 
     public void looseGame(Ball lastBall) {
-        this.musicPlayer.stop();
+        if(this.musicPlayer != null)
+            this.musicPlayer.stop();
 
         if (lastBall != null)
             gameMenu.getPane().getChildren().remove(lastBall);
