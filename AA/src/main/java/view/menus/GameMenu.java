@@ -184,7 +184,7 @@ public class GameMenu extends Application {
 //        timeline.play();
 
         try {
-            new FinishMenu().start(new Stage());
+            new FinishMenu().start(finishStage);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
