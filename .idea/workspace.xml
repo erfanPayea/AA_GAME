@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b3598043-3f53-4ae6-81dd-8331d60aae6b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AA/src/main/resources/FXML/loginMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/AA/src/main/resources/FXML/loginMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AA/src/main/java/view/menus/LoginMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/AA/src/main/java/view/menus/LoginMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AA/src/main/resources/database/stayLoggedIn.json" beforeDir="false" afterPath="$PROJECT_DIR$/AA/src/main/resources/database/stayLoggedIn.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AA/src/main/resources/database/userDatabase.json" beforeDir="false" afterPath="$PROJECT_DIR$/AA/src/main/resources/database/userDatabase.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -61,6 +62,8 @@
       <workItem from="1685391646129" duration="9000" />
       <workItem from="1685556741567" duration="17000" />
       <workItem from="1685694023077" duration="13000" />
+      <workItem from="1687939753389" duration="104000" />
+      <workItem from="1688477909370" duration="11000" />
     </task>
     <servers />
   </component>

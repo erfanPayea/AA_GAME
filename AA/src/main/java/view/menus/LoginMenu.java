@@ -15,7 +15,6 @@ import view.enums.Message;
 
 import java.net.URL;
 import java.util.Objects;
-import java.util.Random;
 
 public class LoginMenu extends Application {
     private static Stage stage;
@@ -47,6 +46,7 @@ public class LoginMenu extends Application {
         }
 
         LoginMenu.stage = stage;
+        //todo :  stage.getIcons().set(0, )
         URL url = LoginMenu.class.getResource("/FXML/loginMenu.fxml");
         BorderPane borderPane = FXMLLoader.load(Objects.requireNonNull(url));
         Scene scene = new Scene(borderPane);
